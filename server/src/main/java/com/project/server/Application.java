@@ -21,8 +21,8 @@ public class Application {
     @Bean
     public CommandLineRunner demo(UserRepository repository) {
         return (args) -> {
-            repository.save(new User("admin", "admin", ""));
-            repository.save(new User("user", "user", ""));
+            repository.save(new User("admin", "admin"));
+            repository.save(new User("user", "user"));
 
             log.info("User found with findAll():");
             log.info("-------------------------------");

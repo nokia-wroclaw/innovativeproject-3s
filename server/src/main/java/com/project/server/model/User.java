@@ -11,20 +11,14 @@ public class User {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
-    private String status;
     private String login;
     private String password;
 
     protected User() {}
 
-    public User(String login, String password, String status) {
+    public User(String login, String password) {
         this.login = login;
         this.password = password;
-        this.status = status;
-    }
-
-    public User(String status) {
-        this.status = status;
     }
 
     @Override
@@ -34,16 +28,8 @@ public class User {
                 id, login, password);
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public Long getId() {
         return id;
-    }
-
-    public String getStatus() {
-        return status;
     }
 
     public String getLogin() {
