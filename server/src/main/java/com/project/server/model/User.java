@@ -11,58 +11,63 @@ public class User {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
+    @Column(nullable = false)
     private String login;
+    @Column(nullable = false)
     private String password;
+
     private String email;
+
+    private int active;
+
+    private String roles;
+
+    private String permissions;
+
     protected User() {}
 
-    public User(String login, String password) {
-        this.login = login;
-        this.password = password;
-    }
-    public User(String login, String password,String email) {
+    public User(String login, String password, String email, String roles, String permissions) {
         this.login = login;
         this.password = password;
         this.email=email;
+        this.roles=roles;
+        this.permissions=permissions;
+        this.active=1;
     }
-
-
-    @Override
-    public String toString() {
-        return String.format(
-                "User[id=%d, login='%s', password='%s',   email='%s';                ]",
-                id, login, password,email);
-    }
-
-    public Long getId() {
+    public Long getId(){
         return id;
     }
-
-    public String getLogin() {
+    public String getLogin(){
         return login;
     }
-
-    public String getPassword() {
+    public String getPassword(){
         return password;
     }
-    public String getEmail() {
+    public String getRoles(){
+        return roles;
+    }
+    public String getPermissions(){
+        return permissions;
+    }
+    public String getEmail(){
         return email;
     }
 
-    public void setId(Long id) {
-        this.id= id;
+    public int getActive(){
+        return active;
     }
 
-    public void setLogin(String login) {
-        this.login= login;
+    public List<String> getRolelist(){
+        if(this.roles.length()>0){
+            return Arrays.asList(this.roles.split(","));
+        }
+        return new ArrayList<>();
     }
-
-    public void setPassword(String Password) {
-        this.password= Password;
+    
+    public List<String> getPermissionsList(){
+        if(this.permissions.length()>0){
+            return Arrays.asList(this.permissions.split(","));
+        }
+        return new ArrayList<>();
     }
-    public void setEmail(String email) {
-        this.email= email;
-    }
-
-
 }
