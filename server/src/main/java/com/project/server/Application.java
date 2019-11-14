@@ -8,9 +8,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @SpringBootApplication
 public class Application {
@@ -24,7 +21,8 @@ public class Application {
     @Bean
     public CommandLineRunner demo(UserRepository repository) {
         return (args) -> {
-            repository.save(new User("admin", "admin"));
+            repository.save(new User("admin", "admin", ""));
+            repository.save(new User("user", "user", ""));
 
             log.info("User found with findAll():");
             log.info("-------------------------------");
@@ -34,5 +32,4 @@ public class Application {
             log.info("");
         };
     }
-
 }
