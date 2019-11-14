@@ -1,0 +1,5 @@
+<nav *ngIf="currentUser">
+    <a routerLink="/">Home</a>
+    <button (click)="logout()">Logout</button>
+</nav>
+<h1>Hello {{currentUser.username}}!</h1>
