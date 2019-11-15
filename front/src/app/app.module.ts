@@ -28,7 +28,6 @@ const routes: Routes = [
   }
 ];
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,8 +41,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes)
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    fakeBackendProvider
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
