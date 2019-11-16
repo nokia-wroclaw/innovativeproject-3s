@@ -5,7 +5,7 @@ import com.project.server.model.User;
 public class UserNotFoundException extends RuntimeException {
 
     public UserNotFoundException(User user) {
-        super("Could not find user {" + user.getId() + ", " + user.getLogin() + ", " + user.getPassword() + "}");
+        super("Could not find user {" + user.getId() + ", " + user.getUsername() + ", " + user.getPassword() + "}");
     }
 
     public UserNotFoundException(Long id) {

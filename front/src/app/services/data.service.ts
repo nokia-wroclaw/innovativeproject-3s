@@ -11,7 +11,7 @@ export class DataService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
 
-    url = 'localhost:8080/validateLogin';
+    url = 'http://localhost:8080/validateLogin';
 
     constructor(private http: HttpClient) {
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));

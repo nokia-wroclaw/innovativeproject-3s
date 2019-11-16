@@ -11,6 +11,7 @@ public class TestController {
 
     @RequestMapping(value = "/test", method = RequestMethod.GET, produces = "application/json")
     public String testMsg() {
+        System.out.println("test launched");
         return "test works";
     }
 }
