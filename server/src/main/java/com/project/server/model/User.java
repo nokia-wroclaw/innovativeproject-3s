@@ -11,29 +11,29 @@ public class User {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
-    private String login;
+    private String username;
     private String password;
 
     protected User() {}
 
-    public User(String login, String password) {
-        this.login = login;
+    public User(String username, String password) {
+        this.username = username;
         this.password = password;
     }
 
     @Override
     public String toString() {
         return String.format(
-                "User[id=%d, login='%s', password='%s']",
-                id, login, password);
+                "User[id=%d, username='%s', password='%s']",
+                id, username, password);
     }
 
     public Long getId() {
         return id;
     }
 
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
     public String getPassword() {
