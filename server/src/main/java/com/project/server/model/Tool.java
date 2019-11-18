@@ -16,37 +16,37 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(allowGetters = true)
-public class User {
+public class Tool {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
-    private String username;
-    private String password;
+    private String toolname;
+    private String info;
+    
+    protected Tool() {}
 
-    protected User() {}
-
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
+    public Tool(String toolname, String info) {
+        this.toolname = toolname;
+        this.info = info;
     }
 
     @Override
     public String toString() {
         return String.format(
-                "User[id=%d, username='%s', password='%s']",
-                id, username, password);
+                "Tool[id=%d, username='%s', password='%s']",
+                id, toolname, info);
     }
 
     public Long getId() {
         return id;
     }
 
-    public String getUsername() {
-        return username;
+    public String gettoolname() {
+        return toolname;
     }
 
-    public String getPassword() {
-        return password;
+    public String getInfo() {
+        return info;
     }
 }
