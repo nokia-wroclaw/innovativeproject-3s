@@ -25,6 +25,9 @@
                         Login
                     </button>
                 </div>
+                <div *ngIf="loginError">
+                    <div class="error">{{errorMsg}}</div>
+                </div>
             </form>
         </div>
     </div>

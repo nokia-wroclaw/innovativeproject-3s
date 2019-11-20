@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 import { DataService } from '../services/data.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({ templateUrl: 'login.component.html' })
 export class LoginComponent implements OnInit {
@@ -12,6 +13,8 @@ export class LoginComponent implements OnInit {
     loading = false;
     submitted = false;
     returnUrl: string;
+    loginError = false;
+    errorMsg: string;
 
     constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private ds: DataService) {
         if (this.ds.currentUserValue) {
@@ -39,10 +42,18 @@ export class LoginComponent implements OnInit {
 
         this.loading = true;
         this.ds.login(this.f.username.value, this.f.password.value).pipe(first()).subscribe(data => {
+            this.loginError = false;
             this.router.navigate([this.returnUrl]);
         }, error => {
+            if (error === 'OK') {
+                this.errorMsg = 'Incorrect login or password';
+            } else {
+                this.errorMsg = 'Cannot connect to the service';
+            }
             console.log(error);
             this.loading = false;
+            this.loginError = true;
+
         });
     }
 }
