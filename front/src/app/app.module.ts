@@ -12,15 +12,28 @@ import { AuthGuard } from './helpers/auth.guard';
 
 import { Routes, RouterModule } from '@angular/router';
 import { fakeBackendProvider } from './helpers/fakedb';
+import { ToolsComponent } from './tools/tools.component';
+import { ProjectsComponent } from './projects/projects.component';
 
 const routes: Routes = [
   {
-    path: '', component: MainComponent,
+    path: '',
+    component: ToolsComponent,
     canActivate: [AuthGuard]
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+  },
+  {
+    path: 'tools',
+    component: ToolsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'projects',
+    component: ProjectsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: '**',
@@ -32,7 +45,9 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     LoginComponent,
-    MainComponent
+    MainComponent,
+    ToolsComponent,
+    ProjectsComponent
   ],
   imports: [
     BrowserModule,
