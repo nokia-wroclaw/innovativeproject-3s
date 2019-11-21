@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
@@ -14,6 +14,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { fakeBackendProvider } from './helpers/fakedb';
 import { ToolsComponent } from './tools/tools.component';
 import { ProjectsComponent } from './projects/projects.component';
+
+import { NgxPaginationModule } from 'ngx-pagination';
+import { Ng2OrderModule } from 'ng2-order-pipe';
 
 const routes: Routes = [
   {
@@ -50,6 +53,9 @@ const routes: Routes = [
     ProjectsComponent
   ],
   imports: [
+    Ng2OrderModule,
+    NgxPaginationModule,
+    FormsModule,
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,

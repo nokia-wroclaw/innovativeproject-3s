@@ -1,2 +1,46 @@
 <app-main></app-main>
-<p>projects works!</p>
+<div class="project">
+    <div *ngFor="let project of projects">
+        <div class="container col-6 p-2">
+            <div class="rounded shadowbox">
+                <div class="row">
+                    <div class="col-3 align-self-center text-center">
+                        <h5>{{project.name}}</h5>
+                    </div>
+                    <div class="col-6 text-center">
+                        {{project.date}}
+                    </div>
+                    <div class="col-3 text-right"><span style="font-size: 2em;"><i class="fa fa-edit"></i></span></div>
+                </div>
+                <div class="row">
+                    <div class="col-2 align-self-center text-center">
+                        <span *ngIf="project.status=='positive'" style="font-size: 3em; color: green">
+                            <i class="fa fa-check-square"></i>
+                        </span>
+                        <span *ngIf="project.status=='negative'" style="font-size: 3em; color: red">
+                            <i class="fa fa-minus-square"></i>
+                        </span>
+                        <span *ngIf="project.status=='waiting'" style="font-size: 3em; color: orange">
+                            <i class="fa fa-pause-circle"></i>
+                        </span>
+                    </div>
+                    <div class="col-1 align-self-center"><button type="button" class="btn btn-secondary"
+                            data-toggle="modal" data-target="#exampleModal">Log</button></div>
+                    <div class="col-9">
+                        <div class="tool-scrollbar">
+                            <table class="table table-hover">
+                                <tbody *ngFor="let tool of project.tools; index as i;">
+                                    <tr>
+                                        <th scope="row">{{i+1}}</th>
+                                        <td>{{tool.id}}</td>
+                                        <td>{{tool.tool}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
