@@ -23,7 +23,7 @@ services:
   app-client:
     build: ./front
     ports:
-      - "4200:4200" # Map the exposed port 80 on the container to port 9090 on the host machine
+      - "4200:4200" 
     restart: always
     depends_on:
       - app-server
