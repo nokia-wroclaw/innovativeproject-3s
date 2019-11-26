@@ -1,21 +1,26 @@
 # base image
-FROM node:12.2.0
+FROM node:12.2.0 as build-node
 
-# set working directory
-WORKDIR /app
-
-# add `/app/node_modules/.bin` to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
-
-# install and cache app dependencies
-COPY package.json /app/package.json
+WORKDIR /front
+# COPY ./package*.json /app/
 RUN npm install
 RUN npm install -g typescript
-RUN npm install -g @angular/cli
+RUN npm install -g @angular/cli 
 
-# add app
-COPY . /app
+COPY ./default.conf  /front/
+COPY . .
+
+RUN npm run build --prod
+
+
+
+FROM nginx:1.15
+
+#source paths depend on your config and project structure
+COPY --from=build-node /front/dist/front/ /usr/share/nginx/html
+COPY --from=build-node /front/ /etc/nginx/conf.d/
+
 EXPOSE 4200
-# start app
-CMD ng serve --host 0.0.0.0 --prod 
+
+
 

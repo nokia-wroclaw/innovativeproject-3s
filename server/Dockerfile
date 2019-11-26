@@ -1,5 +1,13 @@
+FROM maven:3.5.2-jdk-8-alpine AS MAVEN_BUILD
+
+WORKDIR /server
+COPY . .
+RUN mvn -Dmaven.test.skip=true package
+
 FROM openjdk:8-jdk-alpine
 
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+WORKDIR /server
+#.jar file name depends on pom.xml project.build.finalName property, eg. <finalName>SpringApp</finalName>
+COPY --from=MAVEN_BUILD /server/target/server-0.0.1-SNAPSHOT.jar ./
+EXPOSE 8080
+CMD java -jar ./server-0.0.1-SNAPSHOT.jar
