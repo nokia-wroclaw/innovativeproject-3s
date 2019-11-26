@@ -16,7 +16,6 @@ import { ToolsComponent } from './tools/tools.component';
 import { ProjectsComponent } from './projects/projects.component';
 
 import { NgxPaginationModule } from 'ngx-pagination';
-import { Ng2OrderModule } from 'ng2-order-pipe';
 
 const routes: Routes = [
   {
@@ -53,7 +52,6 @@ const routes: Routes = [
     ProjectsComponent
   ],
   imports: [
-    Ng2OrderModule,
     NgxPaginationModule,
     FormsModule,
     BrowserModule,

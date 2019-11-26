@@ -26,7 +26,7 @@
                     </tr>
                 </thead>
                 <tbody
-                    *ngFor="let tool of toolList | orderBy: key : reverse | paginate: { itemsPerPage: pageSize, currentPage: pageNumber }; index as i;">
+                    *ngFor="let tool of toolList | paginate: { itemsPerPage: pageSize, currentPage: pageNumber }; index as i;">
                     <tr>
                         <th scope="row">{{i+1}}</th>
                         <td>{{tool.id}}</td>
