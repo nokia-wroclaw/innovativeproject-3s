@@ -1,34 +1,23 @@
-<app-main></app-main>
-<div class="project p-3">
-    <div class="container shadowbox">
-        <div class="col-xl-12 mx-auto">
-            <div class="dropdown p-4 float-right">
-                Items per page:
-                <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{pageSize}}
-                </a>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" (click)="setPageSize(10)">10</a>
-                    <a class="dropdown-item" (click)="setPageSize(20)">20</a>
-                    <a class="dropdown-item" (click)="setPageSize(50)">50</a>
-                </div>
-            </div>
-            <table id="tooltable" class="table table-hover">
-                <thead>
-                    <tr class="table-primary">
-                        <th scope="col">#</th>
-                        <th scope="col" (click)="sort('id')">ID&nbsp;<i class="fa fa-sort"></i></th>
-                        <th scope="col" (click)="sort('tool')">Tool&nbsp;<i class="fa fa-sort"></i></th>
-                        <th scope="col" (click)="sort('date')">Scan date&nbsp;<i class="fa fa-sort"></i></th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Log</th>
+<div class="project min-vh-100">
+    <app-main></app-main>
+    <div class="p-2">
+        <div class="col-lg-6 mx-auto">
+            <table data-toggle="table" data-pagination="true" data-search="true" data-search-align="left"
+                data-pagination-h-align="left" data-pagination-detail-h-align="right" data-show-toggle="true"
+                data-show-columns="true" data-show-fullscreen="true">
+                <thead class="item">
+                    <tr>
+                        <th data-field="number" data-sortable="true">#</th>
+                        <th data-field="id" data-sortable="true">ID</th>
+                        <th data-field="tool" data-sortable="true">Tool</th>
+                        <th data-field="date" data-sortable="true">Scan date</th>
+                        <th data-field="status" data-sortable="false">Status</th>
+                        <th data-field="log" data-sortable="false">Log</th>
                     </tr>
                 </thead>
-                <tbody
-                    *ngFor="let tool of toolList | paginate: { itemsPerPage: pageSize, currentPage: pageNumber }; index as i;">
-                    <tr>
-                        <th scope="row">{{i+1}}</th>
+                <tbody class="item">
+                    <tr *ngFor="let tool of toolList; index as i;">
+                        <td>{{i+1}}</td>
                         <td>{{tool.id}}</td>
                         <td>{{tool.tool}}</td>
                         <td>{{tool.date}}</td>
@@ -46,12 +35,8 @@
                     </tr>
                 </tbody>
             </table>
-            <div class="p-1">
-                <pagination-controls (pageChange)="pageNumber = $event"></pagination-controls>
-            </div>
         </div>
     </div>
-    <div style="height: 400px;"></div>
 </div>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

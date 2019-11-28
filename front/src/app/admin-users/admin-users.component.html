@@ -1,2 +1,61 @@
-<app-main></app-main>
-<p>admin-users works!</p>
+<div class="project min-vh-100">
+    <app-main></app-main>
+    <div class="container col-lg-6 p-2">
+        <div class="rounded border item">
+            <form id="userForm" [formGroup]="newUserForm" (ngSubmit)="onSubmit()">
+                <div class="row p-2">
+                    <div class="col-lg-9 justify-content-left pt-2">
+                        <h5>Add user, using username and temporary password</h5>
+                    </div>
+                    <div class="col-lg-3 form-group pt-2">
+                        <button class="btn btn-primary float-right">Add user</button>
+                    </div>
+                </div>
+                <div class="row p-2">
+                    <div class="col-lg-5 form-group">
+                        <input class="rounded form-control w-100" type="search" placeholder=" Username"
+                            formControlName="newusername">
+                        <div class="error" *ngIf="submitted && f.newusername.errors">
+                            <div *ngIf="f.newusername.errors.required">Username is required</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 form-group">
+                        <input class="rounded form-control w-100" type="password" placeholder=" Password"
+                            formControlName="newpassword" autocomplete="new-password">
+                        <div class="error" *ngIf="submitted && f.newpassword.errors">
+                            <div *ngIf="f.newpassword.errors.required">Password is required</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 form-group">
+                        <select data-style="bg-white shadow-sm" class="form-control" formControlName="type">
+                            <option>User</option>
+                            <option>Admin</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <table data-toggle="table" data-pagination="true" data-search="true" data-search-align="left"
+            data-pagination-h-align="left" data-pagination-detail-h-align="right" data-show-toggle="true"
+            data-show-columns="true" data-show-fullscreen="true">
+            <thead class="item">
+                <tr>
+                    <th data-field="id" data-sortable="true">ID</th>
+                    <th data-field="username" data-sortable="true">Username</th>
+                    <th data-field="created" data-sortable="true">Created</th>
+                    <th data-field="type" data-sortable="false">Type</th>
+                    <th data-field="action" data-sortable="false">Action</th>
+                </tr>
+            </thead>
+            <tbody class="item">
+                <tr *ngFor="let user of userList;">
+                    <td>{{user.id}}</td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.created}}</td>
+                    <td>{{user.type}}</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
