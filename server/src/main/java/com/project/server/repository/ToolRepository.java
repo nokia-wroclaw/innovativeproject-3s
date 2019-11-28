@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ToolRepository extends JpaRepository<Tool, Long> {
 
-    // List<Tool> findByUserId(long id);
+    List<Tool> findByName (String name);
     Tool findById(long id);
 }
