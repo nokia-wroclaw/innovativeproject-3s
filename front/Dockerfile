@@ -2,17 +2,11 @@
 FROM node:12.2.0 as build-node
 
 WORKDIR /front
-# COPY ./package*.json /app/
 RUN npm install
-RUN npm install -g typescript
-RUN npm install -g @angular/cli 
-
 COPY ./default.conf  /front/
 COPY . .
 
 RUN npm run build --prod
-
-
 
 FROM nginx:1.15
 
