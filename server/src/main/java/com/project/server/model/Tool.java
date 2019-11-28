@@ -13,21 +13,20 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
-
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(allowGetters = true)
 public class Tool {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long id;
-    private String toolname;
+    private int id;
+    private String name;
     private String info;
     
     protected Tool() {}
 
-    public Tool(String toolname, String info) {
-        this.toolname = toolname;
+    public Tool(String name, String info) {
+        this.name = name;
         this.info = info;
     }
 
@@ -35,15 +34,15 @@ public class Tool {
     public String toString() {
         return String.format(
                 "Tool[id=%d, username='%s', password='%s']",
-                id, toolname, info);
+                id, name, info);
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
     public String gettoolname() {
-        return toolname;
+        return name;
     }
 
     public String getInfo() {
