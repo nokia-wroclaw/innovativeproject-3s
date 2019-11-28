@@ -15,6 +15,19 @@ public class Team {
     @ManyToMany(mappedBy = "team")
     private Collection<User> user = new ArrayList<>();
 
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name="team_project",
+            joinColumns=@JoinColumn(name="team_id"),
+            inverseJoinColumns=@JoinColumn(name="project_id"))
+    private Collection<Project> project=new ArrayList<>();
+
+    public Collection<Project> getProject() {
+        return project;
+    }
+    public void setProjects(Collection<Project> project) {
+        this.project = project;
+    }
+
     public Team() {}
 
     public Team(String name) {

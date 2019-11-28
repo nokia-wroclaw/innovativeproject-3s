@@ -1,12 +1,10 @@
 package com.project.server.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -22,7 +20,14 @@ public class Tool {
     private int id;
     private String name;
     private String info;
-    
+
+    @ManyToMany(mappedBy = "tool", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Collection<Project> project = new ArrayList<>();
+    public Collection<Project> getProject() {
+        return project;
+    }
+
+
     protected Tool() {}
 
     public Tool(String name, String info) {
