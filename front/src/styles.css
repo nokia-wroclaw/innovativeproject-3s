@@ -32,6 +32,10 @@ form:before {
     color: red;
 }
 
+.item {
+    background: white;
+}
+
 .tool-scrollbar {
     height: 100px;
     overflow: auto;
@@ -41,9 +45,4 @@ form:before {
 .project {
     background: #ECEBEB;
     height: 100%;
-}
-
-.shadowbox {
-    background: white;  
-    box-shadow: 5px 5px 5px grey;
 }
