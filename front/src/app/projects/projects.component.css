@@ -1,0 +1,15 @@
+.shadowbox {
+    background: white;  
+    box-shadow: 4px 4px 4px grey;
+}
+
+.project {
+    background: #ECEBEB;
+    height: 100%;
+}
+
+.tool-scrollbar {
+    height: 100px;
+    overflow: auto;
+    display: block;
+ }
