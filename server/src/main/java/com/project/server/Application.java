@@ -100,7 +100,6 @@ public class Application {
             testScan.getProject().add(project1);
             project1.getScan().add(testScan);
 
-
             for (Tool t : tools) {
                 toolRepo.save(t);
             }
