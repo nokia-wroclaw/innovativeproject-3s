@@ -1,7 +1,7 @@
 package com.project.server;
 
-import com.project.server.model.User;
-import com.project.server.repository.UserRepository;
+import com.project.server.model.*;
+import com.project.server.repository.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -11,6 +11,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.sql.Date;
+import java.util.ArrayList;
 
 @SpringBootApplication
 @EnableJpaAuditing
@@ -23,17 +26,100 @@ public class Application {
 	}
 
     @Bean
-    public CommandLineRunner demo(UserRepository repository) {
+    public CommandLineRunner demo(UserRepository users, PermissionRepository permissions, TeamRepository teamsRepo,
+                                  ProjectRepository projectRepo, ToolRepository toolRepo, ScanRepository scanRepo) {
         return (args) -> {
-            repository.save(new User("admin", "admin"));
-            repository.save(new User("user", "user"));
+//            Users
+            ArrayList<User> testUsers = new ArrayList<>();
+            testUsers.add(new User("admin", "admin"));
+            testUsers.add(new User("user", "user"));
 
-            log.info("User found with findAll():");
-            log.info("-------------------------------");
-            for (User user : repository.findAll()) {
-                log.info(user.toString());
+            ArrayList<User> teamUsers = new ArrayList<>();
+            for (int i = 0; i < 5; ++i) {
+                teamUsers.add(new User("user" + i, "user" + i));
             }
-            log.info("");
+
+//            Permissions
+            Permission adminPermission = new Permission("ADMIN");
+            Permission userPermission = new Permission("USER");
+
+            testUsers.get(0).getPermissions().add(adminPermission);
+            adminPermission.getUser().add(testUsers.get(0));
+            for (User u : testUsers) {
+                u.getPermissions().add(userPermission);
+                userPermission.getUser().add(u);
+            }
+
+            for (User u : teamUsers) {
+                u.getPermissions().add(userPermission);
+                userPermission.getUser().add(u);
+            }
+
+            permissions.save(adminPermission);
+            permissions.save(userPermission);
+
+//            Teams
+            ArrayList<Team> teams = new ArrayList<>();
+            for (int i = 0; i < 2; ++i) {
+                teams.add(new Team("team" + i));
+            }
+
+            for (int i = 0; i < 5; i += 2) {
+                teams.get(0).getUser().add(teamUsers.get(i));
+                teamUsers.get(i).getTeams().add(teams.get(0));
+            }
+
+            for (int i = 1; i < 4; ++i) {
+                teams.get(1).getUser().add(teamUsers.get(i));
+                teamUsers.get(i).getTeams().add(teams.get(1));
+            }
+
+
+//            Projects
+            Project project1 = new Project("project1");
+            project1.getTeam().add(teams.get(0));
+            project1.getTeam().add(teams.get(1));
+            teams.get(0).getProject().add(project1);
+            teams.get(1).getProject().add(project1);
+
+//            Tools
+            ArrayList<Tool> tools = new ArrayList<>();
+            for (int i = 0; i < 3; ++i) {
+                tools.add(new Tool("tool" + i, "info " + i));
+                tools.get(i).getProject().add(project1);
+                project1.getTool().add(tools.get(i));
+            }
+
+
+//            Scans
+            Scan testScan = new Scan();
+            testScan.setDate(new Date(0));
+            testScan.setResult("ok");
+            testScan.setTool_id(tools.get(0).getId());
+            testScan.setUser_id(teamUsers.get(2).getId());
+            testScan.getProject().add(project1);
+            project1.getScan().add(testScan);
+
+
+            for (Tool t : tools) {
+                toolRepo.save(t);
+            }
+
+            projectRepo.save(project1);
+            scanRepo.save(testScan);
+
+            for (Team t : teams) {
+                teamsRepo.save(t);
+            }
+
+            for (User u : testUsers) {
+                users.save(u);
+            }
+
+            for (User u : teamUsers) {
+                users.save(u);
+            }
+
         };
     }
 }
