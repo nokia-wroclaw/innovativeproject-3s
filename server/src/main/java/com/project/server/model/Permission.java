@@ -1,5 +1,7 @@
 package com.project.server.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,6 +19,7 @@ public class Permission {
     private PermissionType type;
 
     @ManyToMany(mappedBy = "permission", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JsonBackReference
     private Collection<User> user = new ArrayList<>();
 
     public Permission() {}
