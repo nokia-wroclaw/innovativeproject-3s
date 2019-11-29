@@ -5,8 +5,10 @@ import java.util.Collection;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
@@ -26,6 +28,7 @@ public class User {
     @JoinTable(name="user_permission",
             joinColumns=@JoinColumn(name="user_id"),
             inverseJoinColumns=@JoinColumn(name="permission_type"))
+    @JsonIgnore
     private Collection<Permission> permission=new ArrayList<>();
 
     public Collection<Permission> getPermissions() {
