@@ -16,6 +16,7 @@ import { ToolsComponent } from './tools/tools.component';
 import { ProjectsComponent } from './projects/projects.component';
 
 import { NgxPaginationModule } from 'ngx-pagination';
+import { AdminUsersComponent } from './admin-users/admin-users.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'users',
+    component: AdminUsersComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: '**',
     redirectTo: ''
   }
@@ -49,7 +55,8 @@ const routes: Routes = [
     LoginComponent,
     MainComponent,
     ToolsComponent,
-    ProjectsComponent
+    ProjectsComponent,
+    AdminUsersComponent
   ],
   imports: [
     NgxPaginationModule,

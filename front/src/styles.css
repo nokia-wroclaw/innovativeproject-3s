@@ -31,3 +31,18 @@ form:before {
 .error {
     color: red;
 }
+
+.item {
+    background: white;
+}
+
+.tool-scrollbar {
+    height: 100px;
+    overflow: auto;
+    display: block;
+ }
+
+.project {
+    background: #ECEBEB;
+    height: 100%;
+}
