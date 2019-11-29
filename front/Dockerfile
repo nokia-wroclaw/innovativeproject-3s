@@ -3,9 +3,8 @@
 FROM node:12.2.0 as build-node
 
 WORKDIR /front
-RUN npm install
-COPY ./default.conf  /front/
 COPY . .
+RUN npm install
 
 RUN npm run build --prod
 
