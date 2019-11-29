@@ -15,6 +15,3 @@ COPY --from=build-node /front/dist/front/ /usr/share/nginx/html
 COPY --from=build-node /front/ /etc/nginx/conf.d/
 
 EXPOSE 4200
-
-
-

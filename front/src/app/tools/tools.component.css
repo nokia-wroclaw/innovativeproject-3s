@@ -1,0 +1,9 @@
+.shadowbox {
+    background: white;  
+    box-shadow: 4px 4px 4px grey;
+}
+
+.project {
+    background: #ECEBEB;
+    height: 100%;
+}
