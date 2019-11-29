@@ -90,7 +90,6 @@ public class Application {
                 project1.getTool().add(tools.get(i));
             }
 
-
 //            Scans
             Scan testScan = new Scan();
             testScan.setDate(new Date(0));
@@ -99,7 +98,6 @@ public class Application {
             testScan.setUser_id(teamUsers.get(2).getId());
             testScan.getProject().add(project1);
             project1.getScan().add(testScan);
-
 
             for (Tool t : tools) {
                 toolRepo.save(t);
