@@ -3,11 +3,11 @@ import { User } from '../models/user';
 import { DataService } from '../services/data.service';
 
 @Component({
-  selector: 'app-main',
-  templateUrl: './main.component.html',
-  styleUrls: ['./main.component.css']
+  selector: 'app-navbar',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.css']
 })
-export class MainComponent implements OnInit {
+export class NavbarComponent implements OnInit {
   currentUser: User;
 
   constructor(private ds: DataService) {

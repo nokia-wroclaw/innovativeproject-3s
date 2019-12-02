@@ -29,6 +29,7 @@ form:before {
 }
 
 .error {
+    padding-left: 5px;
     color: red;
 }
 

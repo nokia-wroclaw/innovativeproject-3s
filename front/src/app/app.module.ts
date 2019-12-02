@@ -5,7 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { MainComponent } from './main/main.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 import { ErrorInterceptor } from './helpers/error.interceptor';
 import { AuthGuard } from './helpers/auth.guard';
@@ -53,7 +53,7 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     LoginComponent,
-    MainComponent,
+    NavbarComponent,
     ToolsComponent,
     ProjectsComponent,
     AdminUsersComponent
