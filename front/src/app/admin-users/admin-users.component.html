@@ -1,29 +1,32 @@
 <div class="project min-vh-100">
-    <app-main></app-main>
+    <app-navbar></app-navbar>
     <div class="container col-lg-6 p-2">
         <div class="rounded border item">
-            <form id="userForm" [formGroup]="newUserForm" (ngSubmit)="onSubmit()">
+            <form id="userForm" [formGroup]="userForm" (ngSubmit)="onSubmit()">
                 <div class="row p-2">
                     <div class="col-lg-9 justify-content-left pt-2">
                         <h5>Add user, using username and temporary password</h5>
                     </div>
                     <div class="col-lg-3 form-group pt-2">
-                        <button class="btn btn-primary float-right">Add user</button>
+                        <button [disabled]="loading" class="btn btn-primary float-right">
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>Add user</button>
                     </div>
                 </div>
                 <div class="row p-2">
                     <div class="col-lg-5 form-group">
                         <input class="rounded form-control w-100" type="search" placeholder=" Username"
-                            formControlName="newusername">
-                        <div class="error" *ngIf="submitted && f.newusername.errors">
-                            <div *ngIf="f.newusername.errors.required">Username is required</div>
+                            formControlName="username">
+                        <div class="error"
+                            *ngIf="userForm.controls['username'].invalid && (userForm.controls['username'].dirty || userForm.controls['username'].touched)">
+                            <div *ngIf="userForm.controls['username'].errors.required">Username is required</div>
                         </div>
                     </div>
                     <div class="col-lg-5 form-group">
                         <input class="rounded form-control w-100" type="password" placeholder=" Password"
-                            formControlName="newpassword" autocomplete="new-password">
-                        <div class="error" *ngIf="submitted && f.newpassword.errors">
-                            <div *ngIf="f.newpassword.errors.required">Password is required</div>
+                            formControlName="password" autocomplete="new-password">
+                        <div class="error"
+                            *ngIf="userForm.controls['password'].invalid && (userForm.controls['password'].dirty || userForm.controls['password'].touched)">
+                            <div *ngIf="userForm.controls['password'].errors.required">Password is required</div>
                         </div>
                     </div>
                     <div class="col-lg-2 form-group">

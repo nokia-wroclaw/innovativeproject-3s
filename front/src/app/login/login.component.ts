@@ -11,7 +11,6 @@ export class LoginComponent implements OnInit {
 
     loginForm: FormGroup;
     loading = false;
-    submitted = false;
     returnUrl: string;
     loginError = false;
     errorMsg: string;
@@ -27,33 +26,27 @@ export class LoginComponent implements OnInit {
             username: ['', Validators.required],
             password: ['', Validators.required]
         });
-
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
 
     get f() { return this.loginForm.controls; }
 
     onSubmit() {
-        this.submitted = true;
-
-        if (this.loginForm.invalid) {
-            return;
+        if (this.loginForm.valid) {
+            this.loading = true;
+            this.ds.login(this.f.username.value, this.f.password.value).pipe(first()).subscribe(data => {
+                this.loginError = false;
+                this.router.navigate([this.returnUrl]);
+            }, error => {
+                if (error === 'OK') {
+                    this.errorMsg = 'Incorrect login or password';
+                } else {
+                    this.errorMsg = 'Cannot connect to the service';
+                }
+                console.log(error);
+                this.loading = false;
+                this.loginError = true;
+            });
         }
-
-        this.loading = true;
-        this.ds.login(this.f.username.value, this.f.password.value).pipe(first()).subscribe(data => {
-            this.loginError = false;
-            this.router.navigate([this.returnUrl]);
-        }, error => {
-            if (error === 'OK') {
-                this.errorMsg = 'Incorrect login or password';
-            } else {
-                this.errorMsg = 'Cannot connect to the service';
-            }
-            console.log(error);
-            this.loading = false;
-            this.loginError = true;
-
-        });
     }
 }

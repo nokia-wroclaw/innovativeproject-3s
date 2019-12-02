@@ -9,7 +9,7 @@ import { DataService } from '../services/data.service';
 })
 export class AdminUsersComponent implements OnInit {
 
-  userList= [
+  userList = [
     {id: 1, username: 'user 1', created: '01-01-2019', type: 'admin'}, {id: 2, username: 'user 2', created: '01-01-2019', type: 'admin'},
     {id: 3, username: 'user 3', created: '01-01-2019', type: 'user'}, {id: 4, username: 'user 4', created: '01-01-2019', type: 'user'},
     {id: 5, username: 'user 5', created: '01-01-2019', type: 'user'}, {id: 6, username: 'user 6', created: '01-01-2019', type: 'user'},
@@ -20,32 +20,30 @@ export class AdminUsersComponent implements OnInit {
     {id: 15, username: 'user 15', created: '01-01-2019', type: 'user'}, {id: 16, username: 'user 16', created: '01-01-2019', type: 'user'}
   ];
 
-  newUserForm: FormGroup;
-  submitted = false;
+  userForm: FormGroup;
+  loading = false;
 
   constructor(private fb: FormBuilder, private db: DataService) { }
 
   ngOnInit() {
-    this.newUserForm = this.fb.group({
-      newusername: ['', Validators.required],
-      newpassword: ['', Validators.required],
+    this.userForm = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required],
       type: ['', Validators.required]
     });
   }
 
-  get f() { return this.newUserForm.controls; }
+  get f() { return this.userForm.controls; }
 
   onSubmit() {
-    this.submitted = true;
-    if (this.newUserForm.invalid) {
-      return;
+    if (this.userForm.valid) {
+      this.loading = true;
+      const uname = this.f.username.value;
+      const pass = this.f.password.value;
+      const t = this.f.type.value;
+
+      console.log(uname, pass, t);
     }
-
-    const uname = this.f.newusername.value;
-    const pass = this.f.newpassword.value;
-    const t = this.f.type.value;
-
-    console.log(uname, pass, t);
   }
 
 }
