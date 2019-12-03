@@ -12,6 +12,12 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import ch.qos.logback.core.html.NOPThrowableRenderer;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -30,6 +36,36 @@ public class Application {
                                   ProjectRepository projectRepo, ToolRepository toolRepo, ScanRepository scanRepo) {
         return (args) -> {
 //            Users
+
+        try{    
+	
+        // Run a shell script
+
+        Process proc = Runtime.getRuntime().exec("docker run --rm  aquasec/trivy -f json --light python:3.4-alpine");
+        System.out.println("Success!");
+
+        BufferedReader stdInput = new BufferedReader(new 
+     InputStreamReader(proc.getInputStream()));
+
+BufferedReader stdError = new BufferedReader(new 
+     InputStreamReader(proc.getErrorStream()));
+
+// Read the output from the command
+System.out.println("Here is the standard output of the command:\n");
+String s = null;
+while ((s = stdInput.readLine()) != null) {
+    System.out.println(s);
+}
+
+// Read any errors from the attempted command
+System.out.println("Here is the standard error of the command (if any):\n");
+while ((s = stdError.readLine()) != null) {
+    System.out.println(s);
+}
+
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
             ArrayList<User> testUsers = new ArrayList<>();
             testUsers.add(new User("admin", "admin"));
             testUsers.add(new User("user", "user"));
@@ -54,7 +90,7 @@ public class Application {
                 u.getPermissions().add(userPermission);
                 userPermission.getUser().add(u);
             }
-
+            
             permissions.save(adminPermission);
             permissions.save(userPermission);
 
