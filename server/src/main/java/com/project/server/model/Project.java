@@ -1,6 +1,9 @@
 package com.project.server.model;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -13,18 +16,21 @@ public class Project {
     private String name;
 
     @ManyToMany(mappedBy = "project", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JsonIgnore
     private Collection<Team> team = new ArrayList<>();
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name="project_tool",
             joinColumns=@JoinColumn(name="project_id"),
             inverseJoinColumns=@JoinColumn(name="tool_id"))
+    @JsonIgnore            
     private Collection<Tool> tool = new ArrayList<>();
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name="project_scan",
             joinColumns=@JoinColumn(name="project_id"),
             inverseJoinColumns=@JoinColumn(name="scan_id"))
+    @JsonIgnore
     private Collection<Scan> scan = new ArrayList<>();
 
     public Project() {}

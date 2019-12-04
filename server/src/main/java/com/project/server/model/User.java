@@ -42,6 +42,7 @@ public class User {
     @JoinTable(name="user_team",
             joinColumns=@JoinColumn(name="user_id"),
             inverseJoinColumns=@JoinColumn(name="team_id") )
+    @JsonIgnore
     private Collection<Team> team=new ArrayList<>();
 
     public Collection<Team> getTeams() {

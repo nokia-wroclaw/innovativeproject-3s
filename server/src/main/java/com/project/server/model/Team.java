@@ -1,6 +1,9 @@
 package com.project.server.model;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -13,12 +16,14 @@ public class Team {
     private String name;
 
     @ManyToMany(mappedBy = "team")
+    @JsonIgnore
     private Collection<User> user = new ArrayList<>();
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name="team_project",
             joinColumns=@JoinColumn(name="team_id"),
             inverseJoinColumns=@JoinColumn(name="project_id"))
+    @JsonIgnore
     private Collection<Project> project=new ArrayList<>();
 
     public Collection<Project> getProject() {

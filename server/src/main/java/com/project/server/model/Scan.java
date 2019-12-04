@@ -1,5 +1,6 @@
 package com.project.server.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -7,8 +8,6 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
-
-import static java.awt.SystemColor.info;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -21,9 +20,10 @@ public class Scan {
     private Date date;
     private String result;
     private long user_id;
-    private int tool_id;
+    private long tool_id;
 
     @ManyToMany(mappedBy = "scan", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JsonIgnore
     private Collection<Project> project = new ArrayList<>();
     public Collection<Project> getProject() {
         return project;
@@ -33,12 +33,12 @@ public class Scan {
         return id;
     }
 
-    public int getTool_id() {
+    public long getTool_id() {
         return tool_id;
     }
 
-    public void setTool_id(int tool_id) {
-        this.tool_id = tool_id;
+    public void setTool_id(long l) {
+        this.tool_id = l;
     }
 
     public long getUser_id() {

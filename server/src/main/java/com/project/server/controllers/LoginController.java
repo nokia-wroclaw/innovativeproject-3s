@@ -18,7 +18,6 @@ public class LoginController {
     LoginController(UserRepository repository) {
         this.repository = repository;
     }
-
     private static final Logger log = LoggerFactory.getLogger(Application.class);
 
     @RequestMapping("/user/{id}")
