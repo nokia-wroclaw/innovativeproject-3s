@@ -12,6 +12,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import ch.qos.logback.core.html.NOPThrowableRenderer;
+
+
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -30,6 +33,8 @@ public class Application {
                                   ProjectRepository projectRepo, ToolRepository toolRepo, ScanRepository scanRepo) {
         return (args) -> {
 //            Users
+
+        TrivyHandler.startTestcmd();
             ArrayList<User> testUsers = new ArrayList<>();
             testUsers.add(new User("admin", "admin"));
             testUsers.add(new User("user", "user"));
@@ -54,7 +59,7 @@ public class Application {
                 u.getPermissions().add(userPermission);
                 userPermission.getUser().add(u);
             }
-
+            
             permissions.save(adminPermission);
             permissions.save(userPermission);
 
