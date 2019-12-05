@@ -28,7 +28,7 @@ export class ScanState {
         return this.scanService.fetchScans().pipe(tap((result) => {
             const state = getState();
             setState({
-                ...State,
+                ...state,
                 scans: result,
             });
         }));

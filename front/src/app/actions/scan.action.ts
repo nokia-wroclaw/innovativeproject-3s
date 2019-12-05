@@ -1,4 +1,4 @@
-import { Scan } from '../models/Scan';
+import { Scan } from '../models/scan';
 
 export class AddScan {
     static readonly type = '[Scan] Add';

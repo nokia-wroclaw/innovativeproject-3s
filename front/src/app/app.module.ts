@@ -20,6 +20,7 @@ import { AdminUsersComponent } from './admin-users/admin-users.component';
 
 import { NgxsModule } from '@ngxs/store';
 import { ScanState } from './states/scan.state';
+import { UserState } from './states/user.state';
 
 const routes: Routes = [
   {
@@ -69,7 +70,8 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes),
     NgxsModule.forRoot([
-      ScanState
+      ScanState,
+      UserState
     ])
   ],
   providers: [
