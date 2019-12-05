@@ -18,6 +18,9 @@ import { ProjectsComponent } from './projects/projects.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 
+import { NgxsModule } from '@ngxs/store';
+import { ScanState } from './states/scan.state';
+
 const routes: Routes = [
   {
     path: '',
@@ -64,7 +67,10 @@ const routes: Routes = [
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    NgxsModule.forRoot([
+      ScanState
+    ])
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
