@@ -16,7 +16,7 @@ public class Scan {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private int id;
+    private long id;
     private Date date;
     private String result;
     private long user_id;
@@ -29,7 +29,7 @@ public class Scan {
         return project;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

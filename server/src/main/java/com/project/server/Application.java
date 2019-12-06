@@ -34,7 +34,7 @@ public class Application {
         return (args) -> {
 //            Users
 
-        TrivyHandler.startTestcmd();
+        //TrivyHandler.startTestcmd();
             ArrayList<User> testUsers = new ArrayList<>();
             testUsers.add(new User("admin", "admin"));
             testUsers.add(new User("user", "user"));

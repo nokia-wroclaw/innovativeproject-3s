@@ -15,7 +15,7 @@ public class Permission {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private int id;
+    private long id;
     private PermissionType type;
 
     @ManyToMany(mappedBy = "permission", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
@@ -28,10 +28,10 @@ public class Permission {
         this.type = PermissionType.valueOf(type);
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
     public String getType() {
