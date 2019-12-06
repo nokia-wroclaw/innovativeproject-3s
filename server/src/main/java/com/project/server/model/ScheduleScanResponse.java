@@ -1,4 +1,4 @@
-package com.projec.server.model;
+package com.project.server.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
