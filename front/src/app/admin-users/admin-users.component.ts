@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataService } from '../services/data.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-admin-users',
@@ -22,6 +23,7 @@ export class AdminUsersComponent implements OnInit {
 
   newUserForm: FormGroup;
   submitted = false;
+  scanLog: string;
 
   constructor(private fb: FormBuilder, private db: DataService) { }
 
@@ -46,6 +48,13 @@ export class AdminUsersComponent implements OnInit {
     const t = this.f.type.value;
 
     console.log(uname, pass, t);
+  }
+
+  send() {
+    const s = (document.getElementById('scanline') as HTMLInputElement).value;
+    this.db.sendScan(s).pipe(first()).subscribe(data => {
+      this.scanLog = data;
+    });
   }
 
 }

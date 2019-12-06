@@ -2,6 +2,18 @@
     <app-main></app-main>
     <div class="container col-lg-6 p-2">
         <div class="rounded border item">
+            <div class="row p-2">
+                <div class="col-10">
+                    <input id="scanline" type="text" placeholder="scan line" class="w-100">
+                </div>
+                <div class="col-2">
+                    <button class="btn btn-primary" (click)="send()">Send</button>
+                </div>
+            </div>
+        </div>
+        <div style="height: 10px;"></div>
+        <span>{{scanLog}}</span>
+        <div class="rounded border item">
             <form id="userForm" [formGroup]="newUserForm" (ngSubmit)="onSubmit()">
                 <div class="row p-2">
                     <div class="col-lg-9 justify-content-left pt-2">

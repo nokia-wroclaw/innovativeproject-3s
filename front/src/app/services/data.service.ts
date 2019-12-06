@@ -34,4 +34,8 @@ export class DataService {
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
     }
+
+    sendScan(s: string) {
+        return this.http.post<any>('http://localhost:8080/trivy', s);
+    }
 }
