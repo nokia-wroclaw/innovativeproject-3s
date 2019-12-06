@@ -15,7 +15,7 @@ import java.util.Collection;
 public class Scan {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private Date date;
     private String result;
