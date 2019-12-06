@@ -38,7 +38,7 @@ public class ScanJob extends QuartzJobBean {
     protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         logger.info("Executing Job with key {}", jobExecutionContext.getJobDetail().getKey());
         
-        String scanResult = null;
+        StringBuilder scanResult = new StringBuilder();
 
         try{    
 	
@@ -54,8 +54,9 @@ public class ScanJob extends QuartzJobBean {
             // Read the output from the command
             String s = null;
             while ((s = stdInput.readLine()) != null) {
-            System.out.println(s);
-            kappa = s;
+                scanResult.append(s);
+                scanResult.append("\n");
+                System.out.println(s);
         }
 
     
@@ -63,9 +64,10 @@ public class ScanJob extends QuartzJobBean {
             e.printStackTrace();
         }
 
+        String scanEmail = scanResult.toString();
         JobDataMap jobDataMap = jobExecutionContext.getMergedJobDataMap();
         String subject = jobDataMap.getString("subject");
-        String body = kappa;
+        String body = scanEmail;
         String recipientEmail = jobDataMap.getString("email");
 
         sendMail(mailProperties.getUsername(), recipientEmail, subject, body);
