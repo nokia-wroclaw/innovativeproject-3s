@@ -1,8 +1,10 @@
 package com.project.server.controllers;
 
-import java.util.List;
+import java.util.Collection;
 
+import com.project.server.model.Project;
 import com.project.server.model.Tool;
+import com.project.server.model.User;
 import com.project.server.services.ToolService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,7 @@ public class ToolController {
 
     @Autowired ToolService service;
     @GetMapping
-    public List<Tool> getTools() {
+    public Collection<Tool> getTools() {
         return service.getTools();
     }
     @PostMapping
@@ -39,4 +41,10 @@ public class ToolController {
     public void delete(@PathVariable(required = true) long id) {
         service.delete(id);
     }
+    @GetMapping("/MyProject")
+    public Collection<Tool> getProjectTool(@RequestBody Project project)
+        {
+            return  project.getTool();
+
+        }
 }

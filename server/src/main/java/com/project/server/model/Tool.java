@@ -40,7 +40,7 @@ public class Tool {
     @Override
     public String toString() {
         return String.format(
-                "Tool[id=%d, username='%s', password='%s']",
+                "Tool[id=%d, name='%s', info='%s']",
                 id, name, info);
     }
 
@@ -48,7 +48,7 @@ public class Tool {
         return id;
     }
 
-    public String gettoolname() {
+    public String getName() {
         return name;
     }
 

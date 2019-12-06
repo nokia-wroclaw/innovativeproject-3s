@@ -6,7 +6,7 @@ public class ToolNotFoundException extends RuntimeException {
 
     
         public ToolNotFoundException(Tool tool) {
-            super("Could not find user {" + tool.getId() + ", " + tool.gettoolname() + ", " + tool.getInfo() + "}");
+            super("Could not find user {" + tool.getId() + ", " + tool.getName() + ", " + tool.getInfo() + "}");
         }
     
         public ToolNotFoundException(Long id) {
