@@ -9,12 +9,12 @@ public class ScheduleEmailResponse {
     private String jobGroup;
     private String message;
 
-    public ScheduleScanEmailResponse(boolean success, String message) {
+    public ScheduleScanResponse(boolean success, String message) {
         this.success = success;
         this.message = message;
     }
 
-    public ScheduleScanEmailResponse(boolean success, String jobId, String jobGroup, String message) {
+    public ScheduleScanResponse(boolean success, String jobId, String jobGroup, String message) {
         this.success = success;
         this.jobId = jobId;
         this.jobGroup = jobGroup;
