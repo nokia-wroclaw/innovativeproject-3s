@@ -1,4 +1,4 @@
-package com.projec.server.model;
+package com.project.server.model;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
-public class ScheduleScanEmailRequest {
+public class ScheduleScanRequest {
     @Email
     @NotEmpty
     private String email;
