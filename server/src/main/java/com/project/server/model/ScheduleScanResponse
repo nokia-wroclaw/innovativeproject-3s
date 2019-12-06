@@ -3,7 +3,7 @@ package com.projec.server.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ScheduleEmailResponse {
+public class ScheduleScanResponse {
     private boolean success;
     private String jobId;
     private String jobGroup;
