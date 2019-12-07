@@ -31,6 +31,9 @@ export class LoginComponent implements OnInit {
 
     get f() { return this.loginForm.controls; }
 
+    get username() { return this.loginForm.get('username'); }
+    get password() { return this.loginForm.get('password'); }
+
     onSubmit() {
         if (this.loginForm.valid) {
             this.loading = true;

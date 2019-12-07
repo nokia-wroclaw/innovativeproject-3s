@@ -4,69 +4,47 @@ import {UserService} from '../services/user.service';
 import {AddUser, DeleteUser, GetUsers, UpdateUser} from '../actions/user.action';
 import {tap} from 'rxjs/operators';
 
-export class UserStateModel {
-    users: User[];
-}
 
-@State<UserStateModel>({
+@State<User[]>({
     name: 'users',
-    defaults: {
-        users: []
-    }
+    defaults: []
 })
 
 export class UserState {
     constructor(private userService: UserService) { }
 
     @Selector()
-    static getUserList(state: UserStateModel) {
-        return state.users;
+    static getUserList(state: User[]) {
+        return state;
     }
 
     @Action(GetUsers)
-    getUsers({getState, setState}: StateContext<UserStateModel>) {
+    getUsers({setState}: StateContext<User[]>) {
         return this.userService.fetchUsers().pipe(tap((result) => {
-            const state = getState();
             setState({
-                ...state,
-                users: result,
+                ...result
             });
         }));
     }
 
     @Action(AddUser)
-    addUser({getState, patchState}: StateContext<UserStateModel>, {payload}: AddUser) {
+    addUser(ctx: StateContext<User[]>, {payload}: AddUser) {
         return this.userService.addUser(payload).pipe(tap((result) => {
-            const state = getState();
-            patchState({
-                users: [...state.users, result]
-            });
+            ctx.dispatch(new GetUsers());
         }));
     }
 
     @Action(DeleteUser)
-    deleteUser({getState, setState}: StateContext<UserStateModel>, {id}: DeleteUser) {
+    deleteUser(ctx: StateContext<User[]>, {id}: DeleteUser) {
         return this.userService.deleteUser(id).pipe(tap(() => {
-            const state = getState();
-            const filteredArray = state.users.filter(item => item.id !== id);
-            setState({
-                ...state,
-                users: filteredArray
-            });
+            ctx.dispatch(new GetUsers());
         }));
     }
 
     @Action(UpdateUser)
-    updateUser({getState, setState}: StateContext<UserStateModel>, {payload, id}: UpdateUser) {
+    updateUser(ctx: StateContext<User[]>, {payload, id}: UpdateUser) {
         return this.userService.updateUser(payload, id).pipe(tap((result) => {
-            const state = getState();
-            const userList = [...state.users];
-            const userIndex = userList.findIndex(item => item.id === id);
-            userList[userIndex] = result;
-            setState({
-                ...state,
-                users: userList,
-            });
+            ctx.dispatch(new GetUsers());
         }));
     }
 }

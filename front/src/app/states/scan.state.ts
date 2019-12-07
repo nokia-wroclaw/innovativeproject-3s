@@ -4,55 +4,40 @@ import {ScanService} from '../services/scan.service';
 import {AddScan, DeleteScan, GetScans} from '../actions/scan.action';
 import {tap} from 'rxjs/operators';
 
-export class ScanStateModel {
-    scans: Scan[];
-}
 
-@State<ScanStateModel>({
+@State<Scan[]>({
     name: 'scans',
-    defaults: {
-        scans: []
-    }
+    defaults: []
 })
 
 export class ScanState {
     constructor(private scanService: ScanService) { }
 
     @Selector()
-    static getScanList(state: ScanStateModel) {
-        return state.scans;
+    static getScanList(state: Scan[]) {
+        return state;
     }
 
     @Action(GetScans)
-    getScans({getState, setState}: StateContext<ScanStateModel>) {
+    getScans({setState}: StateContext<Scan[]>) {
         return this.scanService.fetchScans().pipe(tap((result) => {
-            const state = getState();
             setState({
-                ...state,
-                scans: result,
+                ...result,
             });
         }));
     }
 
     @Action(AddScan)
-    addScan({getState, patchState}: StateContext<ScanStateModel>, {payload}: AddScan) {
+    addScan(ctx: StateContext<Scan[]>, {payload}: AddScan) {
         return this.scanService.addScan(payload).pipe(tap((result) => {
-            const state = getState();
-            patchState({
-                scans: [...state.scans, result]
-            });
+            ctx.dispatch(new GetScans());
         }));
     }
 
     @Action(DeleteScan)
-    deleteScan({getState, setState}: StateContext<ScanStateModel>, {id}: DeleteScan) {
+    deleteScan(ctx: StateContext<Scan[]>, {id}: DeleteScan) {
         return this.scanService.deleteScan(id).pipe(tap(() => {
-            const state = getState();
-            const filteredArray = state.scans.filter(item => item.id !== id);
-            setState({
-                ...state,
-                scans: filteredArray
-            });
+            ctx.dispatch(new GetScans());
         }));
     }
 }

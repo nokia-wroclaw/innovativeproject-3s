@@ -31,6 +31,9 @@ export class AdminUsersComponent implements OnInit {
 
   get f() { return this.userForm.controls; }
 
+  get username() { return this.userForm.get('username'); }
+  get password() { return this.userForm.get('password'); }
+
   onSubmit() {
     if (this.userForm.valid) {
       this.loading = true;
