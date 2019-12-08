@@ -19,13 +19,16 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 
 import { NgxsModule } from '@ngxs/store';
+import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { ScanState } from './states/scan.state';
 import { UserState } from './states/user.state';
+import { LoginState } from './states/login.state';
 
 const routes: Routes = [
   {
     path: '',
-    component: ToolsComponent,
+    redirectTo: '/scans',
+    pathMatch: 'full',
     canActivate: [AuthGuard]
   },
   {
@@ -33,7 +36,7 @@ const routes: Routes = [
     component: LoginComponent,
   },
   {
-    path: 'tools',
+    path: 'scans',
     component: ToolsComponent,
     canActivate: [AuthGuard]
   },
@@ -49,7 +52,8 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: ''
+    redirectTo: '',
+    canActivate: [AuthGuard]
   }
 ];
 
@@ -71,8 +75,12 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     NgxsModule.forRoot([
       ScanState,
-      UserState
-    ])
+      UserState,
+      LoginState
+    ]),
+    NgxsStoragePluginModule.forRoot({
+      key: ['auth.token', 'auth.username']
+    })
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }

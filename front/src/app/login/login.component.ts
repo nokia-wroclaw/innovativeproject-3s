@@ -3,8 +3,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
-import { DataService } from '../services/data.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Store } from '@ngxs/store';
+import { Login } from '../actions/login.action';
 
 @Component({ templateUrl: 'login.component.html' })
 export class LoginComponent implements OnInit {
@@ -15,10 +16,7 @@ export class LoginComponent implements OnInit {
     loginError = false;
     errorMsg: string;
 
-    constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private ds: DataService) {
-        if (this.ds.currentUserValue) {
-            this.router.navigate(['/']);
-        }
+    constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private store: Store) {
     }
 
     ngOnInit() {
@@ -37,18 +35,19 @@ export class LoginComponent implements OnInit {
     onSubmit() {
         if (this.loginForm.valid) {
             this.loading = true;
-            this.ds.login(this.f.username.value, this.f.password.value).pipe(first()).subscribe(data => {
+            this.store.dispatch(new Login({username: this.f.username.value, password: this.f.password.value}))
+            .subscribe(data => {
                 this.loginError = false;
-                this.router.navigate([this.returnUrl]);
+                this.router.navigate(['/']);
             }, error => {
+                console.log(error);
+                this.loading = false;
+                this.loginError = true;
                 if (error === 'OK') {
                     this.errorMsg = 'Incorrect login or password';
                 } else {
                     this.errorMsg = 'Cannot connect to the service';
                 }
-                console.log(error);
-                this.loading = false;
-                this.loginError = true;
             });
         }
     }

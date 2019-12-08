@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../models/user';
-import { DataService } from '../services/data.service';
+import { Store, Select } from '@ngxs/store';
+import { Logout } from '../actions/login.action';
+import { Observable } from 'rxjs';
+import { LoginState } from '../states/login.state';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -8,18 +12,17 @@ import { DataService } from '../services/data.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  currentUser: User;
+  currentUser: any;
 
-  constructor(private ds: DataService) {
-    this.currentUser = this.ds.currentUserValue;
+  constructor(private store: Store, private router: Router) {
+    this.currentUser = this.store.selectSnapshot(LoginState.userDetails);
   }
 
   ngOnInit() {
   }
 
   logout() {
-    this.ds.logout();
-    location.reload(true);
+    this.store.dispatch(new Logout());
+    this.router.navigate(['/login']);
   }
-
 }
