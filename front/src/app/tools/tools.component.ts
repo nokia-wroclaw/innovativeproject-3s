@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../services/data.service';
+import { ScanState } from '../states/scan.state';
+import {Select, Store} from '@ngxs/store';
+import {Observable} from 'rxjs';
+import { Scan } from '../models/scan';
+import { GetScans, DeleteScan } from '../actions/scan.action';
 
 @Component({
   selector: 'app-tools',
@@ -8,179 +12,11 @@ import { DataService } from '../services/data.service';
 })
 export class ToolsComponent implements OnInit {
 
-  toolList = [
-    {
-      id: '1',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '2',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '3',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    }
-  ];
+  @Select(ScanState.getScanList) scanList: Observable<Scan[]>;
 
-  constructor(private ds: DataService) { }
+  constructor(private store: Store) { }
 
   ngOnInit() {
+    this.store.dispatch(new GetScans());
   }
 }
