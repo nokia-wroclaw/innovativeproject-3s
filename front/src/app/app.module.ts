@@ -23,6 +23,9 @@ import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { ScanState } from './states/scan.state';
 import { UserState } from './states/user.state';
 import { LoginState } from './states/login.state';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatExpansionModule, MatFormFieldModule, MatInputModule, MatGridListModule } from '@angular/material';
 
 const routes: Routes = [
   {
@@ -57,6 +60,13 @@ const routes: Routes = [
   }
 ];
 
+const matmodules = [
+  MatExpansionModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatGridListModule
+];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,6 +77,7 @@ const routes: Routes = [
     AdminUsersComponent
   ],
   imports: [
+    ...matmodules,
     NgxPaginationModule,
     FormsModule,
     BrowserModule,
@@ -80,7 +91,11 @@ const routes: Routes = [
     ]),
     NgxsStoragePluginModule.forRoot({
       key: ['auth.token', 'auth.username']
-    })
+    }),
+    BrowserAnimationsModule
+  ],
+  exports: [
+    ...matmodules,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }

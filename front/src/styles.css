@@ -44,6 +44,9 @@ form:before {
  }
 
 .project {
-    background: #ECEBEB;
+    background: #f1f1f1;
     height: 100%;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
