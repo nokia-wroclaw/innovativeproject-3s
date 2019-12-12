@@ -11,7 +11,7 @@
 
  .tile:hover {
     position: relative;
-    bottom: 0.2em;
+    bottom: 0.3em;
     box-shadow: 0 1px 12px rgb(214, 214, 214);
  }
  
@@ -22,7 +22,8 @@
  .sticky {
     position: -webkit-sticky;
     position: sticky;
-    top: 100px;
+    top: 0;
+    height: 8vh;
     z-index: 1;
 }
 

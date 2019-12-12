@@ -12,6 +12,7 @@ export class ProjectsComponent implements OnInit {
   rows = '2:1.5';
   selected: any;
   details = false;
+  blurValue = 'blur(0px)';
 
   projects = [{
     name: 'Project 1',
@@ -64,5 +65,6 @@ export class ProjectsComponent implements OnInit {
 
   toggle() {
     this.details = !this.details;
+    this.blurValue === 'blur(0px)' ? this.blurValue = 'blur(10px)' : this.blurValue = 'blur(0px)';
   }
 }
