@@ -59,3 +59,19 @@ form:before {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+  
+::-webkit-scrollbar-track {
+    background: #ebebeb;
+}
+  
+::-webkit-scrollbar-thumb {
+    background: rgb(168, 168, 168);
+}
+  
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
