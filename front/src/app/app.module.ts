@@ -26,6 +26,7 @@ import { LoginState } from './states/login.state';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatExpansionModule, MatFormFieldModule, MatInputModule, MatGridListModule } from '@angular/material';
+import { ProjectDetailsComponent } from './project-details/project-details.component';
 
 const routes: Routes = [
   {
@@ -46,6 +47,11 @@ const routes: Routes = [
   {
     path: 'projects',
     component: ProjectsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'project/:id',
+    component: ProjectDetailsComponent,
     canActivate: [AuthGuard]
   },
   {
@@ -74,7 +80,8 @@ const matmodules = [
     NavbarComponent,
     ToolsComponent,
     ProjectsComponent,
-    AdminUsersComponent
+    AdminUsersComponent,
+    ProjectDetailsComponent
   ],
   imports: [
     ...matmodules,

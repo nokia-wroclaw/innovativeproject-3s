@@ -1,56 +1,8 @@
 <div class="project min-vh-100">
     <div class="sticky">
         <app-navbar></app-navbar>
-        <div *ngIf="selected" class="container col-11 col-xl-9" style="top: 150px;">
-            <div class="collapse item border" id="projectDetails">
-                <div class="row">
-                    <div class="col-11 icon">
-                        <span data-toggle="collapse" href="#projectDetails" role="button" aria-expanded="false"
-                            aria-controls="projectDetails" style="cursor: pointer;" (click)="toggle()"><i
-                                class="fa fa-times"></i></span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-1"></div>
-                    <div class="col-11">
-                        <h5><b>{{selected.name}}</b></h5>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-1"></div>
-                    <div class="col-10">
-                        <table class="table table-hover details-scrollbar">
-                            <tbody *ngFor="let scan of selected.tools; index as i;">
-                                <tr>
-                                    <th scope="row">{{i+1}}</th>
-                                    <td>{{scan.id}}</td>
-                                    <td>{{scan.tool}}</td>
-                                    <td>{{scan.date}}</td>
-                                    <td>
-                                        <span *ngIf="scan.status=='positive'" style="font-size: 1em; color: green">
-                                            <i class="fa fa-check-square"></i>&nbsp;Positive
-                                        </span>
-                                        <span *ngIf="scan.status=='negative'" style="font-size: 1em; color: red">
-                                            <i class="fa fa-minus-square"></i>&nbsp;Negative
-                                        </span>
-                                        <span *ngIf="scan.status=='waiting'" style="font-size: 1em; color: orange">
-                                            <i class="fa fa-pause-circle"></i>&nbsp;Waiting
-                                        </span></td>
-                                    <td><button class="btn btn-outline-secondary">Log</button>&nbsp;
-                                        <button class="btn btn-outline-danger">Trigger</button></td>
-                                    <td style="cursor: pointer;">
-                                        <span style="font-size: 1.4em;"><i class="fa fa-edit"></i></span>&nbsp;
-                                        <span style="font-size: 1.5em; color: red;"><i class="fa fa-trash"></i></span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
-    <div class="container col-11 col-xl-8" [ngStyle]="{'filter': blurValue}">
+    <div class="container col-11 col-xl-8">
         <mat-grid-list [cols]="columns" gutterSize="30px" [rowHeight]="rows" (window:resize)="onResize($event)">
             <ng-container>
                 <mat-grid-tile *ngFor="let project of projects; index as idx">
@@ -58,7 +10,6 @@
                         <div class="tile item w-100 h-100">
                             <div class="row">
                                 <div class="col-12 icon">
-                                    <span style="cursor: pointer;"><i class="fa fa-edit"></i></span>
                                 </div>
                             </div>
                             <div class="row">
@@ -101,10 +52,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-12 text-center align-self-end mt-2">
-                                    <span (click)="select(idx)">
-                                        <button type="button" class="btn btn-outline-dark" data-toggle="collapse"
-                                            data-target="#projectDetails" aria-expanded="false"
-                                            aria-controls="projectDetails">
+                                    <span [routerLink]="['/project', idx]">
+                                        <button type="button" class="btn btn-outline-dark">
                                             Details&nbsp;<i class="fa fa-chevron-down"></i></button></span>
                                 </div>
                             </div>
