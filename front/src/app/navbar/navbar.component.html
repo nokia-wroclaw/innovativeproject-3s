@@ -32,71 +32,10 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-default text-center"
                     aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item mb-2" data-toggle="collapse" href="#settings" aria-expanded="false"
-                        aria-controls="settings">Settings</a>
+                    <a class="dropdown-item mb-2">Settings</a>
                     <button class="btn btn-primary" (click)="logout()">Logout</button>
                 </div>
             </li>
         </ul>
     </div>
 </nav>
-<div class="collapse" id="settings">
-    <div class="container col-10 col-sm-6 col-md-5 col-lg-4 col-xl-2 sett border mt-4 px-4 pb-4">
-        <div class="row">
-            <div class="col-9 mt-2 ml-2">
-                <b>Menage your data</b>
-            </div>
-            <div class="col-2 icon">
-                <span data-toggle="collapse" href="#settings" role="button" aria-expanded="false"
-                    aria-controls="settings" style="cursor: pointer;"><i class="fa fa-times"></i></span>
-            </div>
-        </div>
-        <mat-accordion>
-            <mat-expansion-panel class="m-2 p-2 settingsBar">
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        Username
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-
-                <mat-form-field>
-                    <input matInput placeholder="New username">
-                </mat-form-field>
-
-                <button class="btn btn-outline-primary">Confirm</button>
-            </mat-expansion-panel>
-
-            <mat-expansion-panel class="m-2 p-2 settingsBar">
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        Email
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-
-                <mat-form-field>
-                    <input matInput placeholder="New email">
-                </mat-form-field>
-
-                <button class="btn btn-outline-primary">Confirm</button>
-            </mat-expansion-panel>
-
-            <mat-expansion-panel class="m-2 p-2 settingsBar">
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        Password
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-
-                <mat-form-field>
-                    <input matInput placeholder="Password">
-                </mat-form-field>
-
-                <mat-form-field>
-                    <input matInput placeholder="Confirm password">
-                </mat-form-field>
-
-                <button class="btn btn-outline-primary">Confirm</button>
-            </mat-expansion-panel>
-        </mat-accordion>
-    </div>
-</div>

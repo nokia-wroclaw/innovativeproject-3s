@@ -4,7 +4,6 @@
     </div>
     <div class="container col-11 col-xl-8">
         <mat-grid-list [cols]="columns" gutterSize="30px" [rowHeight]="rows" (window:resize)="onResize($event)">
-            <ng-container>
                 <mat-grid-tile *ngFor="let project of projects; index as idx">
                     <div class="w-100 h-100 p-2">
                         <div class="tile item w-100 h-100">
@@ -57,7 +56,6 @@
                         </div>
                     </div>
                 </mat-grid-tile>
-            </ng-container>
         </mat-grid-list>
     </div>
 </div>
