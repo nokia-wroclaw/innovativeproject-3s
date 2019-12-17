@@ -1,5 +1,7 @@
 <div class="project min-vh-100">
-    <app-navbar></app-navbar>
+    <div class="sticky">
+        <app-navbar></app-navbar>
+    </div>
     <div class="container col-lg-6 p-2">
         <div class="rounded border item">
             <form id="userForm" [formGroup]="userForm" (ngSubmit)="onSubmit()">
@@ -16,16 +18,14 @@
                     <div class="col-lg-5 form-group">
                         <input class="rounded form-control w-100" type="search" placeholder=" Username"
                             formControlName="username">
-                        <div class="error"
-                            *ngIf="username.invalid && (username.dirty || username.touched)">
+                        <div class="error" *ngIf="username.invalid && (username.dirty || username.touched)">
                             <div *ngIf="username.errors.required">Username is required</div>
                         </div>
                     </div>
                     <div class="col-lg-5 form-group">
                         <input class="rounded form-control w-100" type="password" placeholder=" Password"
                             formControlName="password" autocomplete="new-password">
-                        <div class="error"
-                            *ngIf="password.invalid && (password.dirty || password.touched)">
+                        <div class="error" *ngIf="password.invalid && (password.dirty || password.touched)">
                             <div *ngIf="password.errors.required">Password is required</div>
                         </div>
                     </div>

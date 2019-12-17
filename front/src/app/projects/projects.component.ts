@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CdkTreeNodeToggle } from '@angular/cdk/tree';
 
 @Component({
   selector: 'app-projects',
@@ -7,21 +8,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectsComponent implements OnInit {
 
+  columns = 3;
+  rows = '2:1.5';
+
   projects = [{
+    id: 1,
     name: 'Project 1',
-    tools: [{id: '123', tool: 'tool 1'},
-    {id: '213', tool: 'tool 2'},
-    {id: '321', tool: 'tool 3'}],
-    date: '01-01-2019',
+    tools: [{tool: 'tool 1', date: '01/01/2019 14:00', status: 'positive'},
+    {tool: 'tool 2', date: '01/01/2019 14:00', status: 'positive'},
+    {tool: 'tool 2', date: '01/01/2019 14:00', status: 'positive'},
+    {tool: 'tool 3', date: '01/01/2019 14:00', status: 'negative'},
+    {tool: 'tool 2', date: '01/01/2019 14:00', status: 'positive'},
+    {tool: 'tool 2', date: '01/01/2019 14:00', status: 'positive'},
+    {tool: 'tool 2', date: '01/01/2019 14:00', status: 'positive'}],
     log: 'test log',
     status: 'negative'
     },
     {
+      id: 2,
       name: 'Project 2',
-      tools: [{id: '123', tool: 'tool 1'},
-      {id: '213', tool: 'tool 2'},
-      {id: '321', tool: 'tool 3'}],
-      date: '01-01-2019',
+      tools: [{tool: 'tool 1', date: '01/01/2019 14:00', status: 'positive'},
+      {tool: 'tool 2', date: '01/01/2019 14:00', status: 'waiting'},
+      {tool: 'tool 3', date: '01/01/2019 14:00', status: 'positive'}],
       log: 'test log',
       status: 'waiting'
       }
@@ -30,16 +38,25 @@ export class ProjectsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    for (let i = 3; i < 10; i++) {
-      this.projects.push({name: 'Project ' + i,
-        tools: [{id: '123', tool: 'tool 1'},
-        {id: '213', tool: 'tool 2'},
-        {id: '321', tool: 'tool 3'}],
-        date: '01-01-2019',
+    this.columns = (window.innerWidth <= 426) ? 1 : ((window.innerWidth <= 1025) ? 2 : 3);
+    this.rows = (window.innerWidth <= 426) ? '2:1.75' : ((window.innerWidth <= 1025) ? '2:2' : '2:1.5');
+
+    for (let i = 3; i < 20; i++) {
+      this.projects.push({
+        id: i,
+        name: 'Project ' + i,
+        tools: [{tool: 'tool 1', date: '01/01/2019 14:00', status: 'positive'},
+        {tool: 'tool 2', date: '01/01/2019 14:00', status: 'positive'},
+        {tool: 'tool 3', date: '01/01/2019 14:00', status: 'positive'}],
         log: 'test log',
         status: 'positive'
         });
     }
+  }
+
+  onResize(event) {
+    this.columns = (window.innerWidth <= 426) ? 1 : ((window.innerWidth <= 1025) ? 2 : 3);
+    this.rows = (window.innerWidth <= 426) ? '2:1.75' : ((window.innerWidth <= 1025) ? '2:2' : '2:1.5');
   }
 
 }

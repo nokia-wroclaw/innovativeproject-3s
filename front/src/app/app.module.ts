@@ -23,6 +23,10 @@ import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { ScanState } from './states/scan.state';
 import { UserState } from './states/user.state';
 import { LoginState } from './states/login.state';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatExpansionModule, MatFormFieldModule, MatInputModule, MatGridListModule } from '@angular/material';
+import { ProjectDetailsComponent } from './project-details/project-details.component';
 
 const routes: Routes = [
   {
@@ -46,6 +50,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'project/:id',
+    component: ProjectDetailsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'users',
     component: AdminUsersComponent,
     canActivate: [AuthGuard]
@@ -57,6 +66,13 @@ const routes: Routes = [
   }
 ];
 
+const matmodules = [
+  MatExpansionModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatGridListModule
+];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,9 +80,11 @@ const routes: Routes = [
     NavbarComponent,
     ToolsComponent,
     ProjectsComponent,
-    AdminUsersComponent
+    AdminUsersComponent,
+    ProjectDetailsComponent
   ],
   imports: [
+    ...matmodules,
     NgxPaginationModule,
     FormsModule,
     BrowserModule,
@@ -80,7 +98,11 @@ const routes: Routes = [
     ]),
     NgxsStoragePluginModule.forRoot({
       key: ['auth.token', 'auth.username']
-    })
+    }),
+    BrowserAnimationsModule
+  ],
+  exports: [
+    ...matmodules,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }

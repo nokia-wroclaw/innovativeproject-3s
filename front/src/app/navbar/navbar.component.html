@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <a class="navbar-brand" routerLink="/">/logo/</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,9 +30,9 @@
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {{currentUser.username}}
                 </a>
-                <div class="dropdown-menu dropdown-menu-right dropdown-default text-center" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-default text-center"
+                    aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item mb-2">Settings</a>
                     <button class="btn btn-primary" (click)="logout()">Logout</button>
                 </div>
             </li>
