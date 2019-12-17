@@ -20,24 +20,24 @@ export class ScanState {
 
     @Action(GetScans)
     getScans({setState}: StateContext<Scan[]>) {
-        return this.scanService.fetchScans().pipe(tap((result) => {
+        return this.scanService.fetchScans().subscribe((result) => {
             setState({
                 ...result,
             });
-        }));
+        });
     }
 
     @Action(AddScan)
     addScan(ctx: StateContext<Scan[]>, {payload}: AddScan) {
-        return this.scanService.addScan(payload).pipe(tap((result) => {
+        return this.scanService.addScan(payload).subscribe((result) => {
             ctx.dispatch(new GetScans());
-        }));
+        });
     }
 
     @Action(DeleteScan)
     deleteScan(ctx: StateContext<Scan[]>, {id}: DeleteScan) {
-        return this.scanService.deleteScan(id).pipe(tap(() => {
+        return this.scanService.deleteScan(id).subscribe(() => {
             ctx.dispatch(new GetScans());
-        }));
+        });
     }
 }

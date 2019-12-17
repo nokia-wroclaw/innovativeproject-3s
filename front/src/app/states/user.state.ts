@@ -20,31 +20,31 @@ export class UserState {
 
     @Action(GetUsers)
     getUsers({setState}: StateContext<User[]>) {
-        return this.userService.fetchUsers().pipe(tap((result) => {
+        return this.userService.fetchUsers().subscribe((result) => {
             setState({
                 ...result
             });
-        }));
+        });
     }
 
     @Action(AddUser)
     addUser(ctx: StateContext<User[]>, {payload}: AddUser) {
-        return this.userService.addUser(payload).pipe(tap((result) => {
+        return this.userService.addUser(payload).subscribe((result) => {
             ctx.dispatch(new GetUsers());
-        }));
+        });
     }
 
     @Action(DeleteUser)
     deleteUser(ctx: StateContext<User[]>, {id}: DeleteUser) {
-        return this.userService.deleteUser(id).pipe(tap(() => {
+        return this.userService.deleteUser(id).subscribe(() => {
             ctx.dispatch(new GetUsers());
-        }));
+        });
     }
 
     @Action(UpdateUser)
     updateUser(ctx: StateContext<User[]>, {payload, id}: UpdateUser) {
-        return this.userService.updateUser(payload, id).pipe(tap((result) => {
+        return this.userService.updateUser(payload, id).subscribe((result) => {
             ctx.dispatch(new GetUsers());
-        }));
+        });
     }
 }
