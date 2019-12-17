@@ -1,7 +1,7 @@
 # innovativeproject-3s
 Security Scan Scheduler
 
-Things to do before running
+Things to do before running trivy scans
 
 1. Create database: db3s
 2. in databse do: source <PATH_TO_QUARTZ_TABLES.sql>
