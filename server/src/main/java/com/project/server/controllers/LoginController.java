@@ -12,8 +12,8 @@ public class LoginController {
     LoginService service;
 
     @RequestMapping("/validateLogin")
-    public User validateUser(@RequestBody User user) {
-        System.out.println("validateLogin (" + user.getEmail() + ") launched");
-        return service.loginValidate(user);
+    public User validateUser(@RequestHeader("Email") String email, @RequestHeader(value="Password") String password) {
+        System.out.println("validateLogin (" + email + ") launched");
+        return service.loginValidate(email, password);
     }
 }

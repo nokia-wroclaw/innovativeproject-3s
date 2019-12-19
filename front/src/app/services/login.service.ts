@@ -21,7 +21,7 @@ export class LoginService {
         Password: password
       })
     };
-    return this.http.post<any>(this.loginUrl, httpOptions).pipe(map(user => user as User));
+    return this.http.get<any>(this.loginUrl, httpOptions).pipe(map(user => user as User));
   }
 
   logout() {

@@ -19,7 +19,7 @@
                     <tr *ngFor="let scan of scanList | async; index as i;">
                         <td>{{i+1}}</td>
                         <td>{{scan.toolName}}</td>
-                        <td>{{scan.project.name}}</td>
+                        <td>{{scan.projectName}}</td>
                         <td>{{scan.date}}</td>
                         <td>
                             <span *ngIf="scan.status=='positive'" style="font-size: 1em; color: green">

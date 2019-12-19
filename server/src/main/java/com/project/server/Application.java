@@ -78,7 +78,7 @@ public class Application {
 //            Scans
             Scan testScan = new Scan();
             testScan.setDate(new Date(0));
-            testScan.setStatus("ok");
+            testScan.setStatus("positive");
             testScan.setEmail("admin");
             testScan.setToolName(tools.get(0).getName());
             testScan.setProject(project1);
@@ -86,7 +86,7 @@ public class Application {
 
             Scan scan2 = new Scan();
             scan2.setDate(new Date(0));
-            scan2.setStatus("ok");
+            scan2.setStatus("waiting");
             scan2.setEmail("admin");
             scan2.setToolName(tools.get(0).getName());
             scan2.setProject(project1);
