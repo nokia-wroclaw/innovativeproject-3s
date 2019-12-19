@@ -1,8 +1,8 @@
 export interface Scan {
     id: number;
-    tool: string;
+    toolName: string;
     date: Date;
-    project: string;
+    projectName: string;
     status: string;
     log: string;
 }
