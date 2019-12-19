@@ -34,7 +34,7 @@ services:
 
   # Database Service (Mysql)
   db:
-    image: mysql:5.7
+    image: mysql:latest
     ports:
       - "3306:3306"
     restart: always
@@ -42,7 +42,8 @@ services:
       MYSQL_DATABASE: db3s
       MYSQL_ROOT_PASSWORD: 1q2w3e4r
     volumes:
-      - db-data:/var/lib/mysql
+      - ./db-data:/var/lib/mysql
+      - ./mysql-dump:/docker-entrypoint-initdb.d
     networks:
       - backend  
   
