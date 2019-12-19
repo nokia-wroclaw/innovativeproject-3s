@@ -16,8 +16,9 @@ public class Project {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @JsonIgnore
     private Long id;
-    @Column(unique = true)
+    @Column(unique = true, length = 100)
     private String name;
+    private String owner;
 
     @ManyToMany(mappedBy = "projects", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Collection<User> users = new ArrayList<>();
@@ -68,5 +69,13 @@ public class Project {
 
     public void setScan(Collection<Scan> scans) {
         this.scans = scans;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 }

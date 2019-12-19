@@ -43,9 +43,9 @@ public class TrivyController {
     public void startTestcmd(@RequestBody String email){
         StringBuilder sb=new StringBuilder();
 
-        try{    
+        try {
             // Run a shell script
-            String cmd ="docker run --rm  aquasec/trivy -f json --quiet --light python:3.4-alpine ";
+        String cmd ="docker run --rm  aquasec/trivy -f json --quiet --light python:3.4-alpine ";
         Process proc = Runtime.getRuntime().exec(cmd);
         System.out.println("Success!");
 

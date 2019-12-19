@@ -11,12 +11,12 @@ public class LoginService {
     @Autowired
     UserService service;
 
-    public User loginValidate(User user) {
-        User match = service.getUserByEmail(user.getEmail());
-        if (user.getPassword().equals(match.getPassword())) {
+    public User loginValidate(String email, String password) {
+        User match = service.getUserByEmail(email);
+        if (match.getPassword().equals(password)) {
             return match;
         } else {
-            throw new UserNotFoundException(user);
+            throw new UserNotFoundException(email);
         }
     }
 }
