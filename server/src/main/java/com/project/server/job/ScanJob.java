@@ -24,6 +24,10 @@ import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
 
+import com.project.server.model.Scan;
+import com.project.server.repository.*;
+import java.util.Optional;
+
 @Component
 public class ScanJob extends QuartzJobBean {
     private static final Logger logger = LoggerFactory.getLogger(ScanJob.class);
@@ -33,6 +37,7 @@ public class ScanJob extends QuartzJobBean {
 
     @Autowired
     private MailProperties mailProperties;
+    public ScanRepository scanRepo;
 
     @Override
     protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
@@ -64,11 +69,19 @@ public class ScanJob extends QuartzJobBean {
             e.printStackTrace();
         }
 
-        String scanEmail = scanResult.toString();
+        String scanTrivy = scanResult.toString();
         JobDataMap jobDataMap = jobExecutionContext.getMergedJobDataMap();
-        String subject = jobDataMap.getString("subject");
-        String body = scanEmail;
+        String scannedTool = jobDataMap.getString("tool");
+        String subject = "Results of " + scannedTool + " trivy scan";
+        int scanId = jobDataMap.getInt("id");
+        String result = jobDataMap.getString("result");
         String recipientEmail = jobDataMap.getString("email");
+        String body = scanId + result;
+
+        Optional<Scan> optionalScanToUpdate = scanRepo.findById((long) scanId);
+        Scan scanToUpdate = optionalScanToUpdate.get();
+        scanToUpdate.setResult(scanTrivy);
+        scanRepo.save(scanToUpdate);
 
         sendMail(mailProperties.getUsername(), recipientEmail, subject, body);
     }
