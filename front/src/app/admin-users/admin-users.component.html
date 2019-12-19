@@ -42,7 +42,7 @@
         <table class="table table-hover">
             <thead class="item">
                 <tr>
-                    <th>ID</th>
+                    <th>#</th>
                     <th>Email</th>
                     <th>Created</th>
                     <th>Permissions</th>
@@ -50,8 +50,8 @@
                 </tr>
             </thead>
             <tbody class="item">
-                <tr *ngFor="let user of userList | async;">
-                    <td>{{user.id}}</td>
+                <tr *ngFor="let user of userList | async; index as i">
+                    <td>{{i + 1}}</td>
                     <td>{{user.email}}</td>
                     <td>{{user.created}}</td>
                     <td>{{user.permission}}</td>
