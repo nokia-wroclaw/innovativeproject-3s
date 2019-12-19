@@ -97,10 +97,8 @@ public class Application {
 
 //            Scans
             Scan testScan = new Scan();
-            testScan.setDate(new Date(0));
+            testScan.setEmail("test);
             testScan.setResult("ok");
-            testScan.setTool_id(tools.get(0).getId());
-            testScan.setUser_id(teamUsers.get(2).getId());
             testScan.getProject().add(project1);
             project1.getScan().add(testScan);
 
