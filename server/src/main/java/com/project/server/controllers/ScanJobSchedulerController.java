@@ -4,6 +4,7 @@ import com.project.server.Application;
 import com.project.server.job.ScanJob;
 import com.project.server.model.ScheduleScanRequest;
 import com.project.server.model.ScheduleScanResponse;
+import com.project.server.model.Scan;
 import org.quartz.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import com.project.server.repository.*;
 
 import javax.validation.Valid;
 import java.time.ZonedDateTime;
@@ -25,9 +27,10 @@ public class ScanJobSchedulerController {
 
     @Autowired
     private Scheduler scheduler;
+    public ScanRepository scanRepo;
 
     @PostMapping("/scheduleScan")
-    public ResponseEntity<ScheduleScanResponse> scheduleScan(@Valid @RequestBody ScheduleScanRequest scheduleScanRequest) {
+    public ResponseEntity<ScheduleScanResponse> scheduleScan(@Valid @RequestBody Scan scheduleScanRequest) {
         try {
             ZonedDateTime dateTime = ZonedDateTime.of(scheduleScanRequest.getDateTime(), scheduleScanRequest.getTimeZone());
             if(dateTime.isBefore(ZonedDateTime.now())) {
@@ -35,8 +38,10 @@ public class ScanJobSchedulerController {
                         "dateTime must be after current time");
                 return ResponseEntity.badRequest().body(scheduleScanResponse);
             }
+            Scan newDatabaseScan = scanRepo.save(scheduleScanRequest);
 
-            JobDetail jobDetail = buildJobDetail(scheduleScanRequest);
+
+            JobDetail jobDetail = buildJobDetail(newDatabaseScan);
             Trigger trigger = buildJobTrigger(jobDetail, dateTime);
             scheduler.scheduleJob(jobDetail, trigger);
 
@@ -52,12 +57,13 @@ public class ScanJobSchedulerController {
         }
     }
 
-    private JobDetail buildJobDetail(ScheduleScanRequest scheduleScanRequest) {
+    private JobDetail buildJobDetail(Scan newDatabaseScan) {
         JobDataMap jobDataMap = new JobDataMap();
+        jobDataMap.put("id", newDatabaseScan.getId());
+        jobDataMap.put("result", newDatabaseScan.getResult());
+        jobDataMap.put("tool", newDatabaseScan.getTool());
+        jobDataMap.put("email", newDatabaseScan.getEmail());
 
-        jobDataMap.put("email", scheduleScanRequest.getEmail());
-        jobDataMap.put("subject", scheduleScanRequest.getSubject());
-        jobDataMap.put("body", scheduleScanRequest.getBody());
 
         return JobBuilder.newJob(ScanJob.class)
                 .withIdentity(UUID.randomUUID().toString(), "email-jobs")
