@@ -7,6 +7,12 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
 
 import static java.awt.SystemColor.info;
 
@@ -18,10 +24,11 @@ public class Scan {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
-    private Date date;
     private String result;
-    private long user_id;
-    private int tool_id;
+    private String tool;
+    private String email;
+    private LocalDateTime dateTime;
+    private ZoneId timeZone;
 
     @ManyToMany(mappedBy = "scan", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Collection<Project> project = new ArrayList<>();
@@ -33,20 +40,12 @@ public class Scan {
         return id;
     }
 
-    public int getTool_id() {
-        return tool_id;
+    public String getTool() {
+        return tool;
     }
 
-    public void setTool_id(int tool_id) {
-        this.tool_id = tool_id;
-    }
-
-    public long getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(long user_id) {
-        this.user_id = user_id;
+    public void setTool(String tool) {
+        this.tool = tool;
     }
 
     public String getResult() {
@@ -57,11 +56,27 @@ public class Scan {
         this.result = result;
     }
 
-    public Date getDate() {
-        return date;
+    public String getEmail() {
+        return email;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    public ZoneId getTimeZone() {
+        return timeZone;
+    }
+
+    public void setTimeZone(ZoneId timeZone) {
+        this.timeZone = timeZone;
     }
 }
