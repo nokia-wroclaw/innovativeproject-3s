@@ -5,6 +5,7 @@ import {UserState} from '../states/user.state';
 import {User} from '../models/user';
 import {Observable} from 'rxjs';
 import {AddUser, DeleteUser, UpdateUser, GetUsers} from '../actions/user.action';
+import { LoginState } from '../states/login.state';
 
 @Component({
   selector: 'app-admin-users',
@@ -15,13 +16,17 @@ export class AdminUsersComponent implements OnInit {
 
   @Select(UserState.getUserList) userList: Observable<User[]>;
 
+  currentUser: any;
+
   userForm: FormGroup;
   loading = false;
 
-  constructor(private fb: FormBuilder, private store: Store) { }
+  constructor(private fb: FormBuilder, private store: Store) {
+    this.currentUser = this.store.selectSnapshot(LoginState.userDetails);
+  }
 
   ngOnInit() {
-    this.store.dispatch(new GetUsers());
+    this.store.dispatch(new GetUsers({email: this.currentUser.email}));
     this.userForm = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required],

@@ -10,6 +10,8 @@ export class AddTool {
 
 export class GetTools {
     static readonly type = '[Tool] Get';
+
+    constructor(public payload: { email: string }) {}
 }
 
 export class DeleteTool {

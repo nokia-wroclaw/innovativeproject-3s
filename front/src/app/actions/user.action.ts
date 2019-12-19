@@ -10,6 +10,8 @@ export class AddUser {
 
 export class GetUsers {
     static readonly type = '[User] Get';
+
+    constructor(public payload: { email: string }) {}
 }
 
 export class DeleteUser {
