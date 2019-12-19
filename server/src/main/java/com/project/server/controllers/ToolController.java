@@ -44,7 +44,7 @@ public class ToolController {
     @GetMapping("/MyProject")
     public Collection<Tool> getProjectTool(@RequestBody Project project)
         {
-            return  project.getTool();
+            return  project.getTools();
 
         }
 }

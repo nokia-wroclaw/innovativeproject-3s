@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ToolRepository extends JpaRepository<Tool, Long> {
 
-    List<Tool> findByName (String name);
-    Optional<Tool> findById(long id);
+    Optional<Tool> findByName (String name);
+    Optional<Tool> findById(Long id);
 }

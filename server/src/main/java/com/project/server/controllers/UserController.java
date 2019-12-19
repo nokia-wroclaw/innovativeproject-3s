@@ -6,37 +6,27 @@ import com.project.server.model.User;
 import com.project.server.services.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/users")
 
 public class UserController {
 
     @Autowired UserService service;
-    @GetMapping
-    public List<User> getUsers() {
-        return service.getUsers();
+
+    @GetMapping("/users")
+    public List<User> getUsers(@RequestBody User user) {
+        return service.getUsers(user);
     }
-    @PostMapping
-    public void postUser(@RequestBody User usr) {
-        service.add(usr);
+
+    @PostMapping("/users/add")
+    public User addUser(@RequestBody User toAdd) {
+        return service.add(toAdd);
     }
-     @GetMapping("/{id}")
-    //  @GetMapping
-    public User getById(@PathVariable(required = true) long id) {
-        return  service.getUserById(id);
-    }
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable(required = true) long id) {
-        service.delete(id);
+
+    @PutMapping("/users/edit")
+    public void changePassword(@RequestBody User user) {
+        service.changePassword(user);
     }
 }

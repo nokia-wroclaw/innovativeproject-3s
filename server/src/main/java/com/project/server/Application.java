@@ -29,7 +29,7 @@ public class Application {
 	}
 
     @Bean
-    public CommandLineRunner demo(UserRepository users, PermissionRepository permissions, TeamRepository teamsRepo,
+    public CommandLineRunner demo(UserRepository users, PermissionRepository permissions,
                                   ProjectRepository projectRepo, ToolRepository toolRepo, ScanRepository scanRepo) {
         return (args) -> {
 //            Users
@@ -63,46 +63,27 @@ public class Application {
             permissions.save(adminPermission);
             permissions.save(userPermission);
 
-//            Teams
-            ArrayList<Team> teams = new ArrayList<>();
-            for (int i = 0; i < 2; ++i) {
-                teams.add(new Team("team" + i));
-            }
-
-            for (int i = 0; i < 5; i += 2) {
-                teams.get(0).getUser().add(teamUsers.get(i));
-                teamUsers.get(i).getTeams().add(teams.get(0));
-            }
-
-            for (int i = 1; i < 4; ++i) {
-                teams.get(1).getUser().add(teamUsers.get(i));
-                teamUsers.get(i).getTeams().add(teams.get(1));
-            }
-
 
 //            Projects
             Project project1 = new Project("project1");
-            project1.getTeam().add(teams.get(0));
-            project1.getTeam().add(teams.get(1));
-            teams.get(0).getProject().add(project1);
-            teams.get(1).getProject().add(project1);
 
 //            Tools
             ArrayList<Tool> tools = new ArrayList<>();
             for (int i = 0; i < 3; ++i) {
                 tools.add(new Tool("tool" + i, "info " + i));
                 tools.get(i).getProject().add(project1);
-                project1.getTool().add(tools.get(i));
+                project1.getTools().add(tools.get(i));
             }
+
+
 
 //            Scans
             Scan testScan = new Scan();
             testScan.setDate(new Date(0));
             testScan.setResult("ok");
-            testScan.setTool_id(tools.get(0).getId());
-            testScan.setUser_id(teamUsers.get(2).getId());
+            testScan.setTool_id(1);
             testScan.getProject().add(project1);
-            project1.getScan().add(testScan);
+            project1.getScans().add(testScan);
 
             for (Tool t : tools) {
                 toolRepo.save(t);
@@ -110,10 +91,6 @@ public class Application {
 
             projectRepo.save(project1);
             scanRepo.save(testScan);
-
-            for (Team t : teams) {
-                teamsRepo.save(t);
-            }
 
             for (User u : testUsers) {
                 users.save(u);

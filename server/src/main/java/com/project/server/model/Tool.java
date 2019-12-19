@@ -17,12 +17,12 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public class Tool {
 
     @Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private String info;
 
-    @ManyToMany(mappedBy = "tool", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(mappedBy = "tools", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JsonIgnore
     private Collection<Project> project = new ArrayList<>();
     public Collection<Project> getProject() {
@@ -44,7 +44,7 @@ public class Tool {
                 id, name, info);
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

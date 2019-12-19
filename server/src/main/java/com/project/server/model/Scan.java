@@ -22,7 +22,7 @@ public class Scan {
     private long user_id;
     private long tool_id;
 
-    @ManyToMany(mappedBy = "scan", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(mappedBy = "scans", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JsonIgnore
     private Collection<Project> project = new ArrayList<>();
     public Collection<Project> getProject() {
