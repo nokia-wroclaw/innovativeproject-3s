@@ -28,10 +28,7 @@ public class Project {
     @JsonIgnore
     private Collection<Tool> tools = new ArrayList<>();
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name="project_scan",
-            joinColumns=@JoinColumn(name="project_id"),
-            inverseJoinColumns=@JoinColumn(name="scan_id"))
+    @OneToMany(mappedBy = "project", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JsonIgnore
     private Collection<Scan> scans = new ArrayList<>();
 

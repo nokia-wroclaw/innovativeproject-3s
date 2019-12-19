@@ -75,14 +75,13 @@ public class Application {
                 project1.getTools().add(tools.get(i));
             }
 
-
-
 //            Scans
             Scan testScan = new Scan();
             testScan.setDate(new Date(0));
             testScan.setResult("ok");
-            testScan.setTool_id(1);
-            testScan.getProject().add(project1);
+            testScan.setEmail("admin");
+            testScan.setToolName(tools.get(0).getName());
+            testScan.setProject(project1);
             project1.getScans().add(testScan);
 
             for (Tool t : tools) {

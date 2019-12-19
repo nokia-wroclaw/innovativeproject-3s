@@ -19,48 +19,45 @@ public class Scan {
     private long id;
     private Date date;
     private String result;
-    private long user_id;
-    private long tool_id;
+    private String email;
+    private String toolName;
 
-    @ManyToMany(mappedBy = "scans", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JsonIgnore
-    private Collection<Project> project = new ArrayList<>();
-    public Collection<Project> getProject() {
+    @ManyToOne
+    @JoinColumn(name="project_id", nullable = false)
+    private Project project;
+
+    public Project getProject() {
         return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 
     public long getId() {
         return id;
     }
-
-    public long getTool_id() {
-        return tool_id;
+    public String getToolName() {
+        return toolName;
     }
-
-    public void setTool_id(long l) {
-        this.tool_id = l;
+    public void setToolName(String toolName) {
+        this.toolName = toolName;
     }
-
-    public long getUser_id() {
-        return user_id;
+    public String getEmail() {
+        return email;
     }
-
-    public void setUser_id(long user_id) {
-        this.user_id = user_id;
+    public void setEmail(String email) {
+        this.email = email;
     }
-
     public String getResult() {
         return result;
     }
-
     public void setResult(String result) {
         this.result = result;
     }
-
     public Date getDate() {
         return date;
     }
-
     public void setDate(Date date) {
         this.date = date;
     }
