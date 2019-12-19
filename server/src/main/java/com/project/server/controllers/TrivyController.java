@@ -24,37 +24,37 @@ import org.springframework.web.bind.annotation.RestController;
 public class TrivyController {
 
     @RequestMapping("/trivy")
-    public String startTestcmd(@RequestBody String img){
-        StringBuilder sb=new StringBuilder();
+    public String startTestcmd(@RequestBody String img) {
+        StringBuilder sb = new StringBuilder();
 
-        try{    
+        try {
             // Run a shell script
-            String cmd ="docker run --rm  aquasec/trivy -f json --light "+img;
-        Process proc = Runtime.getRuntime().exec(cmd);
-        System.out.println("Success!");
+            String cmd = "docker run --rm  aquasec/trivy -f json --light " + img;
+            Process proc = Runtime.getRuntime().exec(cmd);
+            System.out.println("Success!");
 
-        BufferedReader stdInput = new BufferedReader(new 
-        InputStreamReader(proc.getInputStream()));
-        BufferedReader stdError = new BufferedReader(new 
-        InputStreamReader(proc.getErrorStream()));
+            BufferedReader stdInput = new BufferedReader(new
+                    InputStreamReader(proc.getInputStream()));
+            BufferedReader stdError = new BufferedReader(new
+                    InputStreamReader(proc.getErrorStream()));
 
-        // Read the output from the command
-        System.out.println("Here is the standard output of the command:\n");
-        String s = null;
-        while ((s = stdInput.readLine()) != null) {
-            sb.append(s+"\n");        
-        }
+            // Read the output from the command
+            System.out.println("Here is the standard output of the command:\n");
+            String s = null;
+            while ((s = stdInput.readLine()) != null) {
+                sb.append(s + "\n");
+            }
 
-        // Read any errors from the attempted command
-        System.out.println("Here is the standard error of the command (if any):\n");
-        while ((s = stdError.readLine()) != null) {
-            System.out.println(s);
-        }
+            // Read any errors from the attempted command
+            System.out.println("Here is the standard error of the command (if any):\n");
+            while ((s = stdError.readLine()) != null) {
+                System.out.println(s);
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
-             }
-             System.out.println(sb.toString());
-        return sb.toString();   
- }
+        }
+        System.out.println(sb.toString());
+        return sb.toString();
+    }
 }

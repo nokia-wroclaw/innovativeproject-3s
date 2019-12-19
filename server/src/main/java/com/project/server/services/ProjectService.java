@@ -33,11 +33,8 @@ public class ProjectService {
 	}
 
 	public List<Project> getProjectByUserEmail(String email) {
-		System.out.println("TESTEST test 0 [" + email + "]");
 		User user = userService.getUserByEmail(email);
-		System.out.println("TESTEST test 1");
 		List<Project> result = userService.getProjects(user.getEmail());
-		System.out.println("TESTEST test 2");
 		return result;
 	}
 
