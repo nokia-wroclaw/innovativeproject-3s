@@ -23,7 +23,7 @@ export class AdminUsersComponent implements OnInit {
   ngOnInit() {
     this.store.dispatch(new GetUsers());
     this.userForm = this.fb.group({
-      username: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required],
       type: ['', Validators.required]
     });
@@ -31,17 +31,17 @@ export class AdminUsersComponent implements OnInit {
 
   get f() { return this.userForm.controls; }
 
-  get username() { return this.userForm.get('username'); }
+  get email() { return this.userForm.get('email'); }
   get password() { return this.userForm.get('password'); }
 
   onSubmit() {
     if (this.userForm.valid) {
       this.loading = true;
-      const uname: string = this.f.username.value;
+      const em: string = this.f.email.value;
       const pass: string = this.f.password.value;
       const t: string = this.f.type.value;
 
-      this.store.dispatch(new AddUser({id: null, token: null, email: null, username: uname, password: pass, created: null, type: t}))
+      this.store.dispatch(new AddUser({id: null, token: null, email: em, created: null, permission: [t]}))
       .subscribe(() => this.userForm.reset());
 
       this.loading = false;

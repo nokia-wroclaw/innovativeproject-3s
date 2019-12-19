@@ -97,15 +97,12 @@ const matmodules = [
       LoginState
     ]),
     NgxsStoragePluginModule.forRoot({
-      key: ['auth.token', 'auth.username']
+      key: ['auth.token', 'auth.email']
     }),
     BrowserAnimationsModule
   ],
   exports: [
     ...matmodules,
-  ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

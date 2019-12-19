@@ -13,9 +13,9 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  login(username: string, password: string) {
-    return this.http.post<any>(this.loginUrl, {username, password}).pipe(map(user => user as User));
-    }
+  login(email: string, password: string) {
+    return this.http.post<any>(this.loginUrl, {email, password}).pipe(map(user => user as User));
+  }
 
   logout() {
     return of(null);

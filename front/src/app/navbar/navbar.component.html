@@ -13,7 +13,7 @@
                 <a class="nav-link" routerLink="/projects">Projects</a>
             </li>
             <!-- TODO: zmienic to na cos bardziej sensownego -->
-            <li *ngIf="currentUser.username=='admin'" class="nav-item dropdown">
+            <li *ngIf="currentUser.email=='admin'" class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAdminLink" role="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Admin
@@ -28,7 +28,7 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{currentUser.username}}
+                    {{currentUser.email}}
                 </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-default text-center"
                     aria-labelledby="navbarDropdownMenuLink">
