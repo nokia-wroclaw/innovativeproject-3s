@@ -49,7 +49,7 @@ public class TrivyController {
         System.out.println("Here is the standard error of the command (if any):\n");
         while ((s = stdError.readLine()) != null) {
             System.out.println(s);
-            }
+        }
 
         } catch (IOException e) {
             e.printStackTrace();

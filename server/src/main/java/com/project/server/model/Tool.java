@@ -13,22 +13,25 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(allowGetters = true)
 public class Tool {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true)
     private String name;
     private String info;
 
     @ManyToMany(mappedBy = "tools", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JsonIgnore
     private Collection<Project> project = new ArrayList<>();
+
     public Collection<Project> getProject() {
         return project;
     }
-
+    public void setProject(Collection<Project> project) {
+        this.project = project;
+    }
 
     protected Tool() {}
 

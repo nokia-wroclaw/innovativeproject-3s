@@ -18,18 +18,15 @@ public class ScanController {
     @Autowired
     ScanService service;
 
-    @GetMapping("/testScan")
-    public List<Scan> getTest() {
-        return service.getScanByProject("project1");
+
+    @GetMapping("/scanTest")
+    public List<Scan> getScanForTest() {
+        return service.getScanByEmail("admin");
     }
+
 
     @GetMapping("/scans")
     public List<Scan> getScanForUser(@RequestHeader ("Email") String email) {
         return service.getScanByEmail(email);
-    }
-
-    @GetMapping("/scans_project")
-    public List<Scan> getScanForProject(@RequestHeader ("Project") String projectName) {
-        return service.getScanByProject(projectName);
     }
 }

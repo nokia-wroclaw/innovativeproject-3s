@@ -16,21 +16,19 @@ public class Project {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @JsonIgnore
     private Long id;
+    @Column(unique = true)
     private String name;
 
     @ManyToMany(mappedBy = "projects", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JsonIgnore
     private Collection<User> users = new ArrayList<>();
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name="project_tool",
             joinColumns=@JoinColumn(name="project_id"),
             inverseJoinColumns=@JoinColumn(name="tool_id"))
-    @JsonIgnore
     private Collection<Tool> tools = new ArrayList<>();
 
     @OneToMany(mappedBy = "project", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JsonIgnore
     private Collection<Scan> scans = new ArrayList<>();
 
     public Project() {}

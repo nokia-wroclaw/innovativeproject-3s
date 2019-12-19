@@ -15,9 +15,14 @@ public class UserController {
 
     @Autowired UserService service;
 
+    @GetMapping("/userTest")
+    public User getUserTest() {
+        return service.getUserByEmail("admin");
+    }
+
     @GetMapping("/users")
-    public List<User> getUsers(@RequestBody User user) {
-        return service.getUsers(user);
+    public List<User> getUsers(@RequestHeader("Email") String email) {
+        return service.getUsers();
     }
 
     @PostMapping("/users/add")

@@ -22,9 +22,11 @@ public class Scan {
     private String status;
     private String email;
     private String toolName;
+    private String projectName;
 
     @ManyToOne
     @JoinColumn(name="project_id", nullable = false)
+    @JsonIgnore
     private Project project;
 
     public Project getProject() {
@@ -33,6 +35,7 @@ public class Scan {
 
     public void setProject(Project project) {
         this.project = project;
+        this.projectName = project.getName();
     }
 
     public long getId() {
@@ -61,5 +64,13 @@ public class Scan {
     }
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String name) {
+        this.projectName = name;
     }
 }

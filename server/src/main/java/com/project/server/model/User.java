@@ -21,7 +21,9 @@ public class User {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @JsonIgnore
     private Long id;
+    @Column(unique = true)
     private String email;
+    @JsonIgnore
     private String password;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})

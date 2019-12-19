@@ -59,13 +59,11 @@ public class Application {
                 u.getPermissions().add(userPermission);
                 userPermission.getUser().add(u);
             }
-            
-            permissions.save(adminPermission);
-            permissions.save(userPermission);
-
 
 //            Projects
             Project project1 = new Project("project1");
+            testUsers.get(0).getProjects().add(project1);
+            project1.getUsers().add(testUsers.get(0));
 
 //            Tools
             ArrayList<Tool> tools = new ArrayList<>();
@@ -74,6 +72,8 @@ public class Application {
                 tools.get(i).getProject().add(project1);
                 project1.getTools().add(tools.get(i));
             }
+
+
 
 //            Scans
             Scan testScan = new Scan();
@@ -92,13 +92,6 @@ public class Application {
             scan2.setProject(project1);
             project1.getScans().add(scan2);
 
-            for (Tool t : tools) {
-                toolRepo.save(t);
-            }
-
-            projectRepo.save(project1);
-            scanRepo.save(testScan);
-
             for (User u : testUsers) {
                 users.save(u);
             }
@@ -106,7 +99,6 @@ public class Application {
             for (User u : teamUsers) {
                 users.save(u);
             }
-
         };
     }
 }

@@ -29,6 +29,10 @@ public class UserService  {
 		}
 	}
 
+	public List<User> getUsers() {
+		return (List<User>) repository.findAll();
+	}
+
 	public User add(User user) {
 		if (repository.findByEmail(user.getEmail()).isPresent()) {
 			throw new UserAlreadyExistsException(user);
@@ -47,7 +51,6 @@ public class UserService  {
 		return (User) user.orElseThrow(() -> new UserNotFoundException(email));
 	}
 
-
 	public void delete(long id) {
         repository.deleteById(id);
 	}
@@ -60,12 +63,9 @@ public class UserService  {
 		}
 	}
 
-	public List<Project> getProjects(User user) {
-		if (repository.findByEmail(user.getEmail()).isPresent()) {
-			return (List<Project>) repository.findByEmail(user.getEmail()).get().getProjects();
-		} else {
-			throw new UserNotFoundException(user.getEmail());
-		}
+		public List<Project> getProjects(String email) {
+		User user = getUserByEmail(email);
+		return (List<Project>) repository.findByEmail(email).get().getProjects();
 	}
 
 	public static boolean isAdmin(User user) {
