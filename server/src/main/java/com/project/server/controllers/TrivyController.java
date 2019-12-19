@@ -3,12 +3,22 @@ package com.project.server.controllers;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
+
+import org.quartz.JobDataMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 
 import com.project.server.model.User;
 import com.project.server.services.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.mail.MailProperties;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,14 +32,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 
 public class TrivyController {
-
+    private static final Logger logger = LoggerFactory.getLogger(TrivyController.class);
+    
+       @Autowired
+       private JavaMailSender mailSender;
+    
+       @Autowired
+       private MailProperties mailProperties;
     @RequestMapping("/trivy")
-    public String startTestcmd(@RequestBody String img){
+    public void startTestcmd(@RequestBody String email){
         StringBuilder sb=new StringBuilder();
 
         try{    
             // Run a shell script
-            String cmd ="docker run --rm  aquasec/trivy -f json --light "+img;
+            String cmd ="docker run --rm  aquasec/trivy -f json --quiet --light python:3.4-alpine ";
         Process proc = Runtime.getRuntime().exec(cmd);
         System.out.println("Success!");
 
@@ -55,6 +71,26 @@ public class TrivyController {
             e.printStackTrace();
              }
              System.out.println(sb.toString());
-        return sb.toString();   
- }
+
+        String body = sb.toString();
+
+       sendMail(mailProperties.getUsername(), email, "scan", body); sb.toString();  
+    } 
+  private void sendMail(String fromEmail, String toEmail, String subject, String body) {
+                   try {
+                       logger.info("Sending Email to {}", toEmail);
+                       MimeMessage message = mailSender.createMimeMessage();
+            
+                       MimeMessageHelper messageHelper = new MimeMessageHelper(message, StandardCharsets.UTF_8.toString());
+                       messageHelper.setSubject(subject);
+                       messageHelper.setText(body, true);
+                       messageHelper.setFrom(fromEmail);
+                       messageHelper.setTo(toEmail);
+            
+                       mailSender.send(message);
+                   } catch (MessagingException ex) {
+                       logger.error("Failed to send email to {}", toEmail);
+                   }
+               }
+ 
 }
