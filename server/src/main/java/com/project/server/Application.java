@@ -78,11 +78,19 @@ public class Application {
 //            Scans
             Scan testScan = new Scan();
             testScan.setDate(new Date(0));
-            testScan.setResult("ok");
+            testScan.setStatus("ok");
             testScan.setEmail("admin");
             testScan.setToolName(tools.get(0).getName());
             testScan.setProject(project1);
             project1.getScans().add(testScan);
+
+            Scan scan2 = new Scan();
+            scan2.setDate(new Date(0));
+            scan2.setStatus("ok");
+            scan2.setEmail("admin");
+            scan2.setToolName(tools.get(0).getName());
+            scan2.setProject(project1);
+            project1.getScans().add(scan2);
 
             for (Tool t : tools) {
                 toolRepo.save(t);

@@ -16,9 +16,10 @@ public class Scan {
 
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private long id;
     private Date date;
-    private String result;
+    private String status;
     private String email;
     private String toolName;
 
@@ -49,11 +50,11 @@ public class Scan {
     public void setEmail(String email) {
         this.email = email;
     }
-    public String getResult() {
-        return result;
+    public String getStatus() {
+        return status;
     }
-    public void setResult(String result) {
-        this.result = result;
+    public void setStatus(String status) {
+        this.status = status;
     }
     public Date getDate() {
         return date;

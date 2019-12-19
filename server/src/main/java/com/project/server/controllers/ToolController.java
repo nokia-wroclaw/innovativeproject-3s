@@ -24,27 +24,24 @@ import org.springframework.web.bind.annotation.RestController;
 public class ToolController {
 
     @Autowired ToolService service;
+
     @GetMapping
     public Collection<Tool> getTools() {
         return service.getTools();
     }
+
     @PostMapping
     public void postTool(@RequestBody Tool tool) {
         service.add(tool);
     }
-    // @GetMapping("/{id}")
-     @GetMapping("/{id}")
+
+    @GetMapping("/{id}")
     public Tool getById(@PathVariable(required = true) long id) {
         return  service.getToolById(id);
     }
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable(required = true) long id) {
-        service.delete(id);
-    }
-    @GetMapping("/MyProject")
-    public Collection<Tool> getProjectTool(@RequestBody Project project)
-        {
-            return  project.getTools();
 
-        }
+    @GetMapping("/MyProject")
+    public Collection<Tool> getProjectTool(@RequestBody Project project) {
+        return  project.getTools();
+    }
 }
