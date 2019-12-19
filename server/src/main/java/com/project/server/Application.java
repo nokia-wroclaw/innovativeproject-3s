@@ -97,7 +97,7 @@ public class Application {
 
 //            Scans
             Scan testScan = new Scan();
-            testScan.setEmail("test);
+            testScan.setEmail("test");
             testScan.setResult("ok");
             testScan.getProject().add(project1);
             project1.getScan().add(testScan);
