@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DataService } from '../services/data.service';
-import { first } from 'rxjs/operators';
+import { Select, Store } from '@ngxs/store';
+import {UserState} from '../states/user.state';
+import {User} from '../models/user';
+import {Observable} from 'rxjs';
+import {AddUser, DeleteUser, UpdateUser, GetUsers} from '../actions/user.action';
 
 @Component({
   selector: 'app-admin-users',
@@ -10,51 +13,39 @@ import { first } from 'rxjs/operators';
 })
 export class AdminUsersComponent implements OnInit {
 
-  userList= [
-    {id: 1, username: 'user 1', created: '01-01-2019', type: 'admin'}, {id: 2, username: 'user 2', created: '01-01-2019', type: 'admin'},
-    {id: 3, username: 'user 3', created: '01-01-2019', type: 'user'}, {id: 4, username: 'user 4', created: '01-01-2019', type: 'user'},
-    {id: 5, username: 'user 5', created: '01-01-2019', type: 'user'}, {id: 6, username: 'user 6', created: '01-01-2019', type: 'user'},
-    {id: 7, username: 'user 7', created: '01-01-2019', type: 'user'}, {id: 8, username: 'user 8', created: '01-01-2019', type: 'user'},
-    {id: 9, username: 'user 9', created: '01-01-2019', type: 'user'}, {id: 10, username: 'user 10', created: '01-01-2019', type: 'user'},
-    {id: 11, username: 'user 11', created: '01-01-2019', type: 'user'}, {id: 12, username: 'user 12', created: '01-01-2019', type: 'user'},
-    {id: 13, username: 'user 13', created: '01-01-2019', type: 'user'}, {id: 14, username: 'user 14', created: '01-01-2019', type: 'user'},
-    {id: 15, username: 'user 15', created: '01-01-2019', type: 'user'}, {id: 16, username: 'user 16', created: '01-01-2019', type: 'user'}
-  ];
+  @Select(UserState.getUserList) userList: Observable<User[]>;
 
-  newUserForm: FormGroup;
-  submitted = false;
-  scanLog: string;
+  userForm: FormGroup;
+  loading = false;
 
-  constructor(private fb: FormBuilder, private db: DataService) { }
+  constructor(private fb: FormBuilder, private store: Store) { }
 
   ngOnInit() {
-    this.newUserForm = this.fb.group({
-      newusername: ['', Validators.required],
-      newpassword: ['', Validators.required],
+    this.store.dispatch(new GetUsers());
+    this.userForm = this.fb.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required],
       type: ['', Validators.required]
     });
   }
 
-  get f() { return this.newUserForm.controls; }
+  get f() { return this.userForm.controls; }
+
+  get email() { return this.userForm.get('email'); }
+  get password() { return this.userForm.get('password'); }
 
   onSubmit() {
-    this.submitted = true;
-    if (this.newUserForm.invalid) {
-      return;
+    if (this.userForm.valid) {
+      this.loading = true;
+      const em: string = this.f.email.value;
+      const pass: string = this.f.password.value;
+      const t: string = this.f.type.value;
+
+      this.store.dispatch(new AddUser({id: null, token: null, email: em, created: null, permission: [t]}))
+      .subscribe(() => this.userForm.reset());
+
+      this.loading = false;
     }
-
-    const uname = this.f.newusername.value;
-    const pass = this.f.newpassword.value;
-    const t = this.f.type.value;
-
-    console.log(uname, pass, t);
-  }
-
-  send() {
-    const s = (document.getElementById('scanline') as HTMLInputElement).value;
-    this.db.sendScan(s).pipe(first()).subscribe(data => {
-      this.scanLog = data;
-    });
   }
 
 }

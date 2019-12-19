@@ -1,33 +1,34 @@
 <div class="project min-vh-100">
-    <app-main></app-main>
+    <div class="sticky">
+        <app-navbar></app-navbar>
+    </div>
     <div class="p-2">
         <div class="col-lg-6 mx-auto">
-            <table data-toggle="table" data-pagination="true" data-search="true" data-search-align="left"
-                data-pagination-h-align="left" data-pagination-detail-h-align="right" data-show-toggle="true"
-                data-show-columns="true" data-show-fullscreen="true">
+            <table class="table table-hover">
                 <thead class="item">
                     <tr>
-                        <th data-field="number" data-sortable="true">#</th>
-                        <th data-field="id" data-sortable="true">ID</th>
-                        <th data-field="tool" data-sortable="true">Tool</th>
-                        <th data-field="date" data-sortable="true">Scan date</th>
-                        <th data-field="status" data-sortable="false">Status</th>
-                        <th data-field="log" data-sortable="false">Log</th>
+                        <th>#</th>
+                        <th>Tool</th>
+                        <th>Project</th>
+                        <th>Scan date</th>
+                        <th>Status</th>
+                        <th>Log</th>
                     </tr>
                 </thead>
                 <tbody class="item">
-                    <tr *ngFor="let tool of toolList; index as i;">
+                    <tr *ngFor="let scan of scanList | async; index as i;">
                         <td>{{i+1}}</td>
-                        <td>{{tool.id}}</td>
-                        <td>{{tool.tool}}</td>
-                        <td>{{tool.date}}</td>
-                        <td><span *ngIf="tool.status=='positive'" style="font-size: 1.5em; color: green">
+                        <td>{{scan.tool}}</td>
+                        <td>{{scan.project}}</td>
+                        <td>{{scan.date}}</td>
+                        <td style="font-size: 1.5em;">
+                            <span *ngIf="scan.status=='positive'" style="color: green">
                                 <i class="fa fa-check-square"></i>
                             </span>
-                            <span *ngIf="tool.status=='negative'" style="font-size: 1.5em; color: red">
+                            <span *ngIf="scan.status=='negative'" style="color: red">
                                 <i class="fa fa-minus-square"></i>
                             </span>
-                            <span *ngIf="tool.status=='waiting'" style="font-size: 1.5em; color: orange">
+                            <span *ngIf="scan.status=='waiting'" style="color: orange">
                                 <i class="fa fa-pause-circle"></i>
                             </span></td>
                         <td><button type="button" class="btn-sm btn-secondary" data-toggle="modal"

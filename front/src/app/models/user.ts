@@ -1,6 +1,8 @@
-export class User {
+export interface User {
     id: number;
     token: string;
-    username: string;
-    password: string;
+    email: string;
+    created: Date;
+    // TODO: lista pozwolen
+    permission: any[];
 }

@@ -5,7 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { MainComponent } from './main/main.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 import { ErrorInterceptor } from './helpers/error.interceptor';
 import { AuthGuard } from './helpers/auth.guard';
@@ -18,10 +18,21 @@ import { ProjectsComponent } from './projects/projects.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 
+import { NgxsModule } from '@ngxs/store';
+import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
+import { ScanState } from './states/scan.state';
+import { UserState } from './states/user.state';
+import { LoginState } from './states/login.state';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatExpansionModule, MatFormFieldModule, MatInputModule, MatGridListModule } from '@angular/material';
+import { ProjectDetailsComponent } from './project-details/project-details.component';
+
 const routes: Routes = [
   {
     path: '',
-    component: ToolsComponent,
+    redirectTo: '/scans',
+    pathMatch: 'full',
     canActivate: [AuthGuard]
   },
   {
@@ -29,7 +40,7 @@ const routes: Routes = [
     component: LoginComponent,
   },
   {
-    path: 'tools',
+    path: 'scans',
     component: ToolsComponent,
     canActivate: [AuthGuard]
   },
@@ -39,35 +50,59 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'project/:id',
+    component: ProjectDetailsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'users',
     component: AdminUsersComponent,
     canActivate: [AuthGuard]
   },
   {
     path: '**',
-    redirectTo: ''
+    redirectTo: '',
+    canActivate: [AuthGuard]
   }
+];
+
+const matmodules = [
+  MatExpansionModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatGridListModule
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    MainComponent,
+    NavbarComponent,
     ToolsComponent,
     ProjectsComponent,
-    AdminUsersComponent
+    AdminUsersComponent,
+    ProjectDetailsComponent
   ],
   imports: [
+    ...matmodules,
     NgxPaginationModule,
     FormsModule,
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    NgxsModule.forRoot([
+      ScanState,
+      UserState,
+      LoginState
+    ]),
+    NgxsStoragePluginModule.forRoot({
+      key: ['auth.token', 'auth.email']
+    }),
+    BrowserAnimationsModule
   ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  exports: [
+    ...matmodules,
   ],
   bootstrap: [AppComponent]
 })
