@@ -2,7 +2,7 @@
     <div class="container text-white">
         <div class="col-lg-6 mx-auto p-4">
             <h1 class="login">Security Scan Scheduler</h1>
-            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <form class="loginWindow" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input class="form-control" type="text" formControlName="email" />

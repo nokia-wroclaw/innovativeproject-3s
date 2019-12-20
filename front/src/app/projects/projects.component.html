@@ -1,61 +1,172 @@
 <div class="project min-vh-100">
     <div class="sticky">
         <app-navbar></app-navbar>
-    </div>
-    <div class="container col-11 col-xl-8">
-        <mat-grid-list [cols]="columns" gutterSize="30px" [rowHeight]="rows" (window:resize)="onResize($event)">
-                <mat-grid-tile *ngFor="let project of projects | async; index as idx">
-                    <div class="w-100 h-100 p-2">
-                        <div class="tile item w-100 h-100">
-                            <div class="row">
-                                <div class="col-12 icon">&nbsp;
+        <div class="container col-12 col-lg-10 col-xl-6 mt-4">
+            <div class="collapse border item" id="addProject" [ngClass]="{'in': isOpen}">
+                <div class="col addHeader p-3" style="font-size: 120%;">
+                    Add new project
+                    <span class="float-right" data-toggle="collapse" href="#addProject" role="button"
+                        aria-expanded="false" aria-controls="addProject" style="cursor: pointer;" (click)="toggle()"><i
+                            class="fa fa-times"></i></span>
+                </div>
+                <form class="p-3" [formGroup]="projectForm">
+                    <div class="form-group border p-3">
+                        <label for="name">
+                            <h5>Name</h5>
+                        </label>
+                        <input class="form-control" type="text" formControlName="name" placeholder="Project name" />
+                    </div>
+                    <div class="row">
+                        <form [formGroup]="userForm" class="col-5">
+                            <div class="form group border p-3">
+                                <label for="users">
+                                    <h5>Users</h5>
+                                </label>
+                                <div class="row p-2 mt-2">
+                                    <div class="col-8">
+                                        <select class="form-control" formControlName="user">
+                                            <option>Pick user</option>
+                                            <option>user0</option>
+                                            <option>user0</option>
+                                            <option>user1</option>
+                                            <option>user2</option>
+                                            <option>user3</option>
+                                            <option>user4</option>
+                                            <option>user5</option>
+                                            <option>user6</option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <button class="btn btn-outline-primary" (click)="addUser()">Add</button></div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12 text-center">
-                                    <h5><b>{{project.name}}</b></h5>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12" style="text-align: center;"><b>
-                                        <span *ngIf="project.status=='positive'" style="font-size: 1em; color: green">
-                                            <i class="fa fa-check-square"></i>&nbsp;All successful
-                                        </span>
-                                        <span *ngIf="project.status=='negative'" style="font-size: 1em; color: red">
-                                            <i class="fa fa-minus-square"></i>&nbsp;At least one negative
-                                        </span>
-                                        <span *ngIf="project.status=='waiting'" style="font-size: 1em; color: orange">
-                                            <i class="fa fa-pause-circle"></i>&nbsp;At least one ongoing
-                                        </span></b>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-1"></div>
-                                <div class="col-10">
-                                    <div class="tool-scrollbar">
-                                        <table class="table table-hover table-borderless">
-                                            <tbody *ngFor="let scan of project.tools; index as i;">
-                                                <tr>
-                                                    <th scope="row">{{i+1}}</th>
-                                                    <td>{{scan.id}}</td>
-                                                    <td>{{scan.tool}}</td>
-                                                    <td>{{scan.date}}</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                <div class="p-2" *ngFor="let user of userList; index as i;">
+                                    <div class="row mr-2 text-center">
+                                        <div class="col">{{i + 1}}</div>
+                                        <div class="col">{{user.email}}</div>
+                                        <div class="col">{{user.permission}}</div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-12 text-center align-self-end mt-2">
-                                    <span [routerLink]="['/project', idx]">
-                                        <button type="button" class="btn btn-outline-dark">
-                                            Details&nbsp;<i class="fa fa-chevron-down"></i></button></span>
+                        </form>
+                        <form [formGroup]="scanForm" class="col-7">
+                            <div class="form-group border p-3">
+                                <label for="tools">
+                                    <h5>Scans</h5>
+                                </label>
+                                <div class="row p-2">
+                                    <div class="col-4">
+                                        <select class="form-control mt-2" formControlName="tool">
+                                            <option>Add tool</option>
+                                            <option>python 3.6</option>
+                                            <option>tool1</option>
+                                            <option>tool2</option>
+                                            <option>tool3</option>
+                                            <option>tool4</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-5">
+                                        <div class="align-top">
+                                            <mat-form-field>
+                                                <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="date">
+                                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                                <mat-datepicker #picker></mat-datepicker>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="col ml-2 mt-2">
+                                        <button class="btn btn-outline-primary" (click)="addScan()">Add</button></div>
+                                </div>
+                                <div class="p-2" *ngFor="let scan of scanList; index as i;">
+                                    <div class="row mx-2 text-center">
+                                        <div class="col-2">{{i + 1}}</div>
+                                        <div class="col-3">{{scan.toolName}}</div>
+                                        <div class="col-7">{{scan.date}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="form-group p-3">
+                        <div class="text-center">
+                            <button type="button" class="btn btn-primary"
+                                (click)="onSubmit()">Confirm</button>&nbsp;&nbsp;&nbsp;
+                            <span (click)="toggle()"><button type="button" class="btn btn-outline-danger"
+                                    data-toggle="collapse" data-target="#addProject" aria-expanded="false"
+                                    aria-controls="addProject">Cancel</button></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container col-11 col-xl-8" [ngStyle]="{'filter': blurValue}">
+        <mat-grid-list [cols]="columns" gutterSize="30px" [rowHeight]="rows" (window:resize)="onResize($event)">
+            <mat-grid-tile>
+                <div class="w-100 h-100 p-2">
+                    <div class="tile item w-100 h-100">
+                        <span (click)="toggle()" data-toggle="collapse" href="#addProject" role="button" role="button"
+                            aria-expanded="false" aria-controls="settings" style="cursor: pointer;">
+                            <div class="row addButton item h-100">
+                                <div class="mx-auto">
+                                    <h4 class="mt-5">Add new project</h4>
+                                </div>
+                            </div>
+                        </span>
+                    </div>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile *ngFor="let project of projects | async; index as idx">
+                <div class="w-100 h-100 p-2">
+                    <div class="tile item w-100 h-100">
+                        <div class="row">
+                            <div class="col-12 icon">&nbsp;
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <h5><b>{{project.name}}</b></h5>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12" style="text-align: center;"><b>
+                                    <span *ngIf="project.status=='positive'" style="font-size: 1em; color: green">
+                                        <i class="fa fa-check-square"></i>&nbsp;All successful
+                                    </span>
+                                    <span *ngIf="project.status=='negative'" style="font-size: 1em; color: red">
+                                        <i class="fa fa-minus-square"></i>&nbsp;At least one negative
+                                    </span>
+                                    <span *ngIf="project.status=='waiting'" style="font-size: 1em; color: orange">
+                                        <i class="fa fa-pause-circle"></i>&nbsp;At least one ongoing
+                                    </span></b>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-10">
+                                <div class="tool-scrollbar">
+                                    <table class="table table-hover table-borderless">
+                                        <tbody *ngFor="let scan of project.tools; index as i;">
+                                            <tr>
+                                                <th scope="row">{{i+1}}</th>
+                                                <td>{{scan.id}}</td>
+                                                <td>{{scan.tool}}</td>
+                                                <td>{{scan.date}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-12 text-center align-self-end mt-2">
+                                <span [routerLink]="['/project', idx]">
+                                    <button type="button" class="btn btn-outline-dark">
+                                        Details&nbsp;<i class="fa fa-chevron-down"></i></button></span>
+                            </div>
+                        </div>
                     </div>
-                </mat-grid-tile>
+                </div>
+            </mat-grid-tile>
         </mat-grid-list>
     </div>
 </div>

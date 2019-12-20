@@ -10,7 +10,7 @@
     font-size: 120%;
 }
 
-form:before {
+.loginWindow:before {
     content: '';
     height: 100%;
     width: 100%;

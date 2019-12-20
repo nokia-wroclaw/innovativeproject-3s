@@ -35,6 +35,7 @@ export class ProjectState {
 
     @Action(AddProject)
     addProject(ctx: StateContext<ProjectStateModel>, {payload, email}: AddProject) {
+        console.log(payload);
         return this.projectService.addProject(payload).subscribe((result) => {
             ctx.dispatch(new GetProjects({email}));
         });

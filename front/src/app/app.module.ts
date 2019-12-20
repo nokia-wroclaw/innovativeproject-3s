@@ -25,7 +25,8 @@ import { UserState } from './states/user.state';
 import { LoginState } from './states/login.state';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatExpansionModule, MatFormFieldModule, MatInputModule, MatGridListModule } from '@angular/material';
+import { MatExpansionModule, MatFormFieldModule, MatInputModule,
+  MatGridListModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 import { ProjectDetailsComponent } from './project-details/project-details.component';
 
 const routes: Routes = [
@@ -70,7 +71,9 @@ const matmodules = [
   MatExpansionModule,
   MatFormFieldModule,
   MatInputModule,
-  MatGridListModule
+  MatGridListModule,
+  MatDatepickerModule,
+  MatNativeDateModule
 ];
 
 @NgModule({
