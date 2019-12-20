@@ -11,6 +11,7 @@ import com.project.server.model.Project;
 import com.project.server.repository.ProjectRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -36,6 +37,15 @@ public class ProjectService {
 		User user = userService.getUserByEmail(email);
 		List<Project> result = userService.getProjects(user.getEmail());
 		return result;
+	}
+
+	public String addProject(Project project) {
+		if (repository.findByName(project.getName()).isPresent()) {
+			throw  new ProjectAlreadyExistsException(project);
+		} else {
+			repository.save(project);
+			return "Project " + project.getName() + " created.";
+		}
 	}
 
 	public String addProject(String name) {

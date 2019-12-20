@@ -31,6 +31,11 @@ public class ProjectController {
         return service.addProject(name);
     }
 
+    @RequestMapping("/projects_add_all")
+    public String addAllProject(@RequestBody Project project) {
+        return service.addProject(project);
+    }
+
     @RequestMapping("/project_add_user")
     public String addUserToProject(@RequestHeader("ProjectName") String projectName, @RequestHeader("Email") String email) {
         return service.addUserToProject(email, projectName);
