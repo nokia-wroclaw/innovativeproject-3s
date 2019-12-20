@@ -12,6 +12,10 @@ public class ProjectAlreadyExistsException extends RuntimeException {
     public ProjectAlreadyExistsException(Project project) {
         super("Project with this name already exists " + project.getName());
     }
+
+    public ProjectAlreadyExistsException(String name) {
+        super("Project with this name already exists " + name);
+    }
 }
 
 @ControllerAdvice
