@@ -44,6 +44,7 @@
                                         <div class="col">{{i + 1}}</div>
                                         <div class="col">{{user.email}}</div>
                                         <div class="col">{{user.permission}}</div>
+                                        <div class="col"><span style="font-size: 1em; color: red;"><i class="fa fa-trash"></i></span></div>
                                     </div>
                                 </div>
                             </div>
@@ -80,7 +81,8 @@
                                     <div class="row mx-2 text-center">
                                         <div class="col-2">{{i + 1}}</div>
                                         <div class="col-3">{{scan.toolName}}</div>
-                                        <div class="col-7">{{scan.date}}</div>
+                                        <div class="col-6">{{scan.date}}</div>
+                                        <div class="col-1"><span style="font-size: 1em; color: red;"><i class="fa fa-trash"></i></span></div>
                                     </div>
                                 </div>
                             </div>
@@ -149,7 +151,7 @@
                                             <tr>
                                                 <th scope="row">{{i+1}}</th>
                                                 <td>{{scan.id}}</td>
-                                                <td>{{scan.tool}}</td>
+                                                <td>{{scan.toolName}}</td>
                                                 <td>{{scan.date}}</td>
                                             </tr>
                                         </tbody>
