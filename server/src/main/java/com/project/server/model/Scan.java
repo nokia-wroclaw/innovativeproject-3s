@@ -19,6 +19,7 @@ public class Scan {
     @JsonIgnore
     private long id;
     private Date date;
+    private String stringDate;
     private String status;
     private String email;
     private String toolName;
@@ -72,5 +73,13 @@ public class Scan {
 
     public void setProjectName(String name) {
         this.projectName = name;
+    }
+
+    public void setStringDate(String stringDate) {
+        this.stringDate = stringDate;
+    }
+
+    public String getStringDate() {
+        return stringDate;
     }
 }

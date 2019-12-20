@@ -43,6 +43,9 @@ public class ProjectService {
 		if (repository.findByName(project.getName()).isPresent()) {
 			throw  new ProjectAlreadyExistsException(project);
 		} else {
+			for (User u : project.getUsers()) {
+				u.getProjects().add(project);
+			}
 			repository.save(project);
 			return "Project " + project.getName() + " created.";
 		}
