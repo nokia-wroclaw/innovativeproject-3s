@@ -20,7 +20,7 @@ public class UserController {
         return service.getUserByEmail("admin");
     }
 
-    @GetMapping("/users")
+    @RequestMapping("/users")
     public List<User> getUsers(@RequestHeader("Email") String email) {
         return service.getUsers();
     }
@@ -30,7 +30,7 @@ public class UserController {
         return service.add(toAdd);
     }
 
-    @PutMapping("/users/edit")
+    @PostMapping("/users/edit")
     public void changePassword(@RequestBody User user) {
         service.changePassword(user);
     }

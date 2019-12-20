@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-import org.quartz.JobDataMap;
+//import org.quartz.JobDataMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import javax.mail.MessagingException;
@@ -46,7 +46,8 @@ public class TrivyController {
         try {
             // Run a shell script
         String cmd ="docker run --rm  aquasec/trivy -f json --quiet --light python:3.4-alpine ";
-        Process proc = Runtime.getRuntime().exec(cmd);
+            Process proc = Runtime.getRuntime().exec(cmd);
+
         System.out.println("Success!");
 
         BufferedReader stdInput = new BufferedReader(new 

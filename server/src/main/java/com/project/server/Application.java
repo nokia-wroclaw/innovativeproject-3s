@@ -68,7 +68,7 @@ public class Application {
 //            Tools
             ArrayList<Tool> tools = new ArrayList<>();
             for (int i = 0; i < 3; ++i) {
-                tools.add(new Tool("tool" + i, "info " + i));
+                tools.add(new Tool("tool" + i, "info" + i, "testImage" + i));
                 tools.get(i).getProject().add(project1);
                 project1.getTools().add(tools.get(i));
             }

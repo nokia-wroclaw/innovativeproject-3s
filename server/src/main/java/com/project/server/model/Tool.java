@@ -20,6 +20,7 @@ public class Tool {
     private Long id;
     @Column(unique = true, length = 100)
     private String name;
+    private String image;
     private String info;
 
     @ManyToMany(mappedBy = "tools", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
@@ -35,8 +36,9 @@ public class Tool {
 
     protected Tool() {}
 
-    public Tool(String name, String info) {
+    public Tool(String name, String image, String info) {
         this.name = name;
+        this.image = image;
         this.info = info;
     }
 
@@ -57,5 +59,13 @@ public class Tool {
 
     public String getInfo() {
         return info;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getImage() {
+        return image;
     }
 }

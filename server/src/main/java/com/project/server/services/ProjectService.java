@@ -38,11 +38,12 @@ public class ProjectService {
 		return result;
 	}
 
-	public Project addProject(Project project) {
-		if (repository.findByName(project.getName()).isPresent()) {
-			throw new ProjectAlreadyExistsException(project);
+	public String addProject(String name) {
+		if (repository.findByName(name).isPresent()) {
+			throw new ProjectAlreadyExistsException(name);
 		} else {
-			return repository.save(project);
+			repository.save(new Project(name));
+			return "Project " + name + " created.";
 		}
 	}
 
@@ -54,24 +55,44 @@ public class ProjectService {
         repository.deleteById(id);
 	}
 
-	public String addUserToProject(User userToAdd, Project projectToAdd) {
-		User user = userService.getUserByEmail(userToAdd.getEmail());
-		Project project = getProjectByName(projectToAdd.getName());
+	public String addUserToProject(String email, String projectName) {
+		User user = userService.getUserByEmail(email);
+		Project project = getProjectByName(projectName);
 
 		project.getUsers().add(user);
 		user.getProjects().add(project);
 
-		return "User " + userToAdd.getEmail() + " added to " + project.getName();
+		return "User " + email + " added to " + projectName;
 	}
 
-	public String addToolToProject(Tool toolToAdd, Project projectToAdd) {
-		Tool tool = toolService.getToolByName(toolToAdd.getName());
-		Project project = getProjectByName(projectToAdd.getName());
+	public String addToolToProject(String toolName, String projectName) {
+		Tool tool = toolService.getToolByName(toolName);
+		Project project = getProjectByName(projectName);
 
 		project.getTools().add(tool);
 		tool.getProject().add(project);
 
 		return "Tool " + tool.getName() + " added to " + project.getName();
+	}
+
+	public String removeUserFromProject(String email, String projectName) {
+		User user = userService.getUserByEmail(email);
+		Project project = getProjectByName(projectName);
+
+		project.getUsers().remove(user);
+		user.getProjects().remove(project);
+
+		return "User " + email + " removed from " + projectName;
+	}
+
+	public String removeToolFromProject(String toolName, String projectName) {
+		Tool tool = toolService.getToolByName(toolName);
+		Project project = getProjectByName(projectName);
+
+		project.getTools().remove(tool);
+		tool.getProject().remove(project);
+
+		return "Tool " + toolName + " removed from " + projectName;
 	}
 
 }
