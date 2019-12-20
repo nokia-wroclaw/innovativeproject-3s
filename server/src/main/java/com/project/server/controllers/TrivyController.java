@@ -40,7 +40,7 @@ public class TrivyController {
        @Autowired
        private MailProperties mailProperties;
     @RequestMapping("/trivy")
-    public void startTestcmd(@RequestBody String email){
+    public void startTestcmd(){
         StringBuilder sb=new StringBuilder();
 
         try {
@@ -74,7 +74,7 @@ public class TrivyController {
 
         String body = sb.toString();
 
-       sendMail(mailProperties.getUsername(), email, "scan", body); sb.toString();  
+       sendMail(mailProperties.getUsername(), "danieldr1212@gmail.com", "scan", body); sb.toString();  
     } 
   private void sendMail(String fromEmail, String toEmail, String subject, String body) {
                    try {
