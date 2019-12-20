@@ -27,13 +27,12 @@
                                         <select class="form-control" formControlName="user">
                                             <option>Pick user</option>
                                             <option>admin</option>
-                                            <option>user0</option>
-                                            <option>user1</option>
-                                            <option>user2</option>
-                                            <option>user3</option>
-                                            <option>user4</option>
-                                            <option>user5</option>
-                                            <option>user6</option>
+                                            <option>user</option>
+                                            <option>user0@nokia.com</option>
+                                            <option>user1@nokia.com</option>
+                                            <option>user2@nokia.com</option>
+                                            <option>user3@nokia.com</option>
+                                            <option>user4@nokia.com</option>
                                         </select>
                                     </div>
                                     <div class="col">
@@ -138,7 +137,7 @@
                                         <i class="fa fa-minus-square"></i>&nbsp;At least one negative
                                     </span>
                                     <span *ngIf="project.status=='waiting'" style="font-size: 1em; color: orange">
-                                        <i class="fa fa-pause-circle"></i>&nbsp;At least one ongoing
+                                        <i class="fa fa-pause-circle"></i>&nbsp;At least one waiting
                                     </span></b>
                             </div>
                         </div>
@@ -151,7 +150,7 @@
                                             <tr>
                                                 <th scope="row">{{i+1}}</th>
                                                 <td>{{scan.toolName}}</td>
-                                                <td>{{scan.date}}</td>
+                                                <td>{{scan.stringDate}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
