@@ -29,4 +29,8 @@ export class ScanService {
   deleteScan(id: number) {
     return this.http.delete(this.scanUrl + '/' + id);
   }
+
+  triggerScan() {
+      return this.http.get<any>('http://localhost:8080/trivy');
+  }
 }

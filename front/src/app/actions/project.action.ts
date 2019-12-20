@@ -29,3 +29,11 @@ export class UpdateProject {
 
     }
 }
+
+export class SetSelectedProject {
+    static readonly type = '[Project] Set';
+
+    constructor(public payload: Project) {
+
+    }
+}

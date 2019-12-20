@@ -5,7 +5,7 @@ import { LoginState } from '../states/login.state';
 import { ProjectState } from '../states/project.state';
 import { Observable } from 'rxjs';
 import { Project } from '../models/project';
-import { GetProjects, AddProject } from '../actions/project.action';
+import { GetProjects, AddProject, SetSelectedProject } from '../actions/project.action';
 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User } from '../models/user';
@@ -77,7 +77,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   addScan() {
-    this.scanList.push({toolName: this.fs.tool.value, date: String(this.fs.date.value.toLocaleString())});
+    this.scanList.push({toolName: this.fs.tool.value, stringDate: String(this.fs.date.value.toLocaleString())});
   }
 
   onSubmit() {
@@ -93,6 +93,10 @@ export class ProjectsComponent implements OnInit {
     }, error => {
       console.log('Adding project failed');
     });
+  }
+
+  set(project: Project) {
+    this.store.dispatch(new SetSelectedProject(project));
   }
 
 }
