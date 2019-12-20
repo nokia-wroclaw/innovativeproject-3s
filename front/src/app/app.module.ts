@@ -23,6 +23,8 @@ import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { ScanState } from './states/scan.state';
 import { UserState } from './states/user.state';
 import { LoginState } from './states/login.state';
+import { ProjectState } from './states/project.state';
+import { ToolState } from './states/tool.state';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatExpansionModule, MatFormFieldModule, MatInputModule,
@@ -95,6 +97,8 @@ const matmodules = [
     HttpClientModule,
     RouterModule.forRoot(routes),
     NgxsModule.forRoot([
+      ToolState,
+      ProjectState,
       ScanState,
       UserState,
       LoginState

@@ -9,6 +9,7 @@ import { map } from 'rxjs/operators';
 })
 export class ProjectService {
   projectUrl = environment.url + '/projects';
+  addUrl = environment.url + '/projects_add_all';
 
   constructor(private http: HttpClient) { }
 
@@ -23,7 +24,7 @@ export class ProjectService {
   }
 
   addProject(payload: Project) {
-    return this.http.post<Project>(this.projectUrl, payload);
+    return this.http.post<Project>(this.addUrl, payload);
   }
 
   deleteProject(id: number) {
