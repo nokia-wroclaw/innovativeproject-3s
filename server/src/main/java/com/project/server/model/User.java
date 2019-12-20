@@ -1,5 +1,6 @@
 package com.project.server.model;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -25,6 +26,7 @@ public class User {
     private String email;
     @JsonIgnore
     private String password;
+    private Date created;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name="user_permission",
@@ -62,6 +64,12 @@ public class User {
         this.password = password;
     }
 
+    public User(String email, String password, Date created) {
+        this.email = email;
+        this.password = password;
+        this.created = created;
+    }
+
     @Override
     public String toString() {
         return String.format(
@@ -84,5 +92,13 @@ public class User {
     }
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public Date getCreated() {
+        return created;
     }
 }

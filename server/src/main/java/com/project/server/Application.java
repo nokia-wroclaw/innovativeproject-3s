@@ -41,7 +41,8 @@ public class Application {
 
             ArrayList<User> teamUsers = new ArrayList<>();
             for (int i = 0; i < 5; ++i) {
-                teamUsers.add(new User("user" + i, "user" + i));
+                teamUsers.add(new User("user" + i + "@nokia.com", "user" + i));
+                teamUsers.get(i).setCreated(new Date(2019-1900, 11, 10 + i));
             }
 
 //            Permissions
@@ -64,6 +65,16 @@ public class Application {
             Project project1 = new Project("project1");
             testUsers.get(0).getProjects().add(project1);
             project1.getUsers().add(testUsers.get(0));
+            teamUsers.get(0).getProjects().add(project1);
+            project1.getUsers().add(teamUsers.get(0));
+
+            Project project2 = new Project("project2");
+            testUsers.get(0).getProjects().add(project2);
+            project2.getUsers().add(testUsers.get(0));
+            teamUsers.get(0).getProjects().add(project2);
+            project2.getUsers().add(teamUsers.get(0));
+            teamUsers.get(1).getProjects().add(project2);
+            project2.getUsers().add(teamUsers.get(1));
 
 //            Tools
             ArrayList<Tool> tools = new ArrayList<>();
@@ -75,20 +86,49 @@ public class Application {
 
 //            Scans
             Scan testScan = new Scan();
-            testScan.setDate(new Date(0));
+            testScan.setDate(new Date(2019-1900, 11, 19));
+            testScan.setStringDate(testScan.getDate().toString());
             testScan.setStatus("positive");
             testScan.setEmail("admin");
             testScan.setToolName(tools.get(0).getName());
             testScan.setProject(project1);
             project1.getScans().add(testScan);
 
+            Scan negScan = new Scan();
+            negScan.setDate(new Date(2019-1900, 11, 19));
+            negScan.setStringDate(negScan.getDate().toString());
+            negScan.setStatus("negative");
+            negScan.setEmail("admin");
+            negScan.setToolName(tools.get(1).getName());
+            negScan.setProject(project1);
+            project1.getScans().add(negScan);
+
             Scan scan2 = new Scan();
-            scan2.setDate(new Date(0));
+            scan2.setDate(new Date(2019-1900, 11, 22));
+            scan2.setStringDate(scan2.getDate().toString());
             scan2.setStatus("waiting");
             scan2.setEmail("admin");
             scan2.setToolName(tools.get(0).getName());
             scan2.setProject(project1);
             project1.getScans().add(scan2);
+
+            Scan posScan1 = new Scan();
+            posScan1.setDate(new Date(2019-1900, 11, 17));
+            posScan1.setStringDate(posScan1.getDate().toString());
+            posScan1.setStatus("positive");
+            posScan1.setEmail("user1@nokia.com");
+            posScan1.setToolName(tools.get(0).getName());
+            posScan1.setProject(project2);
+            project2.getScans().add(posScan1);
+
+            Scan posScan2 = new Scan();
+            posScan2.setDate(new Date(2019-1900, 11, 15));
+            posScan2.setStringDate(posScan2.getDate().toString());
+            posScan2.setStatus("positive");
+            posScan2.setEmail("admin");
+            posScan2.setToolName(tools.get(1).getName());
+            posScan2.setProject(project2);
+            project2.getScans().add(posScan2);
 
             for (User u : testUsers) {
                 users.save(u);
