@@ -53,13 +53,13 @@ public class Project {
     public Collection<User> getUsers() {
         return users;
     }
-    public void setUsers(Collection<User> user) {
+    public void setUsers(Collection<User> users) {
         this.users = users;
     }
     public Collection<Tool> getTools() {
         return tools;
     }
-    public void setTool(Collection<Tool> tools) {
+    public void setTools(Collection<Tool> tools) {
         this.tools = tools;
     }
 
@@ -67,7 +67,7 @@ public class Project {
         return scans;
     }
 
-    public void setScan(Collection<Scan> scans) {
+    public void setScans(Collection<Scan> scans) {
         this.scans = scans;
     }
 

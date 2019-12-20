@@ -73,8 +73,6 @@ public class Application {
                 project1.getTools().add(tools.get(i));
             }
 
-
-
 //            Scans
             Scan testScan = new Scan();
             testScan.setDate(new Date(0));

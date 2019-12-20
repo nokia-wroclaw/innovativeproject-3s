@@ -3,6 +3,7 @@ package com.project.server.services;
 import java.util.List;
 import java.util.Optional;
 
+import com.project.server.model.Scan;
 import com.project.server.model.Tool;
 import com.project.server.model.User;
 import com.project.server.services.exceptions.ProjectAlreadyExistsException;
@@ -43,11 +44,20 @@ public class ProjectService {
 		if (repository.findByName(project.getName()).isPresent()) {
 			throw  new ProjectAlreadyExistsException(project);
 		} else {
+			Project newProject = new Project(project.getName());
+			User match;
 			for (User u : project.getUsers()) {
-				u.getProjects().add(project);
+				match = userService.getUserByEmail(u.getEmail());
+				match.getProjects().add(newProject);
+				newProject.getUsers().add(match);
 			}
-			repository.save(project);
-			return "Project " + project.getName() + " created.";
+			for (Scan s : project.getScans()) {
+				s.setStatus("waiting");
+				newProject.getScans().add(s);
+				s.setProject(newProject);
+			}
+			repository.save(newProject);
+			return "Project " + newProject.getName() + " created.";
 		}
 	}
 
