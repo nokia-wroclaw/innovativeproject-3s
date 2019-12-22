@@ -24,4 +24,5 @@ export class ToolsComponent implements OnInit {
   ngOnInit() {
     this.store.dispatch(new GetScans({email: this.currentUser.email}));
   }
+  
 }
