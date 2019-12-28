@@ -29,19 +29,20 @@ public class Application {
 	}
 
     @Bean
-    public CommandLineRunner demo(UserRepository users, PermissionRepository permissions, TeamRepository teamsRepo,
+    public CommandLineRunner demo(UserRepository users, PermissionRepository permissions,
                                   ProjectRepository projectRepo, ToolRepository toolRepo, ScanRepository scanRepo) {
         return (args) -> {
 //            Users
 
-        TrivyHandler.startTestcmd();
+        //TrivyHandler.startTestcmd();
             ArrayList<User> testUsers = new ArrayList<>();
             testUsers.add(new User("admin", "admin"));
             testUsers.add(new User("user", "user"));
 
             ArrayList<User> teamUsers = new ArrayList<>();
             for (int i = 0; i < 5; ++i) {
-                teamUsers.add(new User("user" + i, "user" + i));
+                teamUsers.add(new User("user" + i + "@nokia.com", "user" + i));
+                teamUsers.get(i).setCreated(new Date(2019-1900, 11, 10 + i));
             }
 
 //            Permissions
@@ -59,61 +60,75 @@ public class Application {
                 u.getPermissions().add(userPermission);
                 userPermission.getUser().add(u);
             }
-            
-            permissions.save(adminPermission);
-            permissions.save(userPermission);
-
-//            Teams
-            ArrayList<Team> teams = new ArrayList<>();
-            for (int i = 0; i < 2; ++i) {
-                teams.add(new Team("team" + i));
-            }
-
-            for (int i = 0; i < 5; i += 2) {
-                teams.get(0).getUser().add(teamUsers.get(i));
-                teamUsers.get(i).getTeams().add(teams.get(0));
-            }
-
-            for (int i = 1; i < 4; ++i) {
-                teams.get(1).getUser().add(teamUsers.get(i));
-                teamUsers.get(i).getTeams().add(teams.get(1));
-            }
-
 
 //            Projects
             Project project1 = new Project("project1");
-            project1.getTeam().add(teams.get(0));
-            project1.getTeam().add(teams.get(1));
-            teams.get(0).getProject().add(project1);
-            teams.get(1).getProject().add(project1);
+            testUsers.get(0).getProjects().add(project1);
+            project1.getUsers().add(testUsers.get(0));
+            teamUsers.get(0).getProjects().add(project1);
+            project1.getUsers().add(teamUsers.get(0));
+
+            Project project2 = new Project("project2");
+            testUsers.get(0).getProjects().add(project2);
+            project2.getUsers().add(testUsers.get(0));
+            teamUsers.get(0).getProjects().add(project2);
+            project2.getUsers().add(teamUsers.get(0));
+            teamUsers.get(1).getProjects().add(project2);
+            project2.getUsers().add(teamUsers.get(1));
 
 //            Tools
             ArrayList<Tool> tools = new ArrayList<>();
             for (int i = 0; i < 3; ++i) {
-                tools.add(new Tool("tool" + i, "info " + i));
+                tools.add(new Tool("tool" + i, "info" + i, "testImage" + i));
                 tools.get(i).getProject().add(project1);
-                project1.getTool().add(tools.get(i));
+                project1.getTools().add(tools.get(i));
             }
 
 //            Scans
             Scan testScan = new Scan();
-            testScan.setDate(new Date(0));
-            testScan.setResult("ok");
-            testScan.setTool_id(tools.get(0).getId());
-            testScan.setUser_id(teamUsers.get(2).getId());
-            testScan.getProject().add(project1);
-            project1.getScan().add(testScan);
+            testScan.setDate(new Date(2019-1900, 11, 19));
+            testScan.setStringDate(testScan.getDate().toString());
+            testScan.setStatus("positive");
+            testScan.setEmail("admin");
+            testScan.setToolName(tools.get(0).getName());
+            testScan.setProject(project1);
+            project1.getScans().add(testScan);
 
-            for (Tool t : tools) {
-                toolRepo.save(t);
-            }
+            Scan negScan = new Scan();
+            negScan.setDate(new Date(2019-1900, 11, 19));
+            negScan.setStringDate(negScan.getDate().toString());
+            negScan.setStatus("negative");
+            negScan.setEmail("admin");
+            negScan.setToolName(tools.get(1).getName());
+            negScan.setProject(project1);
+            project1.getScans().add(negScan);
 
-            projectRepo.save(project1);
-            scanRepo.save(testScan);
+            Scan scan2 = new Scan();
+            scan2.setDate(new Date(2019-1900, 11, 22));
+            scan2.setStringDate(scan2.getDate().toString());
+            scan2.setStatus("waiting");
+            scan2.setEmail("admin");
+            scan2.setToolName(tools.get(0).getName());
+            scan2.setProject(project1);
+            project1.getScans().add(scan2);
 
-            for (Team t : teams) {
-                teamsRepo.save(t);
-            }
+            Scan posScan1 = new Scan();
+            posScan1.setDate(new Date(2019-1900, 11, 17));
+            posScan1.setStringDate(posScan1.getDate().toString());
+            posScan1.setStatus("positive");
+            posScan1.setEmail("user1@nokia.com");
+            posScan1.setToolName(tools.get(0).getName());
+            posScan1.setProject(project2);
+            project2.getScans().add(posScan1);
+
+            Scan posScan2 = new Scan();
+            posScan2.setDate(new Date(2019-1900, 11, 15));
+            posScan2.setStringDate(posScan2.getDate().toString());
+            posScan2.setStatus("positive");
+            posScan2.setEmail("admin");
+            posScan2.setToolName(tools.get(1).getName());
+            posScan2.setProject(project2);
+            project2.getScans().add(posScan2);
 
             for (User u : testUsers) {
                 users.save(u);
@@ -122,7 +137,6 @@ public class Application {
             for (User u : teamUsers) {
                 users.save(u);
             }
-
         };
     }
 }

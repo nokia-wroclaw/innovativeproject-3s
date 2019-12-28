@@ -22,23 +22,21 @@ export class LoginState {
             id: state.id,
             token: state.token,
             email: state.email,
-            username: state.username,
             created: state.created,
-            type: state.type
+            permission: state.permission
         };
     }
 
     @Action(Login)
     login({ patchState }: StateContext<User>, {payload}: Login) {
-        return this.loginService.login(payload.username, payload.password).pipe(
+        return this.loginService.login(payload.email, payload.password).pipe(
             tap(result => {
                 patchState({
                     id: result.id,
                     token: 'token', // TODO: zmiana
                     email: result.email,
-                    username: result.username,
                     created: result.created,
-                    type: result.type
+                    permission: result.permission
                 });
             })
         );
@@ -52,10 +50,8 @@ export class LoginState {
                     id: null,
                     token: null,
                     email: null,
-                    username: null,
-                    password: null,
                     created: null,
-                    type: null
+                    permission: null
                 });
             })
         );

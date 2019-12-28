@@ -1,5 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ScanService } from '../services/scan.service';
+import { Store, Select } from '@ngxs/store';
+import { ProjectState } from '../states/project.state';
+import { Observable } from 'rxjs';
+import { Project } from '../models/project';
+import { GetProjects } from '../actions/project.action';
+import { LoginState } from '../states/login.state';
+import { map, concatMap, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-project-details',
@@ -8,31 +16,25 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProjectDetailsComponent implements OnInit {
 
-  selected = {
-    id: 1,
-    name: 'Project 1',
-    tools: [{id: 1, tool: 'tool 1', date: '01/01/2019 14:00', status: 'positive'},
-    {id: 2, tool: 'tool 2', date: '01/01/2019 14:00', status: 'positive'},
-    {id: 3, tool: 'tool 2', date: '01/01/2019 14:00', status: 'positive'},
-    {id: 4, tool: 'tool 3', date: '01/01/2019 14:00', status: 'negative'},
-    {id: 5, tool: 'tool 2', date: '01/01/2019 14:00', status: 'positive'},
-    {id: 6, tool: 'tool 2', date: '01/01/2019 14:00', status: 'positive'},
-    {id: 7, tool: 'tool 2', date: '01/01/2019 14:00', status: 'positive'}],
-    log: 'test log',
-    status: 'negative'
-  };
+  @Select(ProjectState.getSelectedProject) selected: Observable<Project>;
+  currentUser: any;
+  loading = false;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private scanService: ScanService) { }
 
   ngOnInit() {
-    this.route.params.subscribe(p => {
-      console.log(p.id);
-    });
   }
 
   trigger(id: any) {
     // TODO manualne odpalanie skanu
-    console.log(id);
+    this.loading = true;
+    this.scanService.triggerScan().subscribe(result => {
+      this.loading = false;
+      console.log(result);
+    }, error => {
+      this.loading = false;
+      console.log(error);
+    });
   }
 
 }

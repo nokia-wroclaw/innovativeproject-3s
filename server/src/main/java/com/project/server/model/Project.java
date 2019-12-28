@@ -1,31 +1,36 @@
 package com.project.server.model;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
+@JsonIgnoreProperties(allowGetters = true)
 public class Project {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private int id;
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @JsonIgnore
+    private Long id;
+    @Column(unique = true, length = 100)
     private String name;
+    private String owner;
 
-    @ManyToMany(mappedBy = "project", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Collection<Team> team = new ArrayList<>();
+    @ManyToMany(mappedBy = "projects", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Collection<User> users = new ArrayList<>();
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name="project_tool",
             joinColumns=@JoinColumn(name="project_id"),
             inverseJoinColumns=@JoinColumn(name="tool_id"))
-    private Collection<Tool> tool = new ArrayList<>();
+    private Collection<Tool> tools = new ArrayList<>();
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name="project_scan",
-            joinColumns=@JoinColumn(name="project_id"),
-            inverseJoinColumns=@JoinColumn(name="scan_id"))
-    private Collection<Scan> scan = new ArrayList<>();
+    @OneToMany(mappedBy = "project", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Collection<Scan> scans = new ArrayList<>();
 
     public Project() {}
 
@@ -33,10 +38,10 @@ public class Project {
         this.name = name;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public String getName() {
@@ -45,24 +50,32 @@ public class Project {
     public void setName(String name) {
         this.name = name;
     }
-    public Collection<Team> getTeam() {
-        return team;
+    public Collection<User> getUsers() {
+        return users;
     }
-    public void setTeam(Collection<Team> team) {
-        this.team = team;
+    public void setUsers(Collection<User> users) {
+        this.users = users;
     }
-    public Collection<Tool> getTool() {
-        return tool;
+    public Collection<Tool> getTools() {
+        return tools;
     }
-    public void setTool(Collection<Tool> tool) {
-        this.tool = tool;
-    }
-
-    public Collection<Scan> getScan() {
-        return scan;
+    public void setTools(Collection<Tool> tools) {
+        this.tools = tools;
     }
 
-    public void setScan(Collection<Scan> scan) {
-        this.scan = scan;
+    public Collection<Scan> getScans() {
+        return scans;
+    }
+
+    public void setScans(Collection<Scan> scans) {
+        this.scans = scans;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 }

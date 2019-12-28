@@ -37,20 +37,20 @@ public class ScanJob extends QuartzJobBean {
     @Override
     protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         logger.info("Executing Job with key {}", jobExecutionContext.getJobDetail().getKey());
-        
+
         StringBuilder scanResult = new StringBuilder();
 
-        try{    
-	
+        try{
+
             // Run a shell script
-    
+
             Process proc = Runtime.getRuntime().exec("docker run --rm  aquasec/trivy -f json --light python:3.4-alpine");
             System.out.println("Success!");
-    
-            BufferedReader stdInput = new BufferedReader(new 
+
+            BufferedReader stdInput = new BufferedReader(new
             InputStreamReader(proc.getInputStream()));
 
-    
+
             // Read the output from the command
             String s = null;
             while ((s = stdInput.readLine()) != null) {
@@ -59,7 +59,7 @@ public class ScanJob extends QuartzJobBean {
                 System.out.println(s);
         }
 
-    
+
         } catch (IOException e) {
             e.printStackTrace();
         }

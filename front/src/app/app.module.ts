@@ -23,9 +23,12 @@ import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { ScanState } from './states/scan.state';
 import { UserState } from './states/user.state';
 import { LoginState } from './states/login.state';
+import { ProjectState } from './states/project.state';
+import { ToolState } from './states/tool.state';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatExpansionModule, MatFormFieldModule, MatInputModule, MatGridListModule } from '@angular/material';
+import { MatExpansionModule, MatFormFieldModule, MatInputModule,
+  MatGridListModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 import { ProjectDetailsComponent } from './project-details/project-details.component';
 
 const routes: Routes = [
@@ -70,7 +73,9 @@ const matmodules = [
   MatExpansionModule,
   MatFormFieldModule,
   MatInputModule,
-  MatGridListModule
+  MatGridListModule,
+  MatDatepickerModule,
+  MatNativeDateModule
 ];
 
 @NgModule({
@@ -92,20 +97,19 @@ const matmodules = [
     HttpClientModule,
     RouterModule.forRoot(routes),
     NgxsModule.forRoot([
+      ToolState,
+      ProjectState,
       ScanState,
       UserState,
       LoginState
     ]),
     NgxsStoragePluginModule.forRoot({
-      key: ['auth.token', 'auth.username']
+      key: ['auth.token', 'auth.email']
     }),
     BrowserAnimationsModule
   ],
   exports: [
     ...matmodules,
-  ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

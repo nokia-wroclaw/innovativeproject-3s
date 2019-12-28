@@ -39,13 +39,14 @@ public class TrivyController {
        @Autowired
        private MailProperties mailProperties;
     @RequestMapping("/trivy")
-    public void startTestcmd(){
+    public String startTestcmd(){
         StringBuilder sb=new StringBuilder();
 
         try {
             // Run a shell script
         String cmd ="docker run --rm  aquasec/trivy -f json --quiet --light python:3.4-alpine ";
-        Process proc = Runtime.getRuntime().exec(cmd);
+            Process proc = Runtime.getRuntime().exec(cmd);
+
         System.out.println("Success!");
 
         BufferedReader stdInput = new BufferedReader(new 
@@ -73,7 +74,8 @@ public class TrivyController {
 
         String body = sb.toString();
 
-       sendMail(mailProperties.getUsername(), "danieldr1212@gmail.com", "scan", body); 
+       sendMail(mailProperties.getUsername(), "rurakf@gmail.com", "scan", body);
+       return sb.toString();
     } 
   private void sendMail(String fromEmail, String toEmail, String subject, String body) {
                    try {

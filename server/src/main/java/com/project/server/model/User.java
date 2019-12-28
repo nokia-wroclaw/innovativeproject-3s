@@ -1,5 +1,6 @@
 package com.project.server.model;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -18,11 +19,14 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public class User {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @JsonIgnore
     private Long id;
-    private String username;
+    @Column(unique = true, length = 100)
+    private String email;
+    @JsonIgnore
     private String password;
-
+    private Date created;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name="user_permission",
@@ -34,48 +38,67 @@ public class User {
     public Collection<Permission> getPermissions() {
         return permission;
     }
+
     public void setPermissions(Collection<Permission> permissions) {
         this.permission = permissions;
     }
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name="user_team",
+    @JoinTable(name="user_project",
             joinColumns=@JoinColumn(name="user_id"),
-            inverseJoinColumns=@JoinColumn(name="team_id") )
-    private Collection<Team> team=new ArrayList<>();
+            inverseJoinColumns=@JoinColumn(name="project_id"))
+    @JsonIgnore
+    private Collection<Project> projects = new ArrayList<>();
 
-    public Collection<Team> getTeams() {
-        return team;
+    public Collection<Project> getProjects() {
+        return projects;
     }
-    public void setTeams(Collection<Team> teams) {
-        this.team = teams;
+    public void setProjects (Collection<Project> projects) {
+        this.projects = projects;
     }
 
     protected User() {}
 
-    public User(String username, String password) {
-        this.username = username;
+    public User(String email, String password) {
+        this.email = email;
         this.password = password;
+    }
+
+    public User(String email, String password, Date created) {
+        this.email = email;
+        this.password = password;
+        this.created = created;
     }
 
     @Override
     public String toString() {
         return String.format(
-                "User[id=%d, username='%s', password='%s']",
-                id, username, password);
+                "User[id=%d, email='%s', password='%s']",
+                id, email, password);
     }
 
     public Long getId() {
         return id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
     public String getPassword() {
         return password;
     }
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public Date getCreated() {
+        return created;
     }
 }

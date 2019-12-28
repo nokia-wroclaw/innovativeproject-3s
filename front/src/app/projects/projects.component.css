@@ -23,3 +23,16 @@
     font-size: 1.5em;
     text-align: end;
 }
+
+.addButton:hover {
+  background: hsl(199, 80%, 76%);
+  box-shadow: 0 1px 12px rgb(214, 214, 214);
+}
+
+.addButton {
+  box-shadow: 0 0 5px rgb(214, 214, 214);
+}
+
+.addHeader {
+  background: hsl(199, 80%, 76%);
+}

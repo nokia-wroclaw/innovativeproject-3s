@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
         this.loginForm = this.fb.group({
-            username: ['', Validators.required],
+            email: ['', Validators.required],
             password: ['', Validators.required]
         });
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
@@ -29,21 +29,20 @@ export class LoginComponent implements OnInit {
 
     get f() { return this.loginForm.controls; }
 
-    get username() { return this.loginForm.get('username'); }
+    get email() { return this.loginForm.get('email'); }
     get password() { return this.loginForm.get('password'); }
 
     onSubmit() {
         if (this.loginForm.valid) {
             this.loading = true;
-            this.store.dispatch(new Login({username: this.f.username.value, password: this.f.password.value}))
+            this.store.dispatch(new Login({email: this.f.email.value, password: this.f.password.value}))
             .subscribe(data => {
                 this.loginError = false;
                 this.router.navigate(['/']);
             }, error => {
-                console.log(error);
                 this.loading = false;
                 this.loginError = true;
-                if (error === 'OK') {
+                if (error.status === 404) {
                     this.errorMsg = 'Incorrect login or password';
                 } else {
                     this.errorMsg = 'Cannot connect to the service';

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../models/user';
 import { environment } from '../../environments/environment';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,14 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  fetchUsers() {
-    return this.http.get<User[]>(this.userUrl);
+  fetchUsers(email: string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Email: email
+      })
+    };
+    return this.http.get<User[]>(this.userUrl, httpOptions).pipe(map(users => users as User[]));
   }
 
   addUser(payload: User) {

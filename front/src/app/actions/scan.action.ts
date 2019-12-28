@@ -10,6 +10,8 @@ export class AddScan {
 
 export class GetScans {
     static readonly type = '[Scan] Get';
+
+    constructor(public payload: { email: string }) {}
 }
 
 export class DeleteScan {

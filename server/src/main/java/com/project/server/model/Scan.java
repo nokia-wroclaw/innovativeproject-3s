@@ -1,5 +1,6 @@
 package com.project.server.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -8,60 +9,77 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import static java.awt.SystemColor.info;
-
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(allowGetters = true)
 public class Scan {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private int id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
+    private long id;
     private Date date;
-    private String result;
-    private long user_id;
-    private int tool_id;
+    private String stringDate;
+    private String status;
+    private String email;
+    private String toolName;
+    private String projectName;
 
-    @ManyToMany(mappedBy = "scan", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Collection<Project> project = new ArrayList<>();
-    public Collection<Project> getProject() {
+    @ManyToOne
+    @JoinColumn(name="project_id", nullable = false)
+    @JsonIgnore
+    private Project project;
+
+    public Project getProject() {
         return project;
     }
 
-    public int getId() {
+    public void setProject(Project project) {
+        this.project = project;
+        this.projectName = project.getName();
+    }
+
+    public long getId() {
         return id;
     }
-
-    public int getTool_id() {
-        return tool_id;
+    public String getToolName() {
+        return toolName;
     }
-
-    public void setTool_id(int tool_id) {
-        this.tool_id = tool_id;
+    public void setToolName(String toolName) {
+        this.toolName = toolName;
     }
-
-    public long getUser_id() {
-        return user_id;
+    public String getEmail() {
+        return email;
     }
-
-    public void setUser_id(long user_id) {
-        this.user_id = user_id;
+    public void setEmail(String email) {
+        this.email = email;
     }
-
-    public String getResult() {
-        return result;
+    public String getStatus() {
+        return status;
     }
-
-    public void setResult(String result) {
-        this.result = result;
+    public void setStatus(String status) {
+        this.status = status;
     }
-
     public Date getDate() {
         return date;
     }
-
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String name) {
+        this.projectName = name;
+    }
+
+    public void setStringDate(String stringDate) {
+        this.stringDate = stringDate;
+    }
+
+    public String getStringDate() {
+        return stringDate;
     }
 }
