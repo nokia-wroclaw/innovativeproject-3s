@@ -6,14 +6,13 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-//import org.quartz.JobDataMap;
+import org.quartz.JobDataMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import com.project.server.model.User;
-import com.project.server.services.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.mail.MailProperties;
@@ -82,8 +81,11 @@ public class TrivyController {
                    try {
                        logger.info("Sending Email to {}", toEmail);
                        MimeMessage message = mailSender.createMimeMessage();
-            
+                       logger.info("Sending Email to {}", toEmail);
+
                        MimeMessageHelper messageHelper = new MimeMessageHelper(message, StandardCharsets.UTF_8.toString());
+                       logger.info("Sending Email to {}", toEmail);
+
                        messageHelper.setSubject(subject);
                        messageHelper.setText(body, true);
                        messageHelper.setFrom(fromEmail);
