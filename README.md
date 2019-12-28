@@ -3,7 +3,7 @@ Security Scan Scheduler
 
 Things to do before running trivy scans
 
-1. Create database: db3s
+1. Create database: heroku_7013a700c5d03a4
 2. in databse do: source <PATH_TO_QUARTZ_TABLES.sql>
 3. mvn spring-boot:run
 
