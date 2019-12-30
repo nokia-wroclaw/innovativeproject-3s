@@ -2,7 +2,80 @@
     <div class="sticky">
         <app-navbar></app-navbar>
     </div>
-    <div>
-        w tym divie mozesz wszystko dodawac
-    </div>
+    <div style="
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;"class="col row-cols-3">
+        <div class="row">
+            <h2>Manage your data</h2>
+        </div>
+            <div class="row">                 Joined on :  // datadołączenia
+                    </div>
+                    <div class="row">                 
+            <mat-expansion-panel class="m-2 p-2 settingsBar">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Email:
+                    </mat-panel-title>
+                    <mat-panel-description>
+                            //tutaj email usera aktualny
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="row row-cols-2">
+                    <div class="col">
+                        <mat-form-field>
+                            <input matInput placeholder="New email">
+                        </mat-form-field>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-outline-primary">Confirm</button>
+                    </div>
+            </div>
+            </mat-expansion-panel>
+                    </div>
+                    <div class="row">                 
+            <mat-expansion-panel class="m-2 p-2 settingsBar">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Password 
+                     </mat-panel-title>
+                     
+
+                </mat-expansion-panel-header>
+                <div class="col row-cols-4">
+                    <div class="row">
+
+                <div class="row row-cols-2">
+                    <div class="col">
+
+                        <div id="password"> *****</div>
+                        </div>
+                        <div class="col">
+
+                        <button id="ident"class="btn btn-outline-primary" (click)="showPassword();changeName();">Show</button>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                <mat-form-field>
+                    <input matInput placeholder="Password">
+                </mat-form-field>
+                </div>
+                <div class="row">
+
+                <mat-form-field>
+                    <input matInput placeholder="Confirm password">
+                </mat-form-field>
+</div>
+<div class="row">
+
+                <button class="btn btn-outline-primary">Confirm</button>
+                </div>
+            </div>
+            </mat-expansion-panel>
+                    </div>
+       
+    
+
 </div>
