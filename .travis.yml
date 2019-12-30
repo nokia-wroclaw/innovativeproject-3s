@@ -25,7 +25,8 @@ jobs:
     - stage: build
       script:
         - cd front
-        - npm i
+        - npm install
+        - npm install express
         - ng build --prod
         - cd ..
         - cd server
@@ -41,6 +42,7 @@ jobs:
         - cd ..
         - cd front
         - npm install
+        - npm install express
         - ng build --prod
         - docker build -t registry.heroku.com/nokia3s-front/web -f Dockerfile.prod .
         - docker push registry.heroku.com/nokia3s-server/web

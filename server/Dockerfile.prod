@@ -13,3 +13,4 @@ COPY --from=MAVEN_BUILD /server/target/server-0.0.1-SNAPSHOT.jar ./
 RUN apk update && apk add docker
 CMD java -jar ./server-0.0.1-SNAPSHOT.jar
 EXPOSE 8080:8080
+
