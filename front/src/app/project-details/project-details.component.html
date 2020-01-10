@@ -1,8 +1,37 @@
 <div class="project min-vh-100">
     <div class="sticky">
         <app-navbar></app-navbar>
+        <div class="col-2 fixed-bottom">
+            <div *ngIf="success" class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Scan finished</strong>
+                <p>Please check Your e-mail for further details</p>
+                <span (click)="closeSuccess()">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </span>
+            </div>
+            <div *ngIf="sending" class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Sending scan</strong>
+                <p>Please wait for results</p>
+                <span (click)="closeSending()">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </span>
+            </div>
+            <div *ngIf="failure" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Scan failed</strong>
+                <p>Please retry or try again later</p>
+                <span (click)="closeFailure()">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </span>
+            </div>
+        </div>
     </div>
-    <div *ngIf="selected | async" class="container col-11 col-xl-9">
+    <div *ngIf="selected | async" class="container col-10 col-xl-8">
         <div class="item border">
             <div class="row">
                 <div class="col-1"></div>
@@ -29,7 +58,7 @@
                                     <span *ngIf="scan.status=='waiting'" style="font-size: 1em; color: orange">
                                         <i class="fa fa-pause-circle"></i>&nbsp;Waiting
                                     </span></td>
-                                <td><button class="btn btn-outline-secondary">Log</button>&nbsp;
+                                <td><button [disabled]="!scan.log" class="btn btn-outline-secondary">Log</button>&nbsp;
                                     <button [disabled]="loading" class="btn btn-outline-danger" (click)="trigger(scan.id)">Trigger
                                         <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                                     </button></td>

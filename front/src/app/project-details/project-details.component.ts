@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ScanService } from '../services/scan.service';
 import { Store, Select } from '@ngxs/store';
 import { ProjectState } from '../states/project.state';
@@ -19,22 +19,40 @@ export class ProjectDetailsComponent implements OnInit {
   @Select(ProjectState.getSelectedProject) selected: Observable<Project>;
   currentUser: any;
   loading = false;
+  success = false;
+  sending = false;
+  failure = false;
 
-  constructor(private route: ActivatedRoute, private scanService: ScanService) { }
+  constructor(private router: Router, private scanService: ScanService) {
+    if (!this.selected) {
+      router.navigate(['/projects']);
+    }
+  }
 
   ngOnInit() {
   }
 
   trigger(id: any) {
-    // TODO manualne odpalanie skanu
-    this.loading = true;
+    this.sending = true;
     this.scanService.triggerScan().subscribe(result => {
-      this.loading = false;
+      this.success = true;
       console.log(result);
     }, error => {
-      this.loading = false;
+      this.failure = true;
       console.log(error);
     });
+  }
+
+  closeSuccess() {
+    this.success = false;
+  }
+
+  closeSending() {
+    this.sending = false;
+  }
+
+  closeFailure() {
+    this.failure = false;
   }
 
 }

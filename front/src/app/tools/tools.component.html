@@ -31,7 +31,7 @@
                             <span *ngIf="scan.status=='waiting'" style="font-size: 1em; color: orange">
                                 <i class="fa fa-pause-circle"></i>&nbsp;Waiting
                             </span></td>
-                        <td><button type="button" class="btn-sm btn-outline-secondary" data-toggle="modal"
+                        <td><button [disabled]="!scan.log" type="button" class="btn-sm btn-outline-secondary" data-toggle="modal"
                                 data-target="#exampleModal">Log</button></td>
                     </tr>
                 </tbody>
