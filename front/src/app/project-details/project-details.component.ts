@@ -5,9 +5,10 @@ import { Store, Select } from '@ngxs/store';
 import { ProjectState } from '../states/project.state';
 import { Observable } from 'rxjs';
 import { Project } from '../models/project';
-import { GetProjects } from '../actions/project.action';
+import { GetProjects, DeleteProject } from '../actions/project.action';
 import { LoginState } from '../states/login.state';
 import { map, concatMap, filter } from 'rxjs/operators';
+import { error } from 'protractor';
 
 @Component({
   selector: 'app-project-details',
@@ -22,14 +23,16 @@ export class ProjectDetailsComponent implements OnInit {
   success = false;
   sending = false;
   failure = false;
+  blurValue = 'blur(0px)';
 
-  constructor(private router: Router, private scanService: ScanService) {
+  constructor(private store: Store, private router: Router, private scanService: ScanService) {
     if (!this.selected) {
-      router.navigate(['/projects']);
+      this.router.navigate(['/projects']);
     }
   }
 
   ngOnInit() {
+    this.currentUser = this.store.selectSnapshot(LoginState.userDetails);
   }
 
   trigger(id: any) {
@@ -55,4 +58,16 @@ export class ProjectDetailsComponent implements OnInit {
     this.failure = false;
   }
 
+  delProject(id: any) {
+    this.selected.subscribe(project => {
+      this.store.dispatch(new DeleteProject(project.id, this.currentUser.email));
+      this.toggle();
+    }, err => {
+      console.log(err);
+    });
+  }
+
+  toggle() {
+    this.blurValue === 'blur(0px)' ? this.blurValue = 'blur(10px)' : this.blurValue = 'blur(0px)';
+  }
 }
