@@ -10,6 +10,7 @@ import org.quartz.JobDataMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import javax.mail.MessagingException;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 
 import com.project.server.model.User;
@@ -39,7 +40,7 @@ public class TrivyController {
        @Autowired
        private MailProperties mailProperties;
     @RequestMapping("/trivy")
-    public String startTestcmd(){
+    public String startTestcmd() {
         StringBuilder sb=new StringBuilder();
 
         try {
@@ -57,8 +58,9 @@ public class TrivyController {
         // Read the output from the command
         System.out.println("Here is the standard output of the command:\n");
         String s = null;
+        
         while ((s = stdInput.readLine()) != null) {
-            sb.append(s+"\n");        
+            sb.append(s+"\r\n");        
         }
 
         // Read any errors from the attempted command
@@ -73,21 +75,20 @@ public class TrivyController {
              System.out.println(sb.toString());
 
         String body = sb.toString();
-
-       sendMail(mailProperties.getUsername(), "rurakf@gmail.com", "scan", body);
+      
+       sendMail(mailProperties.getUsername(), "danieldr1212@gmail.com", "scan", body);
        return sb.toString();
     } 
   private void sendMail(String fromEmail, String toEmail, String subject, String body) {
                    try {
-                       logger.info("Sending Email to {}", toEmail);
                        MimeMessage message = mailSender.createMimeMessage();
-                       logger.info("Sending Email to {}", toEmail);
-
                        MimeMessageHelper messageHelper = new MimeMessageHelper(message, StandardCharsets.UTF_8.toString());
+                      
                        logger.info("Sending Email to {}", toEmail);
 
                        messageHelper.setSubject(subject);
-                       messageHelper.setText(body, true);
+                       
+                       messageHelper.setText(body, false);
                        messageHelper.setFrom(fromEmail);
                        messageHelper.setTo(toEmail);
             
