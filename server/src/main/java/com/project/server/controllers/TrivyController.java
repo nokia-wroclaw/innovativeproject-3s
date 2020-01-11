@@ -3,8 +3,10 @@ package com.project.server.controllers;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Map;
 
 import org.quartz.JobDataMap;
 import org.slf4j.Logger;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,13 +41,44 @@ public class TrivyController {
     
        @Autowired
        private MailProperties mailProperties;
+    @PostMapping("/repo")
+    public void privRepoauthentication( @RequestHeader("login") String login, @RequestHeader("psw") String psw,@RequestHeader("repo") String repo, @RequestHeader("header") String version) throws IOException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException
+    {
+        
+        
+        // String cmd4="docker run --rm  aquasec/trivy -f json --quiet --light danieldrapala/"+repo+":"+version;
+        // Process proc4 = Runtime.getRuntime().exec(cmd4);
+        System.out.println(login +" "+psw+" "+ repo+" "+version);
+   
+        Map<String, String> env = System.getenv();
+        Field field = env.getClass().getDeclaredField("m");
+        field.setAccessible(true);
+        ((Map<String, String>) field.get(env)).put("TRIVY_USERNAME", login);
+        ((Map<String, String>) field.get(env)).put("TRIVY_PASSWORD", psw);
+
+        String cmd4="docker run --rm  -e TRIVY_AUTH_URL -e TRIVY_USERNAME -e TRIVY_PASSWORD aquasec/trivy -f json --light "+ login+"/"+repo+":"+version;
+        Process proc4 = Runtime.getRuntime().exec(cmd4);
+        System.out.println(System.getenv("TRIVY_AUTH_URL") +" "+System.getenv("TRIVY_USERNAME")+" "+ System.getenv("TRIVY_PASSWORD")+" ");
+
+        BufferedReader stdInput4 = new BufferedReader(new 
+        InputStreamReader(proc4.getInputStream()));    
+        String s4="";
+        StringBuilder sb=new StringBuilder();
+        while ((s4 = stdInput4.readLine()) != null) {
+            System.out.println(s4);
+            sb.append(s4);
+        }
+        sendMail(mailProperties.getUsername(), "danieldr1212@gmail.com", "scan", sb.toString());
+        
+    }
+
     @RequestMapping("/trivy")
     public String startTestcmd(){
         StringBuilder sb=new StringBuilder();
 
         try {
             // Run a shell script
-        String cmd ="docker run --rm  aquasec/trivy -f json --quiet --light python:3.4-alpine ";
+            String cmd ="docker run --rm  aquasec/trivy -f json --quiet --light python:3.4-alpine ";
             Process proc = Runtime.getRuntime().exec(cmd);
 
         System.out.println("Success!");
@@ -55,7 +89,7 @@ public class TrivyController {
         InputStreamReader(proc.getErrorStream()));
 
         // Read the output from the command
-        System.out.println("Here is the standard output of the command:\n");
+        System.out.println("Here is the standard output of the command: danieldrapala/3s:latest\n");
         String s = null;
         while ((s = stdInput.readLine()) != null) {
             sb.append(s+"\n");        
@@ -70,12 +104,12 @@ public class TrivyController {
         } catch (IOException e) {
             e.printStackTrace();
              }
-             System.out.println(sb.toString());
+        System.out.println(sb.toString());
 
         String body = sb.toString();
-
-       sendMail(mailProperties.getUsername(), "rurakf@gmail.com", "scan", body);
-       return sb.toString();
+        System.out.println(body);
+       sendMail(mailProperties.getUsername(), "danieldr1212@gmail.com", "scan", body);
+       return body;
     } 
   private void sendMail(String fromEmail, String toEmail, String subject, String body) {
                    try {
