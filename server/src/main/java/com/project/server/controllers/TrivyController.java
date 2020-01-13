@@ -41,24 +41,18 @@ public class TrivyController {
     
        @Autowired
        private MailProperties mailProperties;
-    @PostMapping("/repo")
-    public void privRepoauthentication( @RequestHeader("login") String login, @RequestHeader("psw") String psw,@RequestHeader("repo") String repo, @RequestHeader("header") String version) throws IOException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException
-    {
+    @PostMapping("/trivy")
+    public void privRepoauthentication( @RequestBody Map<String, String> json) throws IOException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException
+    {   
         
-        
-        // String cmd4="docker run --rm  aquasec/trivy -f json --quiet --light danieldrapala/"+repo+":"+version;
-        // Process proc4 = Runtime.getRuntime().exec(cmd4);
-        System.out.println(login +" "+psw+" "+ repo+" "+version);
-   
-        Map<String, String> env = System.getenv();
-        Field field = env.getClass().getDeclaredField("m");
-        field.setAccessible(true);
-        ((Map<String, String>) field.get(env)).put("TRIVY_USERNAME", login);
-        ((Map<String, String>) field.get(env)).put("TRIVY_PASSWORD", psw);
-
-        String cmd4="docker run --rm  -e TRIVY_AUTH_URL -e TRIVY_USERNAME -e TRIVY_PASSWORD aquasec/trivy -f json --light "+ login+"/"+repo+":"+version;
+        String login = json.get("login");
+        String psw =json.get("psw");
+        String repo = json.get("repo");
+        String version = json.get("version");
+        String isPriv = json.get("isPrivate");
+        String authentication = "-e TRIVY_AUTH_URL=https://registry.hub.docker.com -e TRIVY_USERNAME="+ login +" -e TRIVY_PASSWORD=" + psw;
+        String cmd4="docker run --rm " +  (isPriv.equals("true") ? authentication : "")  +  " aquasec/trivy -f json --light "+ login+"/"+repo+":"+version;
         Process proc4 = Runtime.getRuntime().exec(cmd4);
-        System.out.println(System.getenv("TRIVY_AUTH_URL") +" "+System.getenv("TRIVY_USERNAME")+" "+ System.getenv("TRIVY_PASSWORD")+" ");
 
         BufferedReader stdInput4 = new BufferedReader(new 
         InputStreamReader(proc4.getInputStream()));    
@@ -72,45 +66,7 @@ public class TrivyController {
         
     }
 
-    @RequestMapping("/trivy")
-    public String startTestcmd(){
-        StringBuilder sb=new StringBuilder();
 
-        try {
-            // Run a shell script
-            String cmd ="docker run --rm  aquasec/trivy -f json --quiet --light python:3.4-alpine ";
-            Process proc = Runtime.getRuntime().exec(cmd);
-
-        System.out.println("Success!");
-
-        BufferedReader stdInput = new BufferedReader(new 
-        InputStreamReader(proc.getInputStream()));
-        BufferedReader stdError = new BufferedReader(new 
-        InputStreamReader(proc.getErrorStream()));
-
-        // Read the output from the command
-        System.out.println("Here is the standard output of the command: danieldrapala/3s:latest\n");
-        String s = null;
-        while ((s = stdInput.readLine()) != null) {
-            sb.append(s+"\n");        
-        }
-
-        // Read any errors from the attempted command
-        System.out.println("Here is the standard error of the command (if any):\n");
-        while ((s = stdError.readLine()) != null) {
-            System.out.println(s);
-        }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-             }
-        System.out.println(sb.toString());
-
-        String body = sb.toString();
-        System.out.println(body);
-       sendMail(mailProperties.getUsername(), "danieldr1212@gmail.com", "scan", body);
-       return body;
-    } 
   private void sendMail(String fromEmail, String toEmail, String subject, String body) {
                    try {
                        logger.info("Sending Email to {}", toEmail);

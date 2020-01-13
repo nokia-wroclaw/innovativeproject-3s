@@ -7,21 +7,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsComponent implements OnInit {
 
+  Password : String="****"; 
+  ButtonName: String="Show";
+
   constructor() { }
 
   ngOnInit() {
   }
   public showPassword() {
-    document.getElementById('password').innerHTML = "hasłousera";
+    this.Password="haselko";
 }
   public changeName(){
-    if(document.getElementById('ident').textContent=="Show"){
-      document.getElementById('ident').innerHTML="Hide"
-    }
+    if(this.ButtonName=="Show"){
+        this.ButtonName="Hide";
+}
     else{
-      document.getElementById('password').innerHTML = "****";
-      document.getElementById('ident').innerHTML="Show";
-
+      this.Password="****";
+      this.ButtonName="Show";
     }
   }
 

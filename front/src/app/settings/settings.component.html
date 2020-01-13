@@ -2,15 +2,11 @@
     <div class="sticky">
         <app-navbar></app-navbar>
     </div>
-    <div style="
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;"class="col row-cols-3">
+    <div id="manage" class="col row-cols-3">
         <div class="row">
             <h2>Manage your data</h2>
         </div>
-            <div class="row">                 Joined on :  // datadołączenia
+            <div class="row">Joined on :  // datadołączenia
                     </div>
                     <div class="row">                 
             <mat-expansion-panel class="m-2 p-2 settingsBar">
@@ -49,11 +45,11 @@
                 <div class="row row-cols-2">
                     <div class="col">
 
-                        <div id="password"> *****</div>
+                        <div id="password"> {{Password}}</div>
                         </div>
                         <div class="col">
 
-                        <button id="ident"class="btn btn-outline-primary" (click)="showPassword();changeName();">Show</button>
+                        <button id="ident"class="btn btn-outline-primary" (click)="showPassword();changeName();">{{ButtonName}}</button>
                         </div>
                         </div>
                     </div>
