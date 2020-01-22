@@ -29,49 +29,52 @@ public class ScanJob extends QuartzJobBean {
     private static final Logger logger = LoggerFactory.getLogger(ScanJob.class);
 
     @Autowired
+    ScanService scanService;
+
+    @Autowired
     private JavaMailSender mailSender;
 
     @Autowired
     private MailProperties mailProperties;
+    
+    @Autowired
+    public ScanRepository scanRepo;
 
     @Override
     protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         logger.info("Executing Job with key {}", jobExecutionContext.getJobDetail().getKey());
-
-        StringBuilder scanResult = new StringBuilder();
-
-        try{
-
-            // Run a shell script
-
-            Process proc = Runtime.getRuntime().exec("docker run --rm  aquasec/trivy -f json --light python:3.4-alpine");
-            System.out.println("Success!");
-
-            BufferedReader stdInput = new BufferedReader(new
-            InputStreamReader(proc.getInputStream()));
-
-
-            // Read the output from the command
-            String s = null;
-            while ((s = stdInput.readLine()) != null) {
-                scanResult.append(s);
-                scanResult.append("\n");
-                System.out.println(s);
-        }
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        String scanEmail = scanResult.toString();
         JobDataMap jobDataMap = jobExecutionContext.getMergedJobDataMap();
-        String subject = jobDataMap.getString("subject");
-        String body = scanEmail;
-        String recipientEmail = jobDataMap.getString("email");
+   
+        String s4="";
+        StringBuilder sb=new StringBuilder();
+        try{
+        String cmd4="docker run --rm  aquasec/trivy -f json --light -q "+ jobDataMap.getString("tool");
+        Process proc4 = Runtime.getRuntime().exec(cmd4);
+        BufferedReader stdInput4 = new BufferedReader(new 
+        InputStreamReader(proc4.getInputStream()));  
 
-        sendMail(mailProperties.getUsername(), recipientEmail, subject, body);
-    }
+        while ((s4 = stdInput4.readLine()) != null) {
+            System.out.println(s4);
+            sb.append(s4);
+        }}
+         catch (IOException e) {
+        e.printStackTrace();
+        }
+
+
+
+
+        long scanId = jobDataMap.getLong("id");
+
+
+        Optional<Scan> optionalScanToUpdate = scanRepo.findById((long) scanId);
+        Scan scanToUpdate = optionalScanToUpdate.get();
+        scanToUpdate.setContent(sb.toString());
+        scanRepo.save(scanToUpdate);
+
+        sendMail(mailProperties.getUsername(), jobDataMap.getString("email"), "Scan", sb.toString());
+    }       BufferedReader stdInput = new BufferedReader(new
+   
 
     private void sendMail(String fromEmail, String toEmail, String subject, String body) {
         try {
