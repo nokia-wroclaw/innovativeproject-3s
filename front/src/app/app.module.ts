@@ -30,6 +30,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatExpansionModule, MatFormFieldModule, MatInputModule,
   MatGridListModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 import { ProjectDetailsComponent } from './project-details/project-details.component';
+import { SettingsComponent } from './settings/settings.component';
 
 const routes: Routes = [
   {
@@ -63,6 +64,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'settings',
+    component: SettingsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: '**',
     redirectTo: '',
     canActivate: [AuthGuard]
@@ -86,7 +92,8 @@ const matmodules = [
     ToolsComponent,
     ProjectsComponent,
     AdminUsersComponent,
-    ProjectDetailsComponent
+    ProjectDetailsComponent,
+    SettingsComponent
   ],
   imports: [
     ...matmodules,
