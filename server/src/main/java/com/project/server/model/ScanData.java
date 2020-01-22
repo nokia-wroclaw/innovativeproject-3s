@@ -4,6 +4,7 @@ import com.project.server.model.Scan;
 
 
 public class ScanData {
+    private String cron; //string do cronowania
     private String toolName;    // nazwa przy tworzeniu toola
     private String projectName; // nazwa projektu, którego dotyczy skan
     private String email;       // email, na który wysłać
@@ -33,6 +34,14 @@ public class ScanData {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getCron(){
+        return cron;
+    }
+
+    public void setCron(String name){
+        this.cron = cron;
     }
 
     public String getPassword() {
