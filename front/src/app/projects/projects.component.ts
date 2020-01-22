@@ -26,8 +26,6 @@ export class ProjectsComponent implements OnInit {
   scanForm: FormGroup;
   currentUser: any;
 
-  isOpen = false;
-
   userList = [];
   scanList = [];
 
@@ -86,10 +84,10 @@ export class ProjectsComponent implements OnInit {
       name: this.fp.name.value,
       users: this.userList as User[],
       scans: this.scanList as Scan[]
-    } as Project,
-    this.currentUser.email)).subscribe(result => {
+    } as Project, this.currentUser.email)).subscribe(result => {
       console.log('Project added');
-      this.isOpen = false;
+      this.store.dispatch(new GetProjects({email: this.currentUser.email}));
+      window.location.reload();
     }, error => {
       console.log('Adding project failed');
     });

@@ -2,7 +2,7 @@
     <div class="sticky">
         <app-navbar></app-navbar>
         <div class="container col-12 col-lg-10 col-xl-6 mt-4">
-            <div class="collapse border item" id="addProject" [ngClass]="{'in': isOpen}">
+            <div class="collapse border item" id="addProject">
                 <div class="col addHeader p-3" style="font-size: 120%;">
                     Add new project
                     <span class="float-right" data-toggle="collapse" href="#addProject" role="button"
@@ -89,8 +89,9 @@
                     </div>
                     <div class="form-group p-3">
                         <div class="text-center">
-                            <button type="button" class="btn btn-primary"
-                                (click)="onSubmit()">Confirm</button>&nbsp;&nbsp;&nbsp;
+                            <span (click)="onSubmit(); toggle()"><button type="button" class="btn btn-primary" 
+                                    data-toggle="collapse" data-target="#addProject" aria-expanded="false"
+                                    aria-controls="addProject">Confirm</button></span>&nbsp;&nbsp;&nbsp;
                             <span (click)="toggle()"><button type="button" class="btn btn-outline-danger"
                                     data-toggle="collapse" data-target="#addProject" aria-expanded="false"
                                     aria-controls="addProject">Cancel</button></span>
