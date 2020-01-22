@@ -71,8 +71,8 @@ public class ProjectService {
 	}
 
 	public Project getProjectById(long id) {
-        Optional<Project> optpro = repository.findById(id);
-        return (Project) optpro.orElseThrow(() -> new ProjectNotFoundException(id));	}
+        Optional<Project> project = repository.findById(id);
+        return (Project) project.orElseThrow(() -> new ProjectNotFoundException(id));	}
 
 	public void delete(long id) {
         repository.deleteById(id);

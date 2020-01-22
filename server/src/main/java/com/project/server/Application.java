@@ -79,15 +79,15 @@ public class Application {
 //            Tools
             ArrayList<Tool> tools = new ArrayList<>();
             for (int i = 0; i < 3; ++i) {
-                tools.add(new Tool("tool" + i, "info" + i, "testImage" + i));
+                tools.add(new Tool("tool" + i,  "repo" + i));
                 tools.get(i).getProject().add(project1);
                 project1.getTools().add(tools.get(i));
             }
 
 //            Scans
             Scan testScan = new Scan();
-            testScan.setDate(new Date(2019-1900, 11, 19));
-            testScan.setStringDate(testScan.getDate().toString());
+            Date date = new Date(2019-1900, 11, 19);
+            testScan.setStringDate(date.toString());
             testScan.setStatus("positive");
             testScan.setEmail("admin");
             testScan.setToolName(tools.get(0).getName());
@@ -95,8 +95,8 @@ public class Application {
             project1.getScans().add(testScan);
 
             Scan negScan = new Scan();
-            negScan.setDate(new Date(2019-1900, 11, 19));
-            negScan.setStringDate(negScan.getDate().toString());
+            date = new Date(2019-1900, 11, 19);
+            negScan.setStringDate(date.toString());
             negScan.setStatus("negative");
             negScan.setEmail("admin");
             negScan.setToolName(tools.get(1).getName());
@@ -104,8 +104,8 @@ public class Application {
             project1.getScans().add(negScan);
 
             Scan scan2 = new Scan();
-            scan2.setDate(new Date(2019-1900, 11, 22));
-            scan2.setStringDate(scan2.getDate().toString());
+            date = new Date(2019-1900, 11, 22);
+            scan2.setStringDate(date.toString());
             scan2.setStatus("waiting");
             scan2.setEmail("admin");
             scan2.setToolName(tools.get(0).getName());
@@ -113,8 +113,8 @@ public class Application {
             project1.getScans().add(scan2);
 
             Scan posScan1 = new Scan();
-            posScan1.setDate(new Date(2019-1900, 11, 17));
-            posScan1.setStringDate(posScan1.getDate().toString());
+            date = new Date(2019-1900, 11, 17);
+            posScan1.setStringDate(date.toString());
             posScan1.setStatus("positive");
             posScan1.setEmail("user1@nokia.com");
             posScan1.setToolName(tools.get(0).getName());
@@ -122,8 +122,8 @@ public class Application {
             project2.getScans().add(posScan1);
 
             Scan posScan2 = new Scan();
-            posScan2.setDate(new Date(2019-1900, 11, 15));
-            posScan2.setStringDate(posScan2.getDate().toString());
+            date = new Date(2019-1900, 11, 15);
+            posScan2.setStringDate(date.toString());
             posScan2.setStatus("positive");
             posScan2.setEmail("admin");
             posScan2.setToolName(tools.get(1).getName());

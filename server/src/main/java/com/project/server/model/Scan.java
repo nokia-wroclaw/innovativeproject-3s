@@ -5,9 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Optional;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -18,12 +16,13 @@ public class Scan {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore
     private long id;
-    private Date date;
     private String stringDate;
     private String status;
-    private String email;
+    private String login;   // kto zlecił
+    private String email;   // gdzie wysłać
     private String toolName;
     private String projectName;
+    private String content;
 
     @ManyToOne
     @JoinColumn(name="project_id", nullable = false)
@@ -36,7 +35,6 @@ public class Scan {
 
     public void setProject(Project project) {
         this.project = project;
-        this.projectName = project.getName();
     }
 
     public long getId() {
@@ -60,12 +58,6 @@ public class Scan {
     public void setStatus(String status) {
         this.status = status;
     }
-    public Date getDate() {
-        return date;
-    }
-    public void setDate(Date date) {
-        this.date = date;
-    }
 
     public String getProjectName() {
         return projectName;
@@ -81,5 +73,21 @@ public class Scan {
 
     public String getStringDate() {
         return stringDate;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

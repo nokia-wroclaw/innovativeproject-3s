@@ -20,8 +20,10 @@ public class Tool {
     private Long id;
     @Column(unique = true, length = 100)
     private String name;
-    private String image;
-    private String info;
+    private String repo;
+    private boolean isPrivate;
+    private String login;
+    private String password;
 
     @ManyToMany(mappedBy = "tools", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JsonIgnore
@@ -36,17 +38,16 @@ public class Tool {
 
     protected Tool() {}
 
-    public Tool(String name, String image, String info) {
+    public Tool(String name, String repo) {
         this.name = name;
-        this.image = image;
-        this.info = info;
+        this.repo = repo;
     }
 
     @Override
     public String toString() {
         return String.format(
-                "Tool[id=%d, name='%s', info='%s']",
-                id, name, info);
+                "Tool[id=%d, name='%s', repo='%s']",
+                id, name, repo);
     }
 
     public Long getId() {
@@ -57,15 +58,39 @@ public class Tool {
         return name;
     }
 
-    public String getInfo() {
-        return info;
+    public void setRepo(String repo) {
+        this.repo = repo;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public String getRepo() {
+        return repo;
     }
 
-    public String getImage() {
-        return image;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrivate(boolean aPrivate) {
+        isPrivate = aPrivate;
+    }
+
+    public boolean isPrivate() {
+        return isPrivate;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }

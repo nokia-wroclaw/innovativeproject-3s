@@ -1,18 +1,19 @@
-package com.project.server.controllers;
+package com.project.server.model;
 
 import com.project.server.model.Scan;
 
+
 public class ScanData {
-    private Scan scan;
+    private String toolName;    // nazwa przy tworzeniu toola
+    private String projectName; // nazwa projektu, którego dotyczy skan
+    private String email;       // email, na który wysłać
+    private String login;       // login użytkownika, który zlecił skan
+
+    // to są dla prywatnych repo:
     private String username;
     private String password;
     private String name; // this is login/reponame:version
     private String isPrivate;
-    private String email;
-
-    public Scan getScan() {
-        return scan;
-    }
 
     public void setEmail(String email) {
         this.email = email;
@@ -50,12 +51,31 @@ public class ScanData {
         this.username = username;
     }
 
-    public void setScan(Scan scan) {
-        this.scan = scan;
-    }
-
 	public String getEmail() {
 		return email;
 	}
-    
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setToolName(String toolName) {
+        this.toolName = toolName;
+    }
+
+    public String getToolName() {
+        return toolName;
+    }
 }

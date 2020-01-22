@@ -3,31 +3,28 @@ package com.project.server.controllers;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
-import java.util.Map;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
-import org.quartz.JobDataMap;
+import com.project.server.model.Scan;
+import com.project.server.model.ScanData;
+import com.project.server.repository.ScanRepository;
+import com.project.server.services.ScanService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-
-import com.project.server.model.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.mail.MailProperties;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -35,12 +32,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 public class TrivyController {
     private static final Logger logger = LoggerFactory.getLogger(TrivyController.class);
-    
-       @Autowired
-       private JavaMailSender mailSender;
-    
-       @Autowired
-       private MailProperties mailProperties;
+
+    @Autowired
+    ScanService scanService;
+    @Autowired
+    private JavaMailSender mailSender;
+    @Autowired
+    private MailProperties mailProperties;
+
     @PostMapping("/trivy")
     public void privRepoauthentication( @RequestBody ScanData scandata ) throws IOException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException
     {   
@@ -58,7 +57,13 @@ public class TrivyController {
             sb.append(s4);
         }
         sendMail(mailProperties.getUsername(), scandata.getEmail(),"scan", sb.toString());
-        
+
+        Calendar cal = Calendar.getInstance();
+        Date date=cal.getTime();
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+        String formattedDate = dateFormat.format(date);
+
+        scanService.createScanAndAdd(formattedDate, "", scandata.getLogin(), scandata.getEmail(), scandata.getToolName(), scandata.getProjectName(), sb.toString());
     }
 
 
