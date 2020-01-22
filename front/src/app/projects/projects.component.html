@@ -18,14 +18,14 @@
                     </div>
                     <div class="row">
                         <form [formGroup]="userForm" class="col-5">
-                            <div class="form group border p-3">
+                            <div class="form group border p-3" style="min-height: 198px;">
                                 <label for="users">
                                     <h5>Users</h5>
                                 </label>
                                 <div class="row p-2 mt-2">
                                     <div class="col-8">
                                         <select class="form-control" formControlName="user">
-                                            <option>Pick user</option>
+                                            <option value="" disabled selected>Pick user</option>
                                             <option>admin</option>
                                             <option>user</option>
                                             <option>user0@nokia.com</option>
@@ -43,12 +43,58 @@
                                         <div class="col">{{i + 1}}</div>
                                         <div class="col">{{user.email}}</div>
                                         <div class="col">{{user.permission}}</div>
-                                        <div class="col"><span style="font-size: 1em; color: red;"><i class="fa fa-trash"></i></span></div>
+                                        <div class="col"><span style="font-size: 1em; color: red;"><i
+                                                    class="fa fa-trash"></i></span></div>
                                     </div>
                                 </div>
                             </div>
                         </form>
-                        <form [formGroup]="scanForm" class="col-7">
+                        <form [formGroup]="toolForm" class="col-7">
+                            <div class="form group border p-3" style="min-height: 198px;">
+                                <label for="tools">
+                                    <h5>Tools</h5>
+                                </label>
+                                <div class="row mx-2">
+                                    <input class="form-control" type="text" formControlName="repo"
+                                            placeholder="Repository link" />
+                                </div>
+                                <div class="row p-2 mt-2">
+                                    <div class="col-6">
+                                        <input class="form-control" type="text" formControlName="repoName"
+                                            placeholder="Repository name" />
+                                    </div>
+                                    <div class="col">
+                                        <span (click)="togglePrivate()">
+                                            <mat-checkbox color="warn" formControlName="private">Private</mat-checkbox>
+                                        </span>
+                                    </div>
+                                    <div class="col">
+                                        <button class="btn btn-outline-primary" (click)="addTool()">Add</button>
+                                    </div>
+                                </div>
+                                <div *ngIf="privateRepo" class="row p-2 mt-2">
+                                    <div class="col">
+                                        <input class="form-control" type="text" formControlName="login"
+                                            placeholder="Login" />
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-control" type="text" formControlName="password"
+                                            placeholder="Password" />
+                                    </div>
+                                </div>
+                                <div class="p-2" *ngFor="let tool of toolList; index as i;">
+                                    <div class="row mr-2 text-center">
+                                        <div class="col">{{i + 1}}</div>
+                                        <div class="col">{{tool.repo}}</div>
+                                        <div class="col"><span style="font-size: 1em; color: red;"><i
+                                                    class="fa fa-trash"></i></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row">
+                        <form [formGroup]="scanForm" class="col pt-3">
                             <div class="form-group border p-3">
                                 <label for="tools">
                                     <h5>Scans</h5>
@@ -56,7 +102,7 @@
                                 <div class="row p-2">
                                     <div class="col-4">
                                         <select class="form-control mt-2" formControlName="tool">
-                                            <option>Add tool</option>
+                                            <option value="" disabled selected>Add tool</option>
                                             <option>python 3.6</option>
                                             <option>tool1</option>
                                             <option>tool2</option>
@@ -64,14 +110,23 @@
                                             <option>tool4</option>
                                         </select>
                                     </div>
-                                    <div class="col-5">
+                                    <div class="col-3">
                                         <div class="align-top">
                                             <mat-form-field>
-                                                <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="date">
+                                                <input matInput [matDatepicker]="picker" placeholder="Choose a date"
+                                                    formControlName="date" width="30px">
                                                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                                 <mat-datepicker #picker></mat-datepicker>
                                             </mat-form-field>
                                         </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <select class="form-control mt-2">
+                                            <option value="" selected>Never repeat</option>
+                                            <option>Daily</option>
+                                            <option>Weekly</option>
+                                            <option>Monthly</option>
+                                        </select>
                                     </div>
                                     <div class="col ml-2 mt-2">
                                         <button class="btn btn-outline-primary" (click)="addScan()">Add</button></div>
@@ -81,7 +136,8 @@
                                         <div class="col-2">{{i + 1}}</div>
                                         <div class="col-3">{{scan.toolName}}</div>
                                         <div class="col-6">{{scan.stringDate}}</div>
-                                        <div class="col-1"><span style="font-size: 1em; color: red;"><i class="fa fa-trash"></i></span></div>
+                                        <div class="col-1"><span style="font-size: 1em; color: red;"><i
+                                                    class="fa fa-trash"></i></span></div>
                                     </div>
                                 </div>
                             </div>
@@ -89,7 +145,7 @@
                     </div>
                     <div class="form-group p-3">
                         <div class="text-center">
-                            <span (click)="onSubmit(); toggle()"><button type="button" class="btn btn-primary" 
+                            <span (click)="onSubmit(); toggle()"><button type="button" class="btn btn-primary"
                                     data-toggle="collapse" data-target="#addProject" aria-expanded="false"
                                     aria-controls="addProject">Confirm</button></span>&nbsp;&nbsp;&nbsp;
                             <span (click)="toggle()"><button type="button" class="btn btn-outline-danger"

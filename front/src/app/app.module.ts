@@ -28,7 +28,7 @@ import { ToolState } from './states/tool.state';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatExpansionModule, MatFormFieldModule, MatInputModule,
-  MatGridListModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
+  MatGridListModule, MatDatepickerModule, MatNativeDateModule, MatCheckboxModule } from '@angular/material';
 import { ProjectDetailsComponent } from './project-details/project-details.component';
 
 const routes: Routes = [
@@ -75,7 +75,8 @@ const matmodules = [
   MatInputModule,
   MatGridListModule,
   MatDatepickerModule,
-  MatNativeDateModule
+  MatNativeDateModule,
+  MatCheckboxModule
 ];
 
 @NgModule({
