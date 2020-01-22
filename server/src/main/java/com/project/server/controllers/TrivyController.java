@@ -42,16 +42,11 @@ public class TrivyController {
        @Autowired
        private MailProperties mailProperties;
     @PostMapping("/trivy")
-    public void privRepoauthentication( @RequestBody Map<String, String> json) throws IOException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException
+    public void privRepoauthentication( @RequestBody ScanData scandata ) throws IOException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException
     {   
         
-        String login = json.get("login");
-        String psw =json.get("psw");
-        String repo = json.get("repo");
-        String version = json.get("version");
-        String isPriv = json.get("isPrivate");
-        String authentication = "-e TRIVY_AUTH_URL=https://registry.hub.docker.com -e TRIVY_USERNAME="+ login +" -e TRIVY_PASSWORD=" + psw;
-        String cmd4="docker run --rm " +  (isPriv.equals("true") ? authentication : "")  +  " aquasec/trivy -f json --light "+ login+"/"+repo+":"+version;
+        String authentication = "-e TRIVY_AUTH_URL=https://registry.hub.docker.com -e TRIVY_USERNAME="+ scandata.getUsername() +" -e TRIVY_PASSWORD=" + scandata.getPassword();
+        String cmd4="docker run --rm " +  (scandata.getisPrivate().equals("true") ? authentication : "")  +  " aquasec/trivy -f json --light -q "+ scandata.getName();
         Process proc4 = Runtime.getRuntime().exec(cmd4);
 
         BufferedReader stdInput4 = new BufferedReader(new 
@@ -62,7 +57,7 @@ public class TrivyController {
             System.out.println(s4);
             sb.append(s4);
         }
-        sendMail(mailProperties.getUsername(), "danieldr1212@gmail.com", "scan", sb.toString());
+        sendMail(mailProperties.getUsername(), scandata.getEmail(),"scan", sb.toString());
         
     }
 
@@ -77,7 +72,7 @@ public class TrivyController {
                        logger.info("Sending Email to {}", toEmail);
 
                        messageHelper.setSubject(subject);
-                       messageHelper.setText(body, true);
+                       messageHelper.setText(body, false);
                        messageHelper.setFrom(fromEmail);
                        messageHelper.setTo(toEmail);
             
