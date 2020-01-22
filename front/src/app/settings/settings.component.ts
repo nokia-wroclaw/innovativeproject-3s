@@ -10,8 +10,8 @@ import { LoginState } from '../states/login.state';
 export class SettingsComponent implements OnInit {
 
   currentUser: any;
-  Password = '****';
-  ButtonName = 'Show';
+  Password = "****";
+  ButtonName = "Show";
 
   constructor(private store: Store) {
     this.currentUser = this.store.selectSnapshot(LoginState.userDetails);
