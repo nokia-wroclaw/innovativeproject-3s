@@ -36,12 +36,12 @@ export class ScanService {
       return this.http.post<any>(environment.url + '/trivy', {
           toolName: tool.name,
           projectName: project,
-          email: 'rurakf@gmail.com',
+          email: 'danieldr1212@gmail.com',
           login: 'admin',
           username: tool.login,
           password: tool.password,
-          name: 'danieldrapala/3s:latest',
-          isPrivate: true
+          name: 'danieldrapala/tooltest:latest',
+          isPrivate: 'true'
       });
   }
 }

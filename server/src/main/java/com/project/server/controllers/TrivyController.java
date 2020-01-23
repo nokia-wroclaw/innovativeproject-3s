@@ -43,7 +43,6 @@ public class TrivyController {
     @PostMapping("/trivy")
     public void privRepoauthentication( @RequestBody ScanData scandata ) throws IOException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException
     {
-
         String authentication = "-e TRIVY_AUTH_URL=https://registry.hub.docker.com -e TRIVY_USERNAME="+ scandata.getUsername() +" -e TRIVY_PASSWORD=" + scandata.getPassword();
         String cmd4="docker run --rm " +  (scandata.getisPrivate().equals("true") ? authentication : "")  +  " aquasec/trivy -f json --light -q "+ scandata.getName();
         Process proc4 = Runtime.getRuntime().exec(cmd4);
@@ -56,6 +55,7 @@ public class TrivyController {
             System.out.println(s4);
             sb.append(s4);
         }
+        
         sendMail(mailProperties.getUsername(), scandata.getEmail(),"scan", sb.toString());
 
         Calendar cal = Calendar.getInstance();
@@ -65,7 +65,7 @@ public class TrivyController {
 
         System.out.println(formattedDate);
 
-        scanService.createScanAndAdd(formattedDate, "", scandata.getLogin(), scandata.getEmail(), scandata.getToolName(), scandata.getProjectName(), sb.toString());
+        scanService.createScanAndAdd(formattedDate, "", scandata.getLogin(), scandata.getEmail(), scandata.getToolName(), scandata.getProjectName(), sb.toString().replaceAll("\\s",""));
     }
 
 
@@ -83,7 +83,7 @@ public class TrivyController {
                        messageHelper.setFrom(fromEmail);
                        messageHelper.setTo(toEmail);
             
-                       mailSender.send(message);
+                       mailSender.send(message); 
                    } catch (MessagingException ex) {
                        logger.error("Failed to send email to {}", toEmail);
                    }

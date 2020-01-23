@@ -21,6 +21,7 @@ public class Scan {
     private String email;   // gdzie wysłać
     private String toolName;
     private String projectName;
+    @Lob
     private String log;
 
     @ManyToOne
