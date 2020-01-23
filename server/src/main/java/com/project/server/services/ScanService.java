@@ -36,10 +36,11 @@ public class ScanService {
     }
 
 	public void delete(long id) {
-        scanRepository.deleteById(id);
+            scanRepository.deleteById(id);
 	}
-
-	public void createScanAndAdd(String date, String status, String login, String email, String toolName, String projectName, String content) {
+	
+	public Scan createScanAndAdd(String date, String status, String login, String email, String toolName,
+	    String projectName, String content) {
 	    Scan scan = new Scan();
 
 	    scan.setStringDate(date);
@@ -50,11 +51,13 @@ public class ScanService {
 	    scan.setProjectName(projectName);
 	    scan.setContent(content);
 
-        Optional<Project> project = projectRepository.findByName(projectName);
+            Optional<Project> project = projectRepository.findByName(projectName);
 
 	    scan.setProject((Project) project.orElseThrow(() -> new ProjectNotFoundException(projectName)));
 
 	    add(scan);
+		
+	    return scan;
     }
 
 }
