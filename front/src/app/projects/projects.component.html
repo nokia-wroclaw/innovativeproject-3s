@@ -72,7 +72,7 @@
                                         <button class="btn btn-outline-primary" (click)="addTool()">Add</button>
                                     </div>
                                 </div>
-                                <div *ngIf="privateRepo" class="row p-2 mt-2">
+                                <div *ngIf="privateRepo" class="row p-2">
                                     <div class="col">
                                         <input class="form-control" type="text" formControlName="login"
                                             placeholder="Login" />
@@ -85,7 +85,7 @@
                                 <div class="p-2" *ngFor="let tool of toolList; index as i;">
                                     <div class="row mr-2 text-center">
                                         <div class="col">{{i + 1}}</div>
-                                        <div class="col">{{tool.repo}}</div>
+                                        <div class="col">{{tool.name}}</div>
                                         <div class="col"><span style="font-size: 1em; color: red;"><i
                                                     class="fa fa-trash"></i></span></div>
                                     </div>

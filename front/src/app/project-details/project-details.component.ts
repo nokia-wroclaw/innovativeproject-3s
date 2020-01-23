@@ -9,6 +9,8 @@ import { GetProjects, DeleteProject } from '../actions/project.action';
 import { LoginState } from '../states/login.state';
 import { map, concatMap, filter } from 'rxjs/operators';
 import { error } from 'protractor';
+import { Tool } from '../models/tool';
+import { Scan } from '../models/scan';
 
 @Component({
   selector: 'app-project-details',
@@ -35,14 +37,17 @@ export class ProjectDetailsComponent implements OnInit {
     this.currentUser = this.store.selectSnapshot(LoginState.userDetails);
   }
 
-  trigger(id: any) {
-    this.sending = true;
-    this.scanService.triggerScan().subscribe(result => {
-      this.success = true;
-      console.log(result);
-    }, error => {
-      this.failure = true;
-      console.log(error);
+  trigger(scan: Scan) {
+    this.selected.subscribe(project => {
+      const tool = project.tools.filter(t => tool.name === scan.toolName);
+      this.sending = true;
+      this.scanService.triggerScan(tool, project.name, 'rurakf@gmail.com', this.currentUser.email).subscribe(result => {
+        this.success = true;
+        console.log(result);
+      }, error => {
+        this.failure = true;
+        console.log(error);
+      });
     });
   }
 

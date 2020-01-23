@@ -82,7 +82,7 @@
                                 <td>
                                     <span *ngIf="scan.log"><button class="btn btn-outline-secondary">Log</button></span>
                                     <span *ngIf="!scan.log"><button disabled class="btn btn-outline-secondary">No Log</button></span>&nbsp;
-                                    <button [disabled]="loading" class="btn btn-outline-danger" (click)="trigger(scan.id)">Trigger
+                                    <button [disabled]="loading" class="btn btn-outline-danger" (click)="trigger(scan)">Trigger
                                         <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                                     </button></td>
                                 <td style="cursor: pointer;">
