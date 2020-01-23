@@ -35,6 +35,7 @@ public class Scan {
 
     public void setProject(Project project) {
         this.project = project;
+        this.projectName = project.getName();
     }
 
     public long getId() {
