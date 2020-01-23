@@ -26,6 +26,7 @@ export class ProjectDetailsComponent implements OnInit {
   sending = false;
   failure = false;
   blurValue = 'blur(0px)';
+  log: any;
 
   constructor(private store: Store, private router: Router, private scanService: ScanService) {
     if (!this.selected) {
@@ -39,9 +40,9 @@ export class ProjectDetailsComponent implements OnInit {
 
   trigger(scan: Scan) {
     this.selected.subscribe(project => {
-      const tool = project.tools.filter(t => tool.name === scan.toolName);
+      const tool = project.tools.filter(t => t.name === scan.toolName);
       this.sending = true;
-      this.scanService.triggerScan(tool, project.name, 'rurakf@gmail.com', this.currentUser.email).subscribe(result => {
+      this.scanService.triggerScan(tool[0], project.name, 'rurakf@gmail.com', this.currentUser.email).subscribe(result => {
         this.success = true;
         console.log(result);
       }, error => {
@@ -74,5 +75,9 @@ export class ProjectDetailsComponent implements OnInit {
 
   toggle() {
     this.blurValue === 'blur(0px)' ? this.blurValue = 'blur(10px)' : this.blurValue = 'blur(0px)';
+  }
+
+  setLog(display: string) {
+    this.log = JSON.parse(display)[0];
   }
 }
