@@ -48,7 +48,7 @@ public class ScanService {
 	    scan.setEmail(email);
 	    scan.setToolName(toolName);
 	    scan.setProjectName(projectName);
-	    scan.setContent(content);
+	    scan.setLog(content);
 
         Optional<Project> project = projectRepository.findByName(projectName);
 
