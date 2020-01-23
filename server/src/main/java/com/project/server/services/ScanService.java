@@ -44,8 +44,8 @@ public class ScanService {
 	    Scan scan = new Scan();
 
 	    scan.setStringDate(date);
-	    scan.setStringDate(status);
-	    scan.setStringDate(login);
+	    scan.setStatus("positive");	// mock
+	    scan.setLogin(login);
 	    scan.setEmail(email);
 	    scan.setToolName(toolName);
 	    scan.setProjectName(projectName);
