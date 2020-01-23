@@ -26,7 +26,7 @@ export class ProjectState {
     }
 
     @Selector()
-    static getSelectedProject(state: ProjectStateModel){
+    static getSelectedProject(state: ProjectStateModel) {
         return state.selected;
     }
 

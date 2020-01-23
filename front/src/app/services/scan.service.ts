@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Scan } from '../models/scan';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
+import { Tool } from '../models/tool';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,17 @@ export class ScanService {
     return this.http.delete(this.scanUrl + '/' + id);
   }
 
-  triggerScan() {
-      return this.http.get<any>('http://localhost:8080/trivy');
+  triggerScan(tool: Tool, project: string, emailR: string, loginEmail: string) {
+      console.log(tool, project, emailR, loginEmail);
+      return this.http.post<any>(environment.url + '/trivy', {
+          toolName: tool.name,
+          projectName: project,
+          email: emailR,
+          login: loginEmail,
+          username: tool.login,
+          password: tool.password,
+          name: 'danieldrapala/3s:latest',
+          isPrivate: tool.private
+      });
   }
 }
