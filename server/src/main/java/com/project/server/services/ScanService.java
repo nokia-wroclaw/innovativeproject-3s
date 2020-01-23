@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 public class ScanService {
     @Autowired ScanRepository scanRepository;
     @Autowired ProjectRepository projectRepository;
+    @Autowired ProjectService projectService;
 
 	public Collection<Scan> getScan() {
         return (Collection<Scan>) scanRepository.findAll();
@@ -50,9 +51,10 @@ public class ScanService {
 	    scan.setProjectName(projectName);
 	    scan.setLog(content);
 
-        Optional<Project> project = projectRepository.findByName(projectName);
+        Project project = projectService.getProjectByName(projectName);
+	    scan.setProject(project);
+	    project.getScans().add(scan);
 
-	    scan.setProject((Project) project.orElseThrow(() -> new ProjectNotFoundException(projectName)));
 
 	    add(scan);
     }
