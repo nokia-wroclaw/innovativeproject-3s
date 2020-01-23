@@ -68,6 +68,7 @@ export class ProjectsComponent implements OnInit {
     this.store.dispatch(new GetProjects({email: this.currentUser.email}));
     this.columns = (window.innerWidth <= 426) ? 1 : ((window.innerWidth <= 1025) ? 2 : 3);
     this.rows = (window.innerWidth <= 426) ? '2:1.75' : ((window.innerWidth <= 1025) ? '2:2' : '2:1.5');
+    this.projects.subscribe(s => console.log(s));
   }
 
   onResize(event) {
@@ -97,7 +98,7 @@ export class ProjectsComponent implements OnInit {
   addTool() {
     this.toolList.push({
       name: this.ft.repoName.value,
-      repo: this.ft.repo.value, private: this.privateRepo,
+      repo: this.ft.repo.value, isPrivate: this.privateRepo,
       login: this.ft.login.value, password: this.ft.password.value
     });
   }
