@@ -12,7 +12,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.stereotype.Component;
-
+import com.project.server.repository.*;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.nio.charset.StandardCharsets;
@@ -23,6 +23,32 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import com.project.server.model.Scan;
+import com.project.server.model.ScanData;
+import com.project.server.repository.ScanRepository;
+import com.project.server.services.ScanService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.mail.MailProperties;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @Component
 public class ScanJob extends QuartzJobBean {
@@ -36,8 +62,6 @@ public class ScanJob extends QuartzJobBean {
 
     @Autowired
     private MailProperties mailProperties;
-    
-    @Autowired
     public ScanRepository scanRepo;
 
     @Override
@@ -64,17 +88,17 @@ public class ScanJob extends QuartzJobBean {
 
 
 
-        long scanId = jobDataMap.getLong("id");
+        /*long scanId = jobDataMap.getLong("id");
 
 
         Optional<Scan> optionalScanToUpdate = scanRepo.findById((long) scanId);
         Scan scanToUpdate = optionalScanToUpdate.get();
         scanToUpdate.setContent(sb.toString());
         scanRepo.save(scanToUpdate);
+        */
 
         sendMail(mailProperties.getUsername(), jobDataMap.getString("email"), "Scan", sb.toString());
-    }       BufferedReader stdInput = new BufferedReader(new
-   
+    }
 
     private void sendMail(String fromEmail, String toEmail, String subject, String body) {
         try {
