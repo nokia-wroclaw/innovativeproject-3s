@@ -40,7 +40,7 @@ public class ScanData {
         return cron;
     }
 
-    public void setCron(String name){
+    public void setCron(String cron){
         this.cron = cron;
     }
 
