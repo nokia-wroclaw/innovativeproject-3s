@@ -22,7 +22,7 @@ public class Scan {
     private String email;   // gdzie wysłać
     private String toolName;
     private String projectName;
-    private String content;
+    private String log;
 
     @ManyToOne
     @JoinColumn(name="project_id", nullable = false)
@@ -83,11 +83,11 @@ public class Scan {
         return login;
     }
 
-    public String getContent() {
-        return content;
+    public String getLog() {
+        return log;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setLog(String log) {
+        this.log = log;
     }
 }
