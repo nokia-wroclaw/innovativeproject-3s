@@ -6,6 +6,7 @@ import java.util.Optional;
 import com.project.server.model.Scan;
 import com.project.server.model.Tool;
 import com.project.server.model.User;
+import com.project.server.repository.ToolRepository;
 import com.project.server.services.exceptions.ProjectAlreadyExistsException;
 import com.project.server.services.exceptions.ProjectNotFoundException;
 import com.project.server.model.Project;
@@ -24,6 +25,8 @@ public class ProjectService {
 	UserService userService;
 	@Autowired
     ToolService toolService;
+	@Autowired
+	ToolRepository toolRepo;
 
 	public List<Project> getProject() {
         return (List<Project>) repository.findAll();
@@ -46,6 +49,7 @@ public class ProjectService {
 		} else {
 			Project newProject = new Project(project.getName());
 			User match;
+			Tool tool;
 			for (User u : project.getUsers()) {
 				match = userService.getUserByEmail(u.getEmail());
 				match.getProjects().add(newProject);
@@ -55,6 +59,18 @@ public class ProjectService {
 				s.setStatus("waiting");
 				newProject.getScans().add(s);
 				s.setProject(newProject);
+			}
+			for (Tool t : project.getTools()) {
+				if (toolRepo.findByName(t.getName()).isPresent()) {
+					tool = toolService.getToolByName(t.getName());
+					newProject.getTools().add(tool);
+					tool.getProject().add(newProject);
+				} else {
+					toolService.add(t);
+					tool = toolService.getToolByName(t.getName());
+					newProject.getTools().add(tool);
+					tool.getProject().add(newProject);
+				}
 			}
 			repository.save(newProject);
 			return "Project " + newProject.getName() + " created.";
