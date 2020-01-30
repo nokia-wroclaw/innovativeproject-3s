@@ -66,14 +66,61 @@ export class ProjectsComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(new GetProjects({email: this.currentUser.email}));
-    this.columns = (window.innerWidth <= 426) ? 1 : ((window.innerWidth <= 1025) ? 2 : 3);
-    this.rows = (window.innerWidth <= 426) ? '2:1.75' : ((window.innerWidth <= 1025) ? '2:2' : '2:1.5');
-    this.projects.subscribe(s => console.log(s));
+    const w = window.innerWidth;
+    if (w <= 375) {
+      this.columns = 1;
+      this.rows = '2:2';
+    } else if (w <= 480) {
+      this.columns = 1;
+      this.rows = '2:1.75';
+    } else if (w <= 640) {
+      this.columns = 1;
+      this.rows = '2:1.3';
+    } else if (w <= 800) {
+      this.columns = 2;
+      this.rows = '2:2';
+    } else if (w <= 1000) {
+      this.columns = 2;
+      this.rows = '2:1.75';
+    } else if (w <= 1300) {
+      this.columns = 3;
+      this.rows = '2:2';
+    } else if (w <= 1700) {
+      this.columns = 3;
+      this.rows = '2:1.75';
+    } else {
+      this.columns = 3;
+      this.rows = '2:1.3';
+    }
   }
 
   onResize(event) {
-    this.columns = (window.innerWidth <= 426) ? 1 : ((window.innerWidth <= 1025) ? 2 : 3);
-    this.rows = (window.innerWidth <= 426) ? '2:1.75' : ((window.innerWidth <= 1025) ? '2:2' : '2:1.5');
+    const w = window.innerWidth;
+    if (w <= 375) {
+      this.columns = 1;
+      this.rows = '2:2';
+    } else if (w <= 480) {
+      this.columns = 1;
+      this.rows = '2:1.75';
+    } else if (w <= 640) {
+      this.columns = 1;
+      this.rows = '2:1.3';
+    } else if (w <= 800) {
+      this.columns = 2;
+      this.rows = '2:2';
+    } else if (w <= 1000) {
+      this.columns = 2;
+      this.rows = '2:1.75';
+    } else if (w <= 1300) {
+      this.columns = 3;
+      this.rows = '2:2';
+    } else if (w <= 1700) {
+      this.columns = 3;
+      this.rows = '2:1.75';
+    } else {
+      this.columns = 3;
+      this.rows = '2:1.3';
+    }
   }
 
   toggle() {
