@@ -17,7 +17,7 @@ public class UserController {
 
     @GetMapping("/userTest")
     public User getUserTest() {
-        return service.getUserByEmail("admin");
+        return service.getUserByEmail("admin@nokia.com");
     }
 
     @RequestMapping("/users")

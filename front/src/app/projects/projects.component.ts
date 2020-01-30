@@ -92,7 +92,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   addScan() {
-    this.scanList.push({toolName: this.fs.tool.value, stringDate: String(this.fs.date.value.toLocaleString())});
+    this.scanList.push({toolName: this.fs.tool.value, stringDate: String(this.fs.date.value.toLocaleString()), email: this.currentUser.email});
   }
 
   addTool() {

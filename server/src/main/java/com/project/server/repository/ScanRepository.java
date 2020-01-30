@@ -11,5 +11,6 @@ import java.util.Optional;
 public interface ScanRepository extends JpaRepository<Scan, Long> {
     Optional<Scan> findById(Long id);
     List<Scan> findByEmail(String email);
+    List<Scan> findByLogin(String login);
     List<Scan> findByProjectName(String projectName);
 }

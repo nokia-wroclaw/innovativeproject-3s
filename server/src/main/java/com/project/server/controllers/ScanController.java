@@ -21,7 +21,7 @@ public class ScanController {
 
     @GetMapping("/scanTest")
     public List<Scan> getScanForTest() {
-        return service.getScanByEmail("admin");
+        return service.getScanByEmail("admin@nokia.com");
     }
 
 

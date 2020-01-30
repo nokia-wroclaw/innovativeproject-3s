@@ -37,7 +37,7 @@ export class ScanService {
           toolName: tool.name,
           projectName: project,
           email: 'danieldr1212@gmail.com',
-          login: 'admin',
+          login: 'admin@nokia.com',
           username: tool.login,
           password: tool.password,
           name: 'danieldrapala/tooltest:latest',

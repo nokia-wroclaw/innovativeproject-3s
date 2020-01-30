@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import com.project.server.model.Project;
 import com.project.server.model.Scan;
+import com.project.server.model.User;
 import com.project.server.repository.ProjectRepository;
 import com.project.server.repository.ScanRepository;
 
@@ -17,8 +18,8 @@ import org.springframework.stereotype.Component;
 
 public class ScanService {
     @Autowired ScanRepository scanRepository;
-    @Autowired ProjectRepository projectRepository;
     @Autowired ProjectService projectService;
+    @Autowired UserService userService;
 
 	public Collection<Scan> getScan() {
         return (Collection<Scan>) scanRepository.findAll();
@@ -31,8 +32,11 @@ public class ScanService {
 	public List<Scan> getScanByEmail(String email) {
         return scanRepository.findByEmail(email);
     }
+	public List<Scan> getScanByLogin(String login) {
+		return scanRepository.findByLogin(login);
+	}
 
-    public List<Scan> getScanByProject(String projectName) {
+	public List<Scan> getScanByProject(String projectName) {
         return scanRepository.findByProjectName(projectName);
     }
 
@@ -44,9 +48,9 @@ public class ScanService {
 	    Scan scan = new Scan();
 
 	    scan.setStringDate(date);
-	    scan.setStatus("positive");	// mock
+	    scan.setStatus(status);
 	    scan.setLogin(login);
-	    scan.setEmail(email);
+	    scan.setEmail(login);
 	    scan.setToolName(toolName);
 	    scan.setProjectName(projectName);
 	    scan.setLog(content);
@@ -54,7 +58,6 @@ public class ScanService {
         Project project = projectService.getProjectByName(projectName);
 	    scan.setProject(project);
 	    project.getScans().add(scan);
-
 
 	    add(scan);
     }
