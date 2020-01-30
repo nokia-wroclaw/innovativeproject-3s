@@ -1,7 +1,7 @@
 <div class="project min-vh-100">
     <div class="sticky">
         <app-navbar></app-navbar>
-        <div class="container col-12 col-lg-10 col-xl-6 mt-4">
+        <div class="container col-12 col-lg-9 col-xl-7 mt-4">
             <div class="collapse border item" id="addProject">
                 <div class="col addHeader p-3" style="font-size: 120%;">
                     Add new project
@@ -106,7 +106,7 @@
                                             <option *ngFor="let tool of toolList">{{tool.name}}</option>
                                         </select>
                                     </div>
-                                    <div class="col-3">
+                                    <div class="col-12 col-sm-3">
                                         <div class="align-top">
                                             <mat-form-field>
                                                 <input matInput [matDatepicker]="picker" placeholder="Choose a date"
