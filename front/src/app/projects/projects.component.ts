@@ -138,8 +138,22 @@ export class ProjectsComponent implements OnInit {
     this.userList.push({email: this.fu.user.value, permission: ['USER']});
   }
 
+  delUser(user) {
+    const index = this.userList.indexOf(user);
+    if (index > -1) {
+        this.userList.splice(index, 1);
+    }
+  }
+
   addScan() {
     this.scanList.push({toolName: this.fs.tool.value, stringDate: String(this.fs.date.value.toLocaleString())});
+  }
+
+  delScan(scan) {
+    const index = this.scanList.indexOf(scan);
+    if (index > -1) {
+        this.scanList.splice(index, 1);
+    }
   }
 
   addTool() {
@@ -148,6 +162,13 @@ export class ProjectsComponent implements OnInit {
       repo: this.ft.repo.value, isPrivate: this.privateRepo,
       login: this.ft.login.value, password: this.ft.password.value
     });
+  }
+
+  delTool(tool) {
+    const index = this.toolList.indexOf(tool);
+    if (index > -1) {
+        this.toolList.splice(index, 1);
+    }
   }
 
   onSubmit() {
