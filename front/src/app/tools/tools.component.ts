@@ -19,6 +19,7 @@ export class ToolsComponent implements OnInit {
   waitingList = new Array();
 
   currentUser: any;
+  log: any;
 
   constructor(private store: Store) {
     this.currentUser = this.store.selectSnapshot(LoginState.userDetails);
@@ -40,6 +41,10 @@ export class ToolsComponent implements OnInit {
         }
       }
     });
+  }
+
+  setLog(display: string) {
+    this.log = JSON.parse(display)[0];
   }
 
 }

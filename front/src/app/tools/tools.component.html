@@ -87,7 +87,7 @@
                                 <i class="fa fa-pause-circle"></i>&nbsp;Waiting
                             </span></td>
                         <td style="width: 19%">
-                            <span *ngIf="scan.log"><button type="button" class="btn-sm btn-outline-secondary" data-toggle="modal"
+                            <span *ngIf="scan.log" (click)="setLog(scan.log)"><button type="button" class="btn-sm btn-outline-secondary" data-toggle="modal"
                                 data-target="#exampleModal">Log</button></span>
                             <span *ngIf="!scan.log"><button disabled type="button" class="btn-sm btn-outline-secondary" data-toggle="modal"
                                 data-target="#exampleModal">No Log</button></span></td>
@@ -98,23 +98,45 @@
     </div>
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Scan results</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                ...
+            <div *ngIf="log" class="modal-body">
+                <h4>Target: <strong>{{log.Target}}</strong></h4>
+                <table class="table-hover w-100">
+                    <thead>
+                        <tr>
+                            <td>#</td>
+                            <td>Vulnerability ID</td>
+                            <td>Name</td>
+                            <td>Installed Version</td>
+                            <td>Fixed Version</td>
+                            <td>Severity</td>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let item of log.Vulnerabilities; index as i;">
+                        <tr>
+                            <td>{{i+1}}</td>
+                            <td>{{item.VulnerabilityID}}</td>
+                            <td>{{item.PkgName}}</td>
+                            <td>{{item.InstalledVersion}}</td>
+                            <td>{{item.FixedVersion}}</td>
+                            <td>{{item.Severity}}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
 </div>
+
