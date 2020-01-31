@@ -60,7 +60,7 @@ public class TrivyController {
 
         Calendar cal = Calendar.getInstance();
         Date date=cal.getTime();
-        DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("dd:MM:yyyy HH:mm:ss");
         String formattedDate = dateFormat.format(date);
 
         System.out.println(formattedDate);
