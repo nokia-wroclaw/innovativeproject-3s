@@ -165,22 +165,26 @@ public class ProjectService {
 
 			Tool tool = toolService.getToolByName(scheduleScanRequest.getToolName());
 			
-            String dateMon = scheduleScanRequest.getStringDate();
+            		String dateMon = scheduleScanRequest.getStringDate();
 			String[] cronHelperTable = dateMon.split("/");
 			String[] repeat = dateMon.split("\\.");
 
-			String cron = String.format("0 0 12 %s %s/1 ? *",cronHelperTable[1], cronHelperTable[0]);
-			if(repeat[1] == "1"){
+			String cron = "0 0/3 * ? * * *";
+			System.out.println(repeat[0]);
+			System.out.println(repeat[1]);
+			//String cron = String.format("0 0 12 %s %s/1 ? *",cronHelperTable[1], cronHelperTable[0]);
+			if(repeat[1].equals("1")){
 				cron = "0 0/4 * ? * * *";
-			} else if (repeat[1] == "2"){
+			} else if (repeat[1].equals("2")){
 				cron = String.format("0 0 12 %s/1 %s/1 ? *",cronHelperTable[1], cronHelperTable[0]);
-			}else if (repeat[1] == "3"){
+			}else if (repeat[1].equals("3")){
 				cron = String.format("0 0 12 %s/1 %s/1 ? *",cronHelperTable[1], cronHelperTable[0]);
-			}else if (repeat[1] == "4"){
+			}else if (repeat[1].equals("4")){
 				cron = String.format("0 0 12 %s %s/1 ? *",cronHelperTable[1], cronHelperTable[0]);
 			}
 
-
+			System.out.println(cron);
+		
             JobDetail jobDetail = buildJobDetail(scheduleScanRequest, tool);
             CronTrigger trigger = newTrigger().forJob(jobDetail).withIdentity(jobDetail.getKey().getName(), "email-triggers").withSchedule(cronSchedule(cron)).build();
             scheduler.scheduleJob(jobDetail, trigger);
