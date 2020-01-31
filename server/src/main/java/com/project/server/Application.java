@@ -1,7 +1,8 @@
 package com.project.server;
 
-import com.project.server.model.User;
-import com.project.server.repository.UserRepository;
+import com.project.server.model.*;
+import com.project.server.repository.*;
+import com.project.server.services.DataService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -11,6 +12,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import ch.qos.logback.core.html.NOPThrowableRenderer;
+
+
+import java.sql.Date;
+import java.util.ArrayList;
 
 @SpringBootApplication
 @EnableJpaAuditing
@@ -23,17 +30,11 @@ public class Application {
 	}
 
     @Bean
-    public CommandLineRunner demo(UserRepository repository) {
+    public CommandLineRunner demo(DataService dataService) {
         return (args) -> {
-            repository.save(new User("admin", "admin"));
-            repository.save(new User("user", "user"));
-
-            log.info("User found with findAll():");
-            log.info("-------------------------------");
-            for (User user : repository.findAll()) {
-                log.info(user.toString());
+            if (dataService.isDBEmpty()) {
+                dataService.addMockData();
             }
-            log.info("");
         };
     }
 }

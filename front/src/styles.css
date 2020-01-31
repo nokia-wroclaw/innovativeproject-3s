@@ -10,7 +10,7 @@
     font-size: 120%;
 }
 
-form:before {
+.loginWindow:before {
     content: '';
     height: 100%;
     width: 100%;
@@ -29,7 +29,12 @@ form:before {
 }
 
 .error {
+    padding-left: 5px;
     color: red;
+}
+
+.item {
+    background: white;
 }
 
 .tool-scrollbar {
@@ -39,11 +44,34 @@ form:before {
  }
 
 .project {
-    background: #ECEBEB;
+    background: #ececec;
     height: 100%;
+    overflow: auto;
 }
 
-.shadowbox {
-    background: white;  
-    box-shadow: 5px 5px 5px grey;
+.sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    height: 8vh;
+    z-index: 1;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+  
+::-webkit-scrollbar-track {
+    background: #ebebeb;
+}
+  
+::-webkit-scrollbar-thumb {
+    background: rgb(168, 168, 168);
+}
+  
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }

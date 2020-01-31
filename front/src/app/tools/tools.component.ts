@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../services/data.service';
+import { ScanState } from '../states/scan.state';
+import {Select, Store} from '@ngxs/store';
+import {Observable} from 'rxjs';
+import { Scan } from '../models/scan';
+import { GetScans, DeleteScan } from '../actions/scan.action';
+import { LoginState } from '../states/login.state';
 
 @Component({
   selector: 'app-tools',
@@ -8,194 +13,38 @@ import { DataService } from '../services/data.service';
 })
 export class ToolsComponent implements OnInit {
 
-  toolList = [
-    {
-      id: '1',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '2',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '3',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    },
-    {
-      id: '123',
-      tool: 'test 1',
-      date: '01-01-2019',
-      status: 'positive',
-      log: 'logs'
-    }
-  ];
+  @Select(ScanState.getScanList) scanList: Observable<Scan[]>;
+  positiveList = new Array();
+  negativeList = new Array();
+  waitingList = new Array();
 
-  constructor(private ds: DataService) { }
+  currentUser: any;
+  log: any;
 
-  pageNumber = 1;
-  pageSize = 10;
-  key = 'id';
-  reverse = false;
+  constructor(private store: Store) {
+    this.currentUser = this.store.selectSnapshot(LoginState.userDetails);
+  }
 
   ngOnInit() {
+    this.store.dispatch(new GetScans({email: this.currentUser.email}));
+    this.scanList.subscribe(scans => {
+      this.positiveList = [];
+      this.negativeList = [];
+      this.waitingList = [];
+      for (const scan of scans) {
+        if (scan.status === 'positive') {
+          this.positiveList.push(scan);
+        } else if (scan.status === 'waiting') {
+          this.waitingList.push(scan);
+        } else {
+          this.negativeList.push(scan);
+        }
+      }
+    });
   }
 
-  sort(key: string) {
-    this.key = key;
-    this.reverse = !this.reverse;
-  }
-
-  setPageSize(n: number) {
-    this.pageSize = n;
+  setLog(display: string) {
+    this.log = JSON.parse(display)[0];
   }
 
 }

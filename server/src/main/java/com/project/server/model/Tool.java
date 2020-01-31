@@ -1,52 +1,96 @@
 package com.project.server.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
-
 @EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(allowGetters = true)
 public class Tool {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
-    private String toolname;
-    private String info;
-    
+    @Column(unique = true, length = 100)
+    private String name;
+    private String repo;
+    private boolean isPrivate;
+    private String login;
+    private String password;
+
+    @ManyToMany(mappedBy = "tools", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JsonIgnore
+    private Collection<Project> project = new ArrayList<>();
+
+    public Collection<Project> getProject() {
+        return project;
+    }
+    public void setProject(Collection<Project> project) {
+        this.project = project;
+    }
+
     protected Tool() {}
 
-    public Tool(String toolname, String info) {
-        this.toolname = toolname;
-        this.info = info;
+    public Tool(String name, String repo) {
+        this.name = name;
+        this.repo = repo;
     }
 
     @Override
     public String toString() {
         return String.format(
-                "Tool[id=%d, username='%s', password='%s']",
-                id, toolname, info);
+                "Tool[id=%d, name='%s', repo='%s']",
+                id, name, repo);
     }
 
     public Long getId() {
         return id;
     }
 
-    public String gettoolname() {
-        return toolname;
+    public String getName() {
+        return name;
     }
 
-    public String getInfo() {
-        return info;
+    public void setRepo(String repo) {
+        this.repo = repo;
+    }
+
+    public String getRepo() {
+        return repo;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrivate(boolean aPrivate) {
+        isPrivate = aPrivate;
+    }
+
+    public boolean isPrivate() {
+        return isPrivate;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }

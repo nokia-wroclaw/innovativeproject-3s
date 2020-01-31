@@ -1,23 +1,22 @@
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { DataService } from '../services/data.service';
 
 @Injectable()
 export class ErrorInterceptor  {
-    constructor(private ds: DataService) {}
+    constructor() {}
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        return next.handle(request).pipe(catchError(err => {
-            if (err.status === 401) {
-                this.ds.logout();
-                location.reload(true);
+        return next.handle(request).pipe(catchError((error: HttpErrorResponse) => {
+            let errorMessage = '';
+            if (error.error instanceof ErrorEvent) {
+              errorMessage = `Error: ${error.error.message}`;
+            } else {
+              errorMessage = 'Cannot connect to service';
             }
-
-            const error = err.error.message || err.statusText;
-
-            return throwError(error);
-        }));
+            // window.alert(errorMessage);
+            return throwError(errorMessage);
+          }));
     }
 }
