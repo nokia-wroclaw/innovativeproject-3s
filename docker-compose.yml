@@ -12,10 +12,13 @@ services:
     depends_on: 
       - db # This service depends on mysql. Start that first.
     environment: # Pass environment variables to the service
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/db3s
+      #SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/db3s
       #?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: 1q2w3e4r 
+      #SPRING_DATASOURCE_USERNAME: root
+      #SPRING_DATASOURCE_PASSWORD: 1q2w3e4r 
+      SPRING_DATASOURCE_URL: jdbc:mysql://b8e819c239af2b:ce5382cc@eu-cdbr-west-02.cleardb.net/heroku_7013a700c5d03a4?reconnect=true
+      SPRING_DATASOURCE_USERNAME: b8e819c239af2b
+      SPRING_DATASOURCE_PASSWORD: ce5382cc
       
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
