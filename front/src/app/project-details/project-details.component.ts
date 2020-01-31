@@ -39,17 +39,19 @@ export class ProjectDetailsComponent implements OnInit {
   }
 
   trigger(scan: Scan) {
-    this.selected.subscribe(project => {
-      const tool = project.tools.filter(t => t.name === scan.toolName);
-      this.sending = true;
-      this.scanService.triggerScan(tool[0], project.name, 'rurakf@gmail.com', this.currentUser.email).subscribe(result => {
-        this.success = true;
-        console.log(result);
-      }, error => {
-        this.failure = true;
-        console.log(error);
+    if (scan.status !== 'positive') {
+      this.selected.subscribe(project => {
+        const tool = project.tools.filter(t => t.name === scan.toolName);
+        this.sending = true;
+        this.scanService.triggerScan(tool[0], project.name, 'rurakf@gmail.com', this.currentUser.email).subscribe(result => {
+          this.success = true;
+          console.log(result);
+        }, error => {
+          this.failure = true;
+          console.log(error);
+        });
       });
-    });
+    }
   }
 
   closeSuccess() {

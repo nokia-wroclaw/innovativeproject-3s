@@ -90,7 +90,7 @@ public class ScanJob extends QuartzJobBean {
 
         long scanId = jobDataMap.getLong("id");
         //sendMail(mailProperties.getUsername(), jobDataMap.getString("email"), "Scan", sb.toString());
-        sendMail("nokiascaner3s@gmail.com", "nokiascaner3s@gmail.com", "Scan", sb.toString());
+        sendMail("nokiascaner3s@gmail.com", "rurakf@gmail.com", "Scan", sb.toString());
 
         
         Optional<Scan> optionalScanToUpdate = scanRepo.findById((long) scanId);

@@ -36,7 +36,7 @@ export class ScanService {
       return this.http.post<any>(environment.url + '/trivy', {
           toolName: tool.name,
           projectName: project,
-          email: 'danieldr1212@gmail.com',
+          email: 'rurakf@gmail.com',
           login: 'admin@nokia.com',
           username: tool.login,
           password: tool.password,
