@@ -12,7 +12,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.stereotype.Component;
-
+import com.project.server.repository.*;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.nio.charset.StandardCharsets;
@@ -24,53 +24,80 @@ import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Optional;
+
+import com.project.server.model.Scan;
+import com.project.server.model.ScanData;
+import com.project.server.repository.ScanRepository;
+import com.project.server.services.ScanService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.mail.MailProperties;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
 @Component
 public class ScanJob extends QuartzJobBean {
     private static final Logger logger = LoggerFactory.getLogger(ScanJob.class);
+
+    @Autowired
+    ScanService scanService;
 
     @Autowired
     private JavaMailSender mailSender;
 
     @Autowired
     private MailProperties mailProperties;
+    @Autowired
+    public ScanRepository scanRepo;
 
     @Override
     protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         logger.info("Executing Job with key {}", jobExecutionContext.getJobDetail().getKey());
+        JobDataMap jobDataMap = jobExecutionContext.getMergedJobDataMap();
 
-        StringBuilder scanResult = new StringBuilder();
+        String s4 = "";
+        StringBuilder sb = new StringBuilder();
+        try {
+            String authentication = "-e TRIVY_AUTH_URL=https://registry.hub.docker.com -e TRIVY_USERNAME="+ jobDataMap.getString("username") +" -e TRIVY_PASSWORD=" + jobDataMap.getString("password");
+            String cmd4="docker run --rm " +  (jobDataMap.getString("private").equals("true") ? authentication : "")  +  " aquasec/trivy -f json --light -q "+ jobDataMap.getString("tool");
+            Process proc4 = Runtime.getRuntime().exec(cmd4);
+            BufferedReader stdInput4 = new BufferedReader(new InputStreamReader(proc4.getInputStream()));
 
-        try{
-
-            // Run a shell script
-
-            Process proc = Runtime.getRuntime().exec("docker run --rm  aquasec/trivy -f json --light python:3.4-alpine");
-            System.out.println("Success!");
-
-            BufferedReader stdInput = new BufferedReader(new
-            InputStreamReader(proc.getInputStream()));
-
-
-            // Read the output from the command
-            String s = null;
-            while ((s = stdInput.readLine()) != null) {
-                scanResult.append(s);
-                scanResult.append("\n");
-                System.out.println(s);
-        }
-
-
+            while ((s4 = stdInput4.readLine()) != null) {
+                System.out.println(s4);
+                sb.append(s4);
+            }
         } catch (IOException e) {
+            System.out.println(e);
             e.printStackTrace();
         }
 
-        String scanEmail = scanResult.toString();
-        JobDataMap jobDataMap = jobExecutionContext.getMergedJobDataMap();
-        String subject = jobDataMap.getString("subject");
-        String body = scanEmail;
-        String recipientEmail = jobDataMap.getString("email");
+        long scanId = jobDataMap.getLong("id");
+        sendMail(mailProperties.getUsername(), jobDataMap.getString("email"), "Scan", sb.toString());
 
-        sendMail(mailProperties.getUsername(), recipientEmail, subject, body);
+        
+        Optional<Scan> optionalScanToUpdate = scanRepo.findById((long) scanId);
+        Scan scanToUpdate = optionalScanToUpdate.get();
+        scanToUpdate.setLog(sb.toString());
+        scanToUpdate.setStatus("Completed");;
+        scanRepo.save(scanToUpdate);
+        
     }
 
     private void sendMail(String fromEmail, String toEmail, String subject, String body) {
