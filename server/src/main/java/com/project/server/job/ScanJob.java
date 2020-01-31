@@ -96,7 +96,7 @@ public class ScanJob extends QuartzJobBean {
         Optional<Scan> optionalScanToUpdate = scanRepo.findById((long) scanId);
         Scan scanToUpdate = optionalScanToUpdate.get();
         scanToUpdate.setLog(sb.toString());
-        scanToUpdate.setStatus("Completed");
+        scanToUpdate.setStatus("positive");
         scanRepo.save(scanToUpdate);
         
     }
