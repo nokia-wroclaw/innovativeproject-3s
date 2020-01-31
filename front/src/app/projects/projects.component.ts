@@ -66,14 +66,61 @@ export class ProjectsComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(new GetProjects({email: this.currentUser.email}));
-    this.columns = (window.innerWidth <= 426) ? 1 : ((window.innerWidth <= 1025) ? 2 : 3);
-    this.rows = (window.innerWidth <= 426) ? '2:1.75' : ((window.innerWidth <= 1025) ? '2:2' : '2:1.5');
-    this.projects.subscribe(s => console.log(s));
+    const w = window.innerWidth;
+    if (w <= 375) {
+      this.columns = 1;
+      this.rows = '2:2';
+    } else if (w <= 480) {
+      this.columns = 1;
+      this.rows = '2:1.75';
+    } else if (w <= 640) {
+      this.columns = 1;
+      this.rows = '2:1.3';
+    } else if (w <= 800) {
+      this.columns = 2;
+      this.rows = '2:2';
+    } else if (w <= 1000) {
+      this.columns = 2;
+      this.rows = '2:1.75';
+    } else if (w <= 1300) {
+      this.columns = 3;
+      this.rows = '2:2';
+    } else if (w <= 1700) {
+      this.columns = 3;
+      this.rows = '2:1.75';
+    } else {
+      this.columns = 3;
+      this.rows = '2:1.3';
+    }
   }
 
   onResize(event) {
-    this.columns = (window.innerWidth <= 426) ? 1 : ((window.innerWidth <= 1025) ? 2 : 3);
-    this.rows = (window.innerWidth <= 426) ? '2:1.75' : ((window.innerWidth <= 1025) ? '2:2' : '2:1.5');
+    const w = window.innerWidth;
+    if (w <= 375) {
+      this.columns = 1;
+      this.rows = '2:2';
+    } else if (w <= 480) {
+      this.columns = 1;
+      this.rows = '2:1.75';
+    } else if (w <= 640) {
+      this.columns = 1;
+      this.rows = '2:1.3';
+    } else if (w <= 800) {
+      this.columns = 2;
+      this.rows = '2:2';
+    } else if (w <= 1000) {
+      this.columns = 2;
+      this.rows = '2:1.75';
+    } else if (w <= 1300) {
+      this.columns = 3;
+      this.rows = '2:2';
+    } else if (w <= 1700) {
+      this.columns = 3;
+      this.rows = '2:1.75';
+    } else {
+      this.columns = 3;
+      this.rows = '2:1.3';
+    }
   }
 
   toggle() {
@@ -91,8 +138,22 @@ export class ProjectsComponent implements OnInit {
     this.userList.push({email: this.fu.user.value, permission: ['USER']});
   }
 
+  delUser(user) {
+    const index = this.userList.indexOf(user);
+    if (index > -1) {
+        this.userList.splice(index, 1);
+    }
+  }
+
   addScan() {
     this.scanList.push({toolName: this.fs.tool.value, stringDate: String(this.fs.date.value.toLocaleString()), email: this.currentUser.email});
+  }
+
+  delScan(scan) {
+    const index = this.scanList.indexOf(scan);
+    if (index > -1) {
+        this.scanList.splice(index, 1);
+    }
   }
 
   addTool() {
@@ -101,6 +162,13 @@ export class ProjectsComponent implements OnInit {
       repo: this.ft.repo.value, isPrivate: this.privateRepo,
       login: this.ft.login.value, password: this.ft.password.value
     });
+  }
+
+  delTool(tool) {
+    const index = this.toolList.indexOf(tool);
+    if (index > -1) {
+        this.toolList.splice(index, 1);
+    }
   }
 
   onSubmit() {

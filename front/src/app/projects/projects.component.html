@@ -1,7 +1,7 @@
 <div class="project min-vh-100">
     <div class="sticky">
         <app-navbar></app-navbar>
-        <div class="container col-12 col-lg-10 col-xl-6 mt-4">
+        <div class="container col-12 col-lg-9 col-xl-7 mt-4">
             <div class="collapse border item" id="addProject">
                 <div class="col addHeader p-3" style="font-size: 120%;">
                     Add new project
@@ -43,7 +43,7 @@
                                         <div class="col">{{i + 1}}</div>
                                         <div class="col">{{user.email}}</div>
                                         <div class="col">{{user.permission}}</div>
-                                        <div class="col"><span style="font-size: 1em; color: red;"><i
+                                        <div class="col"><span style="font-size: 1em; color: red;" (click)=delUser(user)><i
                                                     class="fa fa-trash"></i></span></div>
                                     </div>
                                 </div>
@@ -86,7 +86,7 @@
                                     <div class="row mr-2 text-center">
                                         <div class="col">{{i + 1}}</div>
                                         <div class="col">{{tool.name}}</div>
-                                        <div class="col"><span style="font-size: 1em; color: red;"><i
+                                        <div class="col"><span style="font-size: 1em; color: red;" (click)="delTool(tool)"><i
                                                     class="fa fa-trash"></i></span></div>
                                     </div>
                                 </div>
@@ -106,7 +106,7 @@
                                             <option *ngFor="let tool of toolList">{{tool.name}}</option>
                                         </select>
                                     </div>
-                                    <div class="col-3">
+                                    <div class="col-12 col-sm-3">
                                         <div class="align-top">
                                             <mat-form-field>
                                                 <input matInput [matDatepicker]="picker" placeholder="Choose a date"
@@ -132,7 +132,7 @@
                                         <div class="col-2">{{i + 1}}</div>
                                         <div class="col-3">{{scan.toolName}}</div>
                                         <div class="col-6">{{scan.stringDate}}</div>
-                                        <div class="col-1"><span style="font-size: 1em; color: red;"><i
+                                        <div class="col-1"><span style="font-size: 1em; color: red;" (click)="delScan(scan)"><i
                                                     class="fa fa-trash"></i></span></div>
                                     </div>
                                 </div>
@@ -153,7 +153,7 @@
             </div>
         </div>
     </div>
-    <div class="container col-11 col-xl-8" [ngStyle]="{'filter': blurValue}">
+    <div class="container col-11 col-xl-9" [ngStyle]="{'filter': blurValue}">
         <mat-grid-list [cols]="columns" gutterSize="30px" [rowHeight]="rows" (window:resize)="onResize($event)">
             <mat-grid-tile>
                 <div class="w-100 h-100 p-2">

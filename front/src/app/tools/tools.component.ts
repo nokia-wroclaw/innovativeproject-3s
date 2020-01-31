@@ -14,6 +14,9 @@ import { LoginState } from '../states/login.state';
 export class ToolsComponent implements OnInit {
 
   @Select(ScanState.getScanList) scanList: Observable<Scan[]>;
+  positiveList = new Array();
+  negativeList = new Array();
+  waitingList = new Array();
 
   currentUser: any;
 
@@ -23,6 +26,20 @@ export class ToolsComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(new GetScans({email: this.currentUser.email}));
+    this.scanList.subscribe(scans => {
+      this.positiveList = [];
+      this.negativeList = [];
+      this.waitingList = [];
+      for (const scan of scans) {
+        if (scan.status === 'positive') {
+          this.positiveList.push(scan);
+        } else if (scan.status === 'waiting') {
+          this.waitingList.push(scan);
+        } else {
+          this.negativeList.push(scan);
+        }
+      }
+    });
   }
-  
+
 }
