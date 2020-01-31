@@ -162,14 +162,14 @@ public class ProjectService {
 			Tool tool = toolService.getToolByName(scheduleScanRequest.getToolName());
 			
             String dateMon = scheduleScanRequest.getStringDate();
-			String[] cronHelperTable = dateMon.split(".");
-
-			String cron = String.format("0 0 12 %s %s/1 ? *",cronHelperTable[0], cronHelperTable[1]);
-			if(cronHelperTable[3] == "1"){
+			String[] cronHelperTable = dateMon.split("/");
+			String cron = "0 0/4 * ? * * *";
+			/*String cron = String.format("0 0 12 %s %s/1 ? *",cronHelperTable[0], cronHelperTable[1]);
+			if(cronHelperTable[4] == "1"){
 				cron = String.format("0 0 12 %s/1 %s/1 ? *",cronHelperTable[0], cronHelperTable[1]);
-			} else if (cronHelperTable[3] == "2"){
+			} else if (cronHelperTable[4] == "2"){
 				cron = "0 0/4 * ? * * *";
-			}
+			}*/
 
 
             JobDetail jobDetail = buildJobDetail(scheduleScanRequest, tool);
