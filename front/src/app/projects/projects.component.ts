@@ -55,7 +55,8 @@ export class ProjectsComponent implements OnInit {
 
     this.scanForm = this.fb.group({
       tool: ['', Validators.required],
-      date: ['', Validators.required]
+      date: ['', Validators.required],
+      repeat: ['', Validators.required]
     });
   }
 
@@ -146,7 +147,12 @@ export class ProjectsComponent implements OnInit {
   }
 
   addScan() {
-    this.scanList.push({toolName: this.fs.tool.value, stringDate: String(this.fs.date.value.toLocaleString()), email: this.currentUser.email});
+    this.scanList.push({
+      toolName: this.fs.tool.value,
+      fakeDate: String(this.fs.date.value.toLocaleDateString()),
+      stringDate: String(this.fs.date.value.toLocaleDateString()).replace(/\b0/g, '') + '.' + this.fs.repeat.value,
+      email: this.currentUser.email
+    });
   }
 
   delScan(scan) {
