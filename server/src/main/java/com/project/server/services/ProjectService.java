@@ -162,8 +162,15 @@ public class ProjectService {
 			Tool tool = toolService.getToolByName(scheduleScanRequest.getToolName());
 			
             String dateMon = scheduleScanRequest.getStringDate();
-            String[] cronHelperTable = dateMon.split("//");
-            String cron = String.format("0 %s %s %s/1 %s/1 ? *",cronHelperTable[4], cronHelperTable[3], cronHelperTable[0], cronHelperTable[1]);
+			String[] cronHelperTable = dateMon.split(".");
+
+			String cron = String.format("0 0 12 %s %s/1 ? *",cronHelperTable[0], cronHelperTable[1]);
+			if(cronHelperTable[3] == "1"){
+				cron = String.format("0 0 12 %s/1 %s/1 ? *",cronHelperTable[0], cronHelperTable[1]);
+			} else if (cronHelperTable[3] == "2"){
+				cron = "0 0/4 * ? * * *";
+			}
+
 
             JobDetail jobDetail = buildJobDetail(scheduleScanRequest, tool);
             CronTrigger trigger = newTrigger().forJob(jobDetail).withIdentity(jobDetail.getKey().getName(), "email-triggers").withSchedule(cronSchedule(cron)).build();
