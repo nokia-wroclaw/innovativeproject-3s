@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6dd18f65-7eab-488d-b1fd-e206546c38fc" name="Default Changelist" comment="Fix skanu z triggera">
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/project/server/services/DataService.java" afterDir="false" />
+    <list default="true" id="6dd18f65-7eab-488d-b1fd-e206546c38fc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/projects/projects.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/projects/projects.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/projects/projects.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/projects/projects.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/services/scan.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/services/scan.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/project/server/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/project/server/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/project/server/controllers/ScanController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/project/server/controllers/ScanController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/project/server/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/project/server/controllers/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/project/server/repository/ScanRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/project/server/repository/ScanRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/project/server/services/ScanService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/project/server/services/ScanService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/app/navbar/navbar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/navbar/navbar.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/project/server/controllers/TrivyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/project/server/controllers/TrivyController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/resources/application.properties" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/server/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -31,62 +25,63 @@
     <session id="-1489887851">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="4" />
+          <entry key="project.closed" value="5" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.22" value="1" />
           <entry key="project.open.time.23" value="1" />
+          <entry key="project.open.time.25" value="1" />
           <entry key="project.open.time.33" value="1" />
           <entry key="project.open.time.96" value="1" />
-          <entry key="project.opened" value="5" />
+          <entry key="project.opened" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="css" value="5" />
-          <entry key="html" value="9" />
-          <entry key="java" value="258" />
+          <entry key="html" value="10" />
+          <entry key="java" value="263" />
           <entry key="json" value="4" />
-          <entry key="properties" value="12" />
+          <entry key="properties" value="13" />
           <entry key="sql" value="1" />
-          <entry key="ts" value="43" />
+          <entry key="ts" value="45" />
           <entry key="xml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CSS" value="5" />
-          <entry key="HTML" value="9" />
-          <entry key="JAVA" value="258" />
+          <entry key="HTML" value="10" />
+          <entry key="JAVA" value="263" />
           <entry key="JSON" value="4" />
-          <entry key="Properties" value="12" />
+          <entry key="Properties" value="13" />
           <entry key="SQL" value="1" />
-          <entry key="TypoScript File" value="43" />
+          <entry key="TypoScript File" value="45" />
           <entry key="XML" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="30" />
-          <entry key="java" value="5658" />
-          <entry key="properties" value="45" />
+          <entry key="html" value="40" />
+          <entry key="java" value="5666" />
+          <entry key="properties" value="51" />
           <entry key="ts" value="118" />
-          <entry key="txt" value="257" />
+          <entry key="txt" value="321" />
           <entry key="xml" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="30" />
-          <entry key="JAVA" value="5658" />
-          <entry key="PLAIN_TEXT" value="257" />
-          <entry key="Properties" value="45" />
+          <entry key="HTML" value="40" />
+          <entry key="JAVA" value="5666" />
+          <entry key="PLAIN_TEXT" value="321" />
+          <entry key="Properties" value="51" />
           <entry key="TypoScript File" value="118" />
           <entry key="XML" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages">
         <counts>
-          <entry key="git.branch.checkout.local" value="1" />
+          <entry key="git.branch.checkout.local" value="2" />
           <entry key="git.branch.checkout.remote" value="3" />
           <entry key="git.branch.merge" value="1" />
         </counts>
@@ -99,54 +94,66 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/src/main/java/com/project/server/model/Scan.java">
+        <entry file="file://$PROJECT_DIR$/server/src/main/java/com/project/server/security/SecurityConfig.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="19" column="41" lean-forward="true" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
+            <state relative-caret-position="612">
+              <caret line="50" selection-start-line="50" selection-end-line="50" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/front/src/app/app.component.ts">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/front/src/app/projects/projects.component.html">
+        <entry file="file://$PROJECT_DIR$/server/src/main/java/com/project/server/repository/UserRepository.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-510">
-              <caret line="160" column="81" lean-forward="true" selection-start-line="160" selection-start-column="81" selection-end-line="160" selection-end-column="81" />
+            <state relative-caret-position="85">
+              <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/front/src/app/projects/projects.component.spec.ts">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/front/src/app/projects/projects.component.ts">
+        <entry file="file://$PROJECT_DIR$/server/src/main/java/com/project/server/model/User.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="101" column="66" lean-forward="true" selection-start-line="101" selection-start-column="66" selection-end-line="101" selection-end-column="66" />
+            <state relative-caret-position="1207">
+              <caret line="103" column="1" selection-start-line="103" selection-start-column="1" selection-end-line="103" selection-end-column="1" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/src/main/java/com/project/server/controllers/LoginController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="18" column="1" lean-forward="true" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/src/main/resources/application.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="21" column="14" lean-forward="true" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
+            <state relative-caret-position="238">
+              <caret line="14" column="38" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/front/src/app/models/scan.ts">
-          <provider selected="true" editor-type-id="text-editor" />
+        <entry file="file://$PROJECT_DIR$/server/src/main/java/com/project/server/controllers/TrivyController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="493">
+              <caret line="67" column="61" selection-start-line="67" selection-start-column="61" selection-end-line="67" selection-end-column="61" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -159,11 +166,11 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/front/src/app/navbar/navbar.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="30" column="21" lean-forward="true" selection-start-line="30" selection-start-column="21" selection-end-line="30" selection-end-column="40" />
+            <state relative-caret-position="238">
+              <caret line="14" column="54" selection-start-line="14" selection-start-column="54" selection-end-line="14" selection-end-column="54" />
             </state>
           </provider>
         </entry>
@@ -181,7 +188,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="ScanToolsControllers" />
+        <entry key="$PROJECT_DIR$" value="ScanView" />
       </map>
     </option>
     <option name="PREVIEW_PUSH_PROTECTED_ONLY" value="true" />
@@ -189,7 +196,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/server/src/main/java/com/project/server/services/exceptions/ToolNotFoundAdvice.java" />
         <option value="$PROJECT_DIR$/server/src/main/java/com/project/server/services/exceptions/UserNotFoundAdvice.java" />
         <option value="$PROJECT_DIR$/server/src/main/java/com/project/server/services/exceptions/UserNotFoundException.java" />
         <option value="$PROJECT_DIR$/server/src/main/java/com/project/server/services/exceptions/NoPermissionException.java" />
@@ -219,7 +225,6 @@
         <option value="$PROJECT_DIR$/server/src/main/java/com/project/server/model/Tool.java" />
         <option value="$PROJECT_DIR$/front/src/app/models/scan.ts" />
         <option value="$PROJECT_DIR$/server/src/main/java/com/project/server/model/Scan.java" />
-        <option value="$PROJECT_DIR$/server/src/main/java/com/project/server/controllers/TrivyController.java" />
         <option value="$PROJECT_DIR$/server/src/main/java/com/project/server/repository/ScanRepository.java" />
         <option value="$PROJECT_DIR$/server/src/main/java/com/project/server/controllers/UserController.java" />
         <option value="$PROJECT_DIR$/server/src/main/java/com/project/server/services/ScanService.java" />
@@ -240,6 +245,8 @@
         <option value="$PROJECT_DIR$/server/src/main/java/com/project/server/services/ProjectService.java" />
         <option value="$PROJECT_DIR$/front/src/app/projects/projects.component.ts" />
         <option value="$PROJECT_DIR$/server/src/main/resources/application.properties" />
+        <option value="$PROJECT_DIR$/server/src/main/java/com/project/server/controllers/TrivyController.java" />
+        <option value="$PROJECT_DIR$/front/src/app/navbar/navbar.component.html" />
       </list>
     </option>
   </component>
@@ -277,13 +284,51 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="innovativeproject-3s" type="b2602c69:ProjectViewProjectNode" />
               <item name="innovativeproject-3s" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="innovativeproject-3s" type="b2602c69:ProjectViewProjectNode" />
+              <item name="innovativeproject-3s" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="innovativeproject-3s" type="b2602c69:ProjectViewProjectNode" />
+              <item name="innovativeproject-3s" type="462c0819:PsiDirectoryNode" />
+              <item name="front" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="innovativeproject-3s" type="b2602c69:ProjectViewProjectNode" />
+              <item name="innovativeproject-3s" type="462c0819:PsiDirectoryNode" />
+              <item name="front" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="innovativeproject-3s" type="b2602c69:ProjectViewProjectNode" />
+              <item name="innovativeproject-3s" type="462c0819:PsiDirectoryNode" />
+              <item name="front" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="innovativeproject-3s" type="b2602c69:ProjectViewProjectNode" />
+              <item name="innovativeproject-3s" type="462c0819:PsiDirectoryNode" />
+              <item name="front" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="login" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="innovativeproject-3s" type="b2602c69:ProjectViewProjectNode" />
+              <item name="innovativeproject-3s" type="462c0819:PsiDirectoryNode" />
+              <item name="front" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="navbar" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="innovativeproject-3s" type="b2602c69:ProjectViewProjectNode" />
@@ -310,6 +355,55 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="innovativeproject-3s" type="b2602c69:ProjectViewProjectNode" />
+              <item name="innovativeproject-3s" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="innovativeproject-3s" type="b2602c69:ProjectViewProjectNode" />
+              <item name="innovativeproject-3s" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="innovativeproject-3s" type="b2602c69:ProjectViewProjectNode" />
+              <item name="innovativeproject-3s" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="innovativeproject-3s" type="b2602c69:ProjectViewProjectNode" />
+              <item name="innovativeproject-3s" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="repository" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="innovativeproject-3s" type="b2602c69:ProjectViewProjectNode" />
+              <item name="innovativeproject-3s" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="security" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="innovativeproject-3s" type="b2602c69:ProjectViewProjectNode" />
@@ -338,20 +432,24 @@
               <item name="innovativeproject-3s" type="b2602c69:ProjectViewProjectNode" />
               <item name="innovativeproject-3s" type="462c0819:PsiDirectoryNode" />
               <item name="server" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1580427568101" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1580427996006" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/server" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
@@ -369,15 +467,36 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/front/e2e/src/app.po.ts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/encodings.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/workspace.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docker-compose.yml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/front/package-lock.json</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/front/package.json</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/front/src/app/admin-users/admin-users.component.html</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/front/src/app/app.component.spec.ts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/front/src/app/app.module.ts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/front/src/app/models/scan.ts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/front/src/app/models/tool.ts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/front/src/app/navbar/navbar.component.html</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/front/src/app/project-details/project-details.component.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/front/src/app/project-details/project-details.component.ts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/front/src/app/projects/projects.component.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/front/src/app/projects/projects.component.ts</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/front/src/app/services/scan.service.ts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/front/src/app/states/project.state.ts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/front/src/app/tools/tools.component.css</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/front/src/app/tools/tools.component.html</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/front/src/index.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/front/src/app/tools/tools.component.ts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/front/src/styles.css</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/server/src/main/java/com/project/server/Application.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/server/src/main/java/com/project/server/controllers/ScanController.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/server/src/main/java/com/project/server/controllers/TrivyController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/server/src/main/java/com/project/server/controllers/UserController.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/server/src/main/java/com/project/server/model/Scan.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/server/src/main/java/com/project/server/model/Tool.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/server/src/main/java/com/project/server/repository/ScanRepository.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/server/src/main/java/com/project/server/services/ProjectService.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/server/src/main/java/com/project/server/services/ScanService.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/server/src/main/java/com/project/server/services/exceptions/ToolNotFoundException.java</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Created" />
@@ -385,6 +504,12 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="CREATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/front/src/app/settings/settings.component.css</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/front/src/app/settings/settings.component.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/front/src/app/settings/settings.component.spec.ts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/front/src/app/settings/settings.component.ts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/server/src/main/java/com/project/server/model/ScanData.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/server/src/main/java/com/project/server/services/DataService.java</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Deleted" />
@@ -501,6 +626,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Application" />
         <item itemvalue="Application.Application" />
       </list>
     </recent_temporary>
@@ -622,7 +748,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579771439002</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Fix wyświetlania skanów dla użytkownika.">
+      <created>1580427658662</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1580427658662</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -634,16 +767,16 @@
       <window_info id="Capture Tool" order="2" />
       <window_info id="Favorites" order="3" sideWeight="0.1410072" side_tool="true" weight="0.195629" />
       <window_info id="Image Layers" order="4" />
-      <window_info content_ui="combo" id="Project" order="5" sideWeight="0.8595989" visible="true" weight="0.18390192" />
-      <window_info id="Structure" order="6" sideWeight="0.14040114" side_tool="true" visible="true" weight="0.18390192" />
+      <window_info active="true" content_ui="combo" id="Project" order="5" sideWeight="0.8581662" visible="true" weight="0.18603411" />
+      <window_info id="Structure" order="6" sideWeight="0.14183381" side_tool="true" visible="true" weight="0.18603411" />
       <window_info anchor="bottom" id="Terminal" order="0" weight="0.33118972" />
-      <window_info anchor="bottom" id="Version Control" order="1" weight="0.2651515" />
+      <window_info anchor="bottom" id="Version Control" order="1" weight="0.2647374" />
       <window_info anchor="bottom" id="Messages" order="2" weight="0.32475883" />
       <window_info anchor="bottom" id="Event Log" order="3" sideWeight="0.50053304" side_tool="true" weight="0.34405145" />
       <window_info anchor="bottom" id="CheckStyle" order="4" weight="0.3290461" />
       <window_info anchor="bottom" id="Message" order="5" />
       <window_info anchor="bottom" id="Find" order="6" weight="0.32475883" />
-      <window_info active="true" anchor="bottom" id="Run" order="7" sideWeight="0.49946696" visible="true" weight="0.25187567" />
+      <window_info anchor="bottom" id="Run" order="7" sideWeight="0.49946696" visible="true" weight="0.25187567" />
       <window_info anchor="bottom" id="Debug" order="8" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="9" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="10" weight="0.4" />
@@ -707,40 +840,10 @@
     <MESSAGE value="model fix" />
     <MESSAGE value="model fix 2" />
     <MESSAGE value="Fix skanu z triggera" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix skanu z triggera" />
+    <MESSAGE value="Fix wyświetlania skanów dla użytkownika." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix wyświetlania skanów dla użytkownika." />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/server/src/main/java/com/project/server/controllers/UserController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="19" column="54" selection-start-line="19" selection-start-column="54" selection-end-line="19" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/main/java/com/project/server/TrivyHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="26" column="9" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/main/java/com/project/server/services/DataService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2227">
-          <caret line="131" column="9" lean-forward="true" selection-start-line="131" selection-start-column="9" selection-end-line="131" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/front/e2e/src/app.po.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/front/node_modules/@angular/cdk/observers.metadata.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -899,16 +1002,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/main/java/com/project/server/controllers/TrivyController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-13">
-          <caret line="32" column="30" lean-forward="true" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server/src/main/java/com/project/server/Application.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -936,28 +1029,86 @@
     <entry file="file://$PROJECT_DIR$/front/src/app/projects/projects.component.css">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/front/src/app/projects/projects.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-510">
-          <caret line="160" column="81" lean-forward="true" selection-start-line="160" selection-start-column="81" selection-end-line="160" selection-end-column="81" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/front/src/app/projects/projects.component.spec.ts">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/server/src/main/java/com/project/server/model/Scan.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="19" column="41" lean-forward="true" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
+        <state relative-caret-position="323">
+          <caret line="23" column="25" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/front/src/app/app.component.ts">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/front/src/app/projects/projects.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1819">
+          <caret line="107" column="81" selection-start-line="107" selection-start-column="81" selection-end-line="107" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front/src/app/projects/projects.component.spec.ts">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front/src/app/projects/projects.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1360">
+          <caret line="80" column="3" selection-start-line="80" selection-start-column="3" selection-end-line="80" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/front/src/app/models/scan.ts">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/main/java/com/project/server/security/SecurityConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="50" selection-start-line="50" selection-end-line="50" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/main/java/com/project/server/repository/UserRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/main/java/com/project/server/model/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1207">
+          <caret line="103" column="1" selection-start-line="103" selection-start-column="1" selection-end-line="103" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/main/java/com/project/server/controllers/LoginController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="1" lean-forward="true" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="38" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/main/java/com/project/server/controllers/TrivyController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="67" column="61" selection-start-line="67" selection-start-column="61" selection-end-line="67" selection-end-column="61" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/front/src/app/navbar/navbar.component.ts">
       <provider selected="true" editor-type-id="text-editor" />
@@ -967,22 +1118,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/front/src/app/navbar/navbar.component.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="21" lean-forward="true" selection-start-line="30" selection-start-column="21" selection-end-line="30" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/front/src/app/projects/projects.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="101" column="66" lean-forward="true" selection-start-line="101" selection-start-column="66" selection-end-line="101" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="14" lean-forward="true" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
+        <state relative-caret-position="238">
+          <caret line="14" column="54" selection-start-line="14" selection-start-column="54" selection-end-line="14" selection-end-column="54" />
         </state>
       </provider>
     </entry>

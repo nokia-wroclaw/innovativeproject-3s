@@ -65,7 +65,7 @@ public class TrivyController {
 
         System.out.println(formattedDate);
 
-        scanService.createScanAndAdd(formattedDate, "", scandata.getLogin(), scandata.getEmail(), scandata.getToolName(), scandata.getProjectName(), sb.toString().replaceAll("\\s",""));
+        scanService.createScanAndAdd(formattedDate, "positive", scandata.getLogin(), scandata.getEmail(), scandata.getToolName(), scandata.getProjectName(), sb.toString().replaceAll("\\s",""));
     }
 
 
