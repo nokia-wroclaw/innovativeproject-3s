@@ -13,8 +13,25 @@ import com.project.server.model.Project;
 import com.project.server.repository.ProjectRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
+
 import org.springframework.stereotype.Component;
+
+
+import static org.quartz.CronScheduleBuilder.cronSchedule;
+import static org.quartz.TriggerBuilder.newTrigger;
+
+
+
+import com.project.server.job.ScanJob;
+
+import com.project.server.model.ScheduleScanResponse;
+import org.quartz.*;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+import java.util.UUID;
+
 
 @Component
 
@@ -27,6 +44,8 @@ public class ProjectService {
     ToolService toolService;
 	@Autowired
 	ToolRepository toolRepo;
+	@Autowired
+    private Scheduler scheduler;
 
 	public List<Project> getProject() {
         return (List<Project>) repository.findAll();
@@ -73,6 +92,9 @@ public class ProjectService {
 				}
 			}
 			repository.save(newProject);
+			for (Scan s : project.getScans()) {
+				scheduleProjectScan(s);
+			}
 			return "Project " + newProject.getName() + " created.";
 		}
 	}
@@ -134,4 +156,48 @@ public class ProjectService {
 		return "Tool " + toolName + " removed from " + projectName;
 	}
 
+	private ResponseEntity<ScheduleScanResponse> scheduleProjectScan(Scan scheduleScanRequest) {
+        try {
+
+			Tool tool = toolService.getToolByName(scheduleScanRequest.getToolName());
+			
+            String dateMon = scheduleScanRequest.getStringDate();
+            String[] cronHelperTable = dateMon.split("//");
+            String cron = String.format("0 %s %s %s/1 %s/1 ? *",cronHelperTable[4], cronHelperTable[3], cronHelperTable[0], cronHelperTable[1]);
+
+            JobDetail jobDetail = buildJobDetail(scheduleScanRequest, tool);
+            CronTrigger trigger = newTrigger().forJob(jobDetail).withIdentity(jobDetail.getKey().getName(), "email-triggers").withSchedule(cronSchedule(cron)).build();
+            scheduler.scheduleJob(jobDetail, trigger);
+
+            ScheduleScanResponse scheduleScanResponse = new ScheduleScanResponse(true,
+                    jobDetail.getKey().getName(), jobDetail.getKey().getGroup(), "Scan Scheduled Successfully!");
+            return ResponseEntity.ok(scheduleScanResponse);
+        } catch (Exception ex) {
+			System.out.println(ex);
+			ex.printStackTrace();
+			
+            ScheduleScanResponse scheduleScanResponse = new ScheduleScanResponse(false,
+                    "Error scheduling scan. Please try later!");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(scheduleScanResponse);
+        }
+	}
+	
+
+
+	private JobDetail buildJobDetail(Scan newScan, Tool newTool) {
+        JobDataMap jobDataMap = new JobDataMap();
+        jobDataMap.put("id", newScan.getId());      
+        jobDataMap.put("email", newScan.getEmail());
+        jobDataMap.put("tool", newScan.getToolName());
+        jobDataMap.put("username", newTool.getLogin());
+        jobDataMap.put("password", newTool.getPassword());
+        jobDataMap.put("private", newTool.isPrivate());
+
+        return JobBuilder.newJob(ScanJob.class)
+                .withIdentity(UUID.randomUUID().toString(), "email-jobs")
+                .withDescription("Send Scan Job")
+                .usingJobData(jobDataMap)
+                .storeDurably()
+                .build();
+    }
 }
