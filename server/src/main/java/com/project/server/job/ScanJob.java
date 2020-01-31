@@ -75,7 +75,7 @@ public class ScanJob extends QuartzJobBean {
         StringBuilder sb = new StringBuilder();
         try {
             String authentication = "-e TRIVY_AUTH_URL=https://registry.hub.docker.com -e TRIVY_USERNAME="+ jobDataMap.getString("username") +" -e TRIVY_PASSWORD=" + jobDataMap.getString("password");
-            String cmd4="docker run --rm " +  (jobDataMap.getString("private").equals("true") ? authentication : "")  +  " aquasec/trivy -f json --light -q "+ jobDataMap.getString("tool");
+            String cmd4="docker run --rm " +  (jobDataMap.getBoolean("private") == equals(true) ? authentication : "")  +  " aquasec/trivy -f json --light -q "+ jobDataMap.getString("tool");
             Process proc4 = Runtime.getRuntime().exec(cmd4);
             BufferedReader stdInput4 = new BufferedReader(new InputStreamReader(proc4.getInputStream()));
 
@@ -89,13 +89,14 @@ public class ScanJob extends QuartzJobBean {
         }
 
         long scanId = jobDataMap.getLong("id");
-        sendMail(mailProperties.getUsername(), jobDataMap.getString("email"), "Scan", sb.toString());
+        //sendMail(mailProperties.getUsername(), jobDataMap.getString("email"), "Scan", sb.toString());
+        sendMail("nokiascaner3s@gmail.com", "nokiascaner3s@gmail.com", "Scan", sb.toString());
 
         
         Optional<Scan> optionalScanToUpdate = scanRepo.findById((long) scanId);
         Scan scanToUpdate = optionalScanToUpdate.get();
         scanToUpdate.setLog(sb.toString());
-        scanToUpdate.setStatus("Completed");;
+        scanToUpdate.setStatus("Completed");
         scanRepo.save(scanToUpdate);
         
     }
